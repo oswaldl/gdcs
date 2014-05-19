@@ -1,0 +1,3 @@
+任务分配、bug管理、wiki依旧用redmine
+
+http://199.230.109.18:8086/redmine/projects/gdcs
