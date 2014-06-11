@@ -28,6 +28,7 @@ public class SnpediaRepoPageProcessor implements PageProcessor {
         	// 部分三：从页面发现后续的url地址来抓取
             page.addTargetRequests(page.getHtml().links().regex(page.getHtml().xpath("//div[9]/a/@href").toString()).all());
     	}else{
+    		//获取所有符合条件class='adiseasebox'的div集合
     		List<Selectable> divs1 = page.getHtml().xpath("//div[@class='adiseasebox']").nodes();
 //    		System.out.println(divs1.size());
     		for (Selectable div1 : divs1) {
