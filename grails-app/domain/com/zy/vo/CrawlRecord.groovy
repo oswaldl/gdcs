@@ -13,6 +13,7 @@ class CrawlRecord {
     }
 	
 	static CrawlRecord create(String username,String url1,String url2){
+		println "username:"+username+username.getClass()
 		if(!CrawlRecord.findByUsernameAndUrl1AndUrl2(username, url1, url2)){
 			new CrawlRecord(
 				username:username,
