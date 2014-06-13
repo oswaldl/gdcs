@@ -118,6 +118,6 @@ class CrawlRecordController {
 	}
 	
 	def testSave(){
-		CrawlRecord.create("username22222", "url122222", "url222222")
+		CrawlRecord.create("username", "url1", "url2")
 	}
 }

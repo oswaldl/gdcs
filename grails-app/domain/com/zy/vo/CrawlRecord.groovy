@@ -22,4 +22,5 @@ class CrawlRecord {
 				).save(failOnError:true)
 		}
 	}
+	
 }

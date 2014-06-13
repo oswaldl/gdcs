@@ -2,12 +2,17 @@ package com.zy.gdcs.webmagic;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.codehaus.groovy.runtime.InvokerHelper;
 
 
-import com.zy.vo.CrawlRecord;
+
+
+
+
+import com.zy.vo.Gene;
 
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
@@ -27,24 +32,17 @@ public class SnpediaPipeline implements Pipeline {
 //			//好像这种方法还有点问题，虽然可以调用到方法中去，但是创建的时候还是会出错
 //			CrawlRecord.create("username", url1, url2);
 			
-		    Map<String, String> map=new HashMap<String, String>();
-		    map.put("url1", url1);
-		    map.put("url2", url2);
-		    map.put("username", "username");
-		    InvokerHelper.invokeMethod("CrawlRecord","save",map);
+			
 		}else{
 			//获取数据进行持久化处理
 			System.out.println("获取数据进行持久化处理。。。");
+			//map中的数据，键值为病例名称，值为相关基因的集合
+			Map<String, List<Gene>> map=resultItems.get("map");
+			for (Map.Entry<String, List<Gene>> entry : map.entrySet()) {  
+				System.out.println("key = " + entry.getKey() + " and value = " + entry.getValue());  
+			}
 		}
 		
 	}
-	
-	 public static void main(String[] args) {
-		 Map<String, String> map=new HashMap<String, String>();
-		 map.put("url1", "url1");
-		 map.put("url2", "url2");
-		 map.put("username", "username");
-		 InvokerHelper.invokeMethod(CrawlRecord.class,"create",map);
-	    }
 	
 }
