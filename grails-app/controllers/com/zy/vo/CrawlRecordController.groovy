@@ -2,6 +2,11 @@ package com.zy.vo
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import us.codecraft.webmagic.Spider;
+
+import com.zy.gdcs.webmagic.SnpediaPipeline;
+import com.zy.gdcs.webmagic.SnpediaRepoPageProcessor;
+
 class CrawlRecordController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -107,7 +112,7 @@ class CrawlRecordController {
 		def username=params.username
 		def url1=params.url1
 		def url2=params.url2
-		println "username:"+username.getClass()+"-url1:"+url1.getClass()+"-url2:"+url2.getClass()
+		//println "username:"+username.getClass()+"-url1:"+url1.getClass()+"-url2:"+url2.getClass()
 		if(!CrawlRecord.findByUsernameAndUrl1AndUrl2(username, url1, url2)){
 			new CrawlRecord(
 				username:username,
@@ -118,6 +123,24 @@ class CrawlRecordController {
 	}
 	
 	def testSave(){
-		CrawlRecord.create("username", "url1", "url2")
+		Spider.create(new SnpediaRepoPageProcessor())
+                //从"https://github.com/code4craft"开始抓
+                .addUrl("http://files.snpedia.com/reports/genome_Mike_Spear_pooled.html")
+                .addPipeline(new SnpediaPipeline())
+                //开启5个线程抓取
+                .thread(5)
+                //启动爬虫
+                .run();
+		render "success"
+	}
+	
+	def testSave2(){
+		println "======================"+params.username
+		CrawlRecord record = new CrawlRecord();
+		record.setUsername(params.username);
+		record.setUrl1(params.url1);
+		record.setUrl1(params.url2);
+		record.save(failOnError:true);
+		render "success"
 	}
 }
