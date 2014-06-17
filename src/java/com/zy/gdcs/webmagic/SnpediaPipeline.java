@@ -1,8 +1,6 @@
 package com.zy.gdcs.webmagic;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,7 +11,6 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
-import com.zy.vo.CrawlRecord;
 import com.zy.vo.Gene;
 
 public class SnpediaPipeline implements Pipeline {
@@ -29,7 +26,7 @@ public class SnpediaPipeline implements Pipeline {
 			// //好像这种方法还有点问题，虽然可以调用到方法中去，但是创建的时候还是会出错
 			// CrawlRecord.create("username", url1, url2);
 			
-			activeUrl("http://localhost:8080/gdcs/crawlRecord/testSave2?uername=abc1&url1=123&url2=321");
+			activeUrl("http://localhost:8080/gdcs/crawlRecord/createCrawlRecord?username=abc11&url1=1213&url2=3121");
 
 		} else {
 			// 获取数据进行持久化处理
@@ -50,6 +47,8 @@ public class SnpediaPipeline implements Pipeline {
 			System.out.println(url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.connect();// 握手
+//			conn.getInputStream();
+			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -58,5 +57,5 @@ public class SnpediaPipeline implements Pipeline {
 
 		}
 	}
-
+	
 }

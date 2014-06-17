@@ -27,7 +27,6 @@ class ShowResultController {
 		[gene:gene,illnesses:illnesses]
 	}
 	
-	def show
 	
 	
 }

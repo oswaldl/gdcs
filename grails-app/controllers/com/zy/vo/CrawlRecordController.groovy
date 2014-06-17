@@ -106,13 +106,10 @@ class CrawlRecordController {
     }
 	
 	def createCrawlRecord(){
-//		def username=map.get("username")
-//		def url1=map.get("url1")
-//		def url2=map.get("url2")
 		def username=params.username
 		def url1=params.url1
 		def url2=params.url2
-		//println "username:"+username.getClass()+"-url1:"+url1.getClass()+"-url2:"+url2.getClass()
+		println "username:"+username.getClass()+"-url1:"+url1.getClass()+"-url2:"+url2.getClass()
 		if(!CrawlRecord.findByUsernameAndUrl1AndUrl2(username, url1, url2)){
 			new CrawlRecord(
 				username:username,
@@ -120,9 +117,10 @@ class CrawlRecordController {
 				url2:url2
 				).save(failOnError:true)
 		}
+		render "success"
 	}
 	
-	def testSave(){
+	def test(){
 		Spider.create(new SnpediaRepoPageProcessor())
                 //从"https://github.com/code4craft"开始抓
                 .addUrl("http://files.snpedia.com/reports/genome_Mike_Spear_pooled.html")
@@ -134,13 +132,4 @@ class CrawlRecordController {
 		render "success"
 	}
 	
-	def testSave2(){
-		println "======================"+params.username
-		CrawlRecord record = new CrawlRecord();
-		record.setUsername(params.username);
-		record.setUrl1(params.url1);
-		record.setUrl1(params.url2);
-		record.save(failOnError:true);
-		render "success"
-	}
 }
