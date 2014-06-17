@@ -34,8 +34,8 @@ public class SnpediaPipeline implements Pipeline {
 			// map中的数据，键值为病例名称，值为相关基因的集合
 			Map<String, List<Gene>> map = resultItems.get("map");
 			for (Map.Entry<String, List<Gene>> entry : map.entrySet()) {
-				System.out.println("key = " + entry.getKey() + " and value = "
-						+ entry.getValue());
+//				System.out.println("key = " + entry.getKey() + " and value = "
+//						+ entry.getValue());
 			}
 		}
 

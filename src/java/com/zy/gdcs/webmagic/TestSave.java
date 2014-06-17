@@ -15,8 +15,8 @@ import org.apache.commons.httpclient.methods.PostMethod;
 public class TestSave {
 
 	public void testPostRequest() throws HttpException, IOException {  
-        HttpClient client = new HttpClient();  
-        PostMethod method = new PostMethod("http://localhost:8080/gdcs/crawlRecord/createCrawlRecord");  
+        HttpClient client = new HttpClient();
+        PostMethod method = new PostMethod("http://localhost:8080/gdcs/crawlRecord/createCrawlRecord");
         method.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
         NameValuePair[] param = { new NameValuePair("username", "11"),
                 new NameValuePair("url1", "jay"), new NameValuePair("url2", "jay")};
@@ -30,11 +30,9 @@ public class TestSave {
         // Post请求的url，与get不同的是不需要带参数
         URL postUrl = new URL("http://localhost:8080/gdcs/crawlRecord/createCrawlRecord");
         // 打开连接
-        HttpURLConnection connection = (HttpURLConnection) postUrl
-                .openConnection();
+        HttpURLConnection connection = (HttpURLConnection) postUrl.openConnection();
         // Output to the connection. Default is false, set to true because post method must write something to the connection
-        // 设置是否向connection输出，因为这个是post请求，参数要放在
-        // http正文内，因此需要设为true
+        // 设置是否向connection输出，因为这个是post请求，参数要放在http正文内，因此需要设为true
         connection.setDoOutput(true);
         // Read from the connection. Default is true.
         connection.setDoInput(true);
