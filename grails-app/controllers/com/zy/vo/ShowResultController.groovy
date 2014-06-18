@@ -21,12 +21,14 @@ class ShowResultController {
 	
 	def showIllnessByGene(){
 		Gene gene=Gene.get(params.id)
-		def illnesses=SNPRelation.findAllByGene(Gene).collect {
+		def illnesses=SNPRelation.findAllByGene(gene).collect {
 			it.illness
 		}.toSet()
 		[gene:gene,illnesses:illnesses]
 	}
 	
-	
+	def testData(){
+		println params.myeditor
+	}
 	
 }

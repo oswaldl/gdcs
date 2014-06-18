@@ -89,3 +89,40 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+ckeditor {
+	//    config = "/js/ckconfig.js"
+		upload {
+			//basedir = "/tmp/storagearea/"
+			// baseurl = "/uploads/"
+			overwrite = false
+			link {
+				browser = true
+				upload = true
+				allowed = ['doc', 'docx', 'flv', 'xls']
+				denied = ['html', 'htm', 'php', 'php2', 'php3', 'php4', 'php5',
+						'phtml', 'pwml', 'inc', 'asp', 'aspx', 'ascx', 'jsp',
+						 'cfm', 'cfc', 'pl', 'bat', 'exe', 'com', 'dll', 'vbs', 'js', 'reg',
+						'cgi', 'htaccess', 'asis', 'sh', 'shtml', 'shtm', 'phtm']
+			}
+			image {
+				browser = true
+				upload = true
+				allowed = ['jpg', 'gif', 'jpeg', 'png']
+				denied = []
+			}
+			flash {
+				browser = true
+				upload = true
+				allowed = ['swf']
+				denied = []
+			}
+			flv {
+				browser = true
+				upload = true
+				allowed = ['flv']
+				denied = []
+			}
+
+		}
+	}

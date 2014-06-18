@@ -23,7 +23,7 @@ public class TestSave {
         method.setRequestBody(param);
         int statusCode = client.executeMethod(method);
         System.out.println(statusCode);
-        method.releaseConnection();  
+        method.releaseConnection(); 
     }
 	
 	public void readContentFromPost() throws IOException {
