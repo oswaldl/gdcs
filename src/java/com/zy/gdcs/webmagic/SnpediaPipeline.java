@@ -1,11 +1,15 @@
 package com.zy.gdcs.webmagic;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
@@ -26,7 +30,7 @@ public class SnpediaPipeline implements Pipeline {
 			// //好像这种方法还有点问题，虽然可以调用到方法中去，但是创建的时候还是会出错
 			// CrawlRecord.create("username", url1, url2);
 			
-			activeUrl("http://localhost:8080/gdcs/crawlRecord/createCrawlRecord?username=abc11&url1=1213&url2=3121");
+			
 
 		} else {
 			// 获取数据进行持久化处理
@@ -38,17 +42,16 @@ public class SnpediaPipeline implements Pipeline {
 //						+ entry.getValue());
 			}
 		}
+		
+		activeUrl("http://localhost:8080/gdcs/crawlRecord/createCrawlRecord?username=abc11&url1=1213&url2=3121");
 
 	}
 
 	private void activeUrl(String spec) {
 		try {
-			URL url = new URL(spec);
-			System.out.println(url);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.connect();// 握手
-//			conn.getInputStream();
-			
+			CloseableHttpClient httpclient = HttpClients.createDefault();
+		    HttpGet httpget = new HttpGet(spec);
+		    CloseableHttpResponse response = httpclient.execute(httpget);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
