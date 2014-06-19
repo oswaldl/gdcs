@@ -10,5 +10,8 @@ class Gene {
 	boolean isReputeGood
 
     static constraints = {
+		name blank: false
+		description1 nullable:true
+		description2 nullable:true
     }
 }

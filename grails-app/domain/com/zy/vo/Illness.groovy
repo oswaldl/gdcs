@@ -7,5 +7,7 @@ class Illness {
 	String description
 
     static constraints = {
+		name blank: false, unique: true
+		description nullable:true
     }
 }

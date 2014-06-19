@@ -10,7 +10,7 @@
   <div class="body">
   	<table width="100%">
   		<tr>
-  			<th colspan="2">${user?.username } 基因检测报告</th>
+  			<th colspan="2">${user?.username } ${initialValue } 基因检测报告</th>
   		</tr>
   		<g:each in="${illnesses }" var="illness">
   			<tr>

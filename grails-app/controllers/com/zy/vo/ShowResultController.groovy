@@ -16,7 +16,7 @@ class ShowResultController {
 			}
 			map.put(illness, genes);
 		}
-		[user:user,illnesses:illnesses,map:map]
+		[user:user,illnesses:illnesses,map:map,initialValue:params.myeditor]
 	}
 	
 	def showIllnessByGene(){
@@ -29,6 +29,7 @@ class ShowResultController {
 	
 	def testData(){
 		println params.myeditor
+		redirect(action: "show", params: params)
 	}
-	
+
 }
