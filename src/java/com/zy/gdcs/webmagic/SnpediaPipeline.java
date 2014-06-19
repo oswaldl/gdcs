@@ -52,12 +52,12 @@ public class SnpediaPipeline implements Pipeline {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 		    HttpGet httpget = new HttpGet(spec);
 		    CloseableHttpResponse response = httpclient.execute(httpget);
+		    response.close();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-
 		}
 	}
 	
