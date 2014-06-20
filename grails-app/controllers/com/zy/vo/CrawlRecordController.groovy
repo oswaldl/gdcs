@@ -1,19 +1,12 @@
 package com.zy.vo
 
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.dao.DataIntegrityViolationException;
 
-import us.codecraft.webmagic.Spider
-
-import com.zy.gdcs.webmagic.SnpediaPipeline
-import com.zy.gdcs.webmagic.SnpediaRepoPageProcessor
 
 class CrawlRecordController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
-	GrailsApplication grailsApplication
-
     def index() {
         redirect(action: "list", params: params)
     }
@@ -120,24 +113,6 @@ class CrawlRecordController {
 				url2:url2
 				).save(failOnError:true)
 		}
-		render "success"
-	}
-	
-	def test(){
-		
-		SnpediaRepoPageProcessor processer=new SnpediaRepoPageProcessor();
-		SnpediaPipeline pline=new SnpediaPipeline();
-		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(processer)
-		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(pline)
-		
-		Spider.create(processer)
-                //从"https://github.com/code4craft"开始抓
-                .addUrl("http://files.snpedia.com/reports/genome_Mike_Spear_pooled.html")
-                .addPipeline(pline)
-                //开启5个线程抓取
-                .thread(5)
-                //启动爬虫
-                .run();
 		render "success"
 	}
 	

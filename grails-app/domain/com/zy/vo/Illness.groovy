@@ -8,6 +8,6 @@ class Illness {
 
     static constraints = {
 		name blank: false, unique: true
-		description nullable:true
+		description nullable:true,maxSize: 3000
     }
 }

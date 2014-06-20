@@ -11,7 +11,7 @@ class Gene {
 
     static constraints = {
 		name blank: false
-		description1 nullable:true
-		description2 nullable:true
+		description1 nullable:true,maxSize: 3000
+		description2 nullable:true,maxSize: 3000
     }
 }

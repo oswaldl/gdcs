@@ -14,7 +14,7 @@
   		<g:each in="${illnesses }" var="illness">
   			<tr>
   				<th>${illness.name }</th>
-  				<th>${illness.description }<g:link action="editDesc" params='[illnessId:"${illness.id }",username:"${user?.username }"]' >修改</g:link></th>
+  				<td>${illness.description }<g:link action="editDesc" params='[illnessId:"${illness.id }",username:"${user?.username }"]' >修改</g:link></td>
   			</tr>
   			<g:each in="${map.get(illness) }" var="gene">
   				<tr>

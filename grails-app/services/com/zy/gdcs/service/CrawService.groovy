@@ -7,6 +7,9 @@ import us.codecraft.webmagic.selector.Selectable
 
 import com.zy.vo.CrawlRecord
 import com.zy.vo.Gene
+import com.zy.vo.Illness;
+import com.zy.vo.SNPRelation;
+import com.zy.vo.User;
 
 class CrawService {
 
@@ -70,6 +73,7 @@ class CrawService {
 	}
 
 	public void process(ResultItems resultItems, Task task) {
+		User user=User.findByUsername('mike')
 		if (resultItems.get("MedicalConditionsUrl") != null) {
 			System.out.println("url1:" + resultItems.get("currentUrl"));
 			System.out.println("url2:"
@@ -79,7 +83,7 @@ class CrawService {
 			// //好像这种方法还有点问题，虽然可以调用到方法中去，但是创建的时候还是会出错
 			// CrawlRecord.create("username", url1, url2);
 			CrawlRecord crawlRecord = new CrawlRecord();
-			crawlRecord.setUsername(resultItems.get("MedicalConditionsUrl"));
+			crawlRecord.setUsername(user.username);
 			crawlRecord.setUrl1(resultItems.get("currentUrl").toString());
 			crawlRecord.setUrl2(resultItems.get("MedicalConditionsUrl").toString());
 			crawlRecord.save(failOnError:true);
@@ -92,7 +96,16 @@ class CrawService {
 			for (Map.Entry<String, List<Gene>> entry : map.entrySet()) {
 //				System.out.println("key = " + entry.getKey() + " and value = "
 //						+ entry.getValue());
-				
+				def illnessName=entry.getKey()
+				def illness=Illness.findByName(illnessName) ?: new Illness(name:illnessName).save(failOnError:true)
+				for(Gene gene:entry.getValue()){
+					gene.save(failOnError:true)
+					new SNPRelation(
+						user:user,
+						gene:gene,
+						illness:illness
+						).save(failOnError:true)
+				}
 			}
 		}
 		
