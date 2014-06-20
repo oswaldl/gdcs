@@ -92,6 +92,7 @@ class CrawService {
 			for (Map.Entry<String, List<Gene>> entry : map.entrySet()) {
 //				System.out.println("key = " + entry.getKey() + " and value = "
 //						+ entry.getValue());
+				
 			}
 		}
 		

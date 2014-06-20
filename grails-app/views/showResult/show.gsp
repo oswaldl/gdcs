@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <%--<meta name="layout" content="main"/>--%>
 <title>show</title>
-<ckeditor:resources/>
 </head>
 <body>
   <div class="body">
@@ -15,7 +14,7 @@
   		<g:each in="${illnesses }" var="illness">
   			<tr>
   				<th>${illness.name }</th>
-  				<th>${illness.description }</th>
+  				<th>${illness.description }<g:link action="editDesc" params='[illnessId:"${illness.id }",username:"${user?.username }"]' >修改</g:link></th>
   			</tr>
   			<g:each in="${map.get(illness) }" var="gene">
   				<tr>
@@ -25,14 +24,6 @@
   			</g:each>
   		</g:each>
   	</table>
-  </div>
-  <div>
-	<form action="testData">
-  	<ckeditor:editor name="myeditor" height="400px" width="80%">
-		${initialValue }
-	</ckeditor:editor>
-	<input type="submit" value="提交"/>
-	</form>
   </div>
 </body>
 </html>

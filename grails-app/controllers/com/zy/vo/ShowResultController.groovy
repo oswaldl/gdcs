@@ -2,10 +2,13 @@ package com.zy.vo
 
 class ShowResultController {
 
-    def index() { }
+    def index() { 
+		redirect(action: "show", params: [username:'mike'])
+	}
 	
 	def show(){
-		User user=User.findByUsername(params.username)
+		def username=params.username
+		User user=User.findByUsername(username)
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet()
@@ -27,9 +30,16 @@ class ShowResultController {
 		[gene:gene,illnesses:illnesses]
 	}
 	
-	def testData(){
-		println params.myeditor
-		redirect(action: "show", params: params)
+	def editDesc(){
+		Illness illness=Illness.get(params.illnessId)
+		[illness:illness,username:params.username]
 	}
-
+	
+	def saveDesc(){
+		Illness illness=Illness.get(params.illnessId)
+		illness.description=params.description
+		illness.save(failOnError:true)
+		redirect(action: "show", params: [username:params.username])
+	}
+//
 }
