@@ -6,13 +6,16 @@ package com.zy.vo
  */
 
 class SNPRelation {
-	
+	//对应人员
 	User user
-	
+	//对应基因
 	Gene gene
-	
+	//对应基因所影响的病例
 	Illness illness
+	//技术报告
+	String oddRatio
 	
     static constraints = {
+		oddRatio nullable:true
     }
 }

@@ -50,7 +50,20 @@ class CrawService {
 					gene.setName(name);
 					gene.setDescription1(boxeffect);
 					gene.setDescription2(rstext);
-					gene.setIsReputeGood(true);
+					gene.setRepute("good");
+					list.add(gene);
+				}
+				//坏基因
+				List<Selectable> divs4 = div1.xpath("//div[@class='boxbadresult']").nodes();
+				for (Selectable div4 : divs4) {
+					String name=div4.xpath("//div[@class='boxlink']/a[1]/text()").toString()+div4.xpath("//div[@class='boxlink']/a[2]/text()").toString();
+					String boxeffect=div4.xpath("//div[@class='boxeffect']/text()").toString();
+					String rstext=div4.xpath("//div[@class='rstext']/text()").toString();
+					Gene gene=new Gene();
+					gene.setName(name);
+					gene.setDescription1(boxeffect);
+					gene.setDescription2(rstext);
+					gene.setRepute("bad");
 					list.add(gene);
 				}
 				//一般基因
@@ -63,7 +76,7 @@ class CrawService {
 					gene.setName(name);
 					gene.setDescription1(boxeffect);
 					gene.setDescription2(rstext);
-					gene.setIsReputeGood(false);
+					gene.setRepute("normal");
 					list.add(gene);
 				}
 				map.put(caseName, list);
@@ -76,12 +89,7 @@ class CrawService {
 		User user=User.findByUsername('mike')
 		if (resultItems.get("MedicalConditionsUrl") != null) {
 			System.out.println("url1:" + resultItems.get("currentUrl"));
-			System.out.println("url2:"
-					+ resultItems.get("MedicalConditionsUrl"));
-			// String url1=resultItems.get("currentUrl");
-			// String url2=resultItems.get("MedicalConditionsUrl");
-			// //好像这种方法还有点问题，虽然可以调用到方法中去，但是创建的时候还是会出错
-			// CrawlRecord.create("username", url1, url2);
+			System.out.println("url2:" + resultItems.get("MedicalConditionsUrl"));
 			CrawlRecord crawlRecord = new CrawlRecord();
 			crawlRecord.setUsername(user.username);
 			crawlRecord.setUrl1(resultItems.get("currentUrl").toString());
@@ -99,10 +107,14 @@ class CrawService {
 				def illnessName=entry.getKey()
 				def illness=Illness.findByName(illnessName) ?: new Illness(name:illnessName).save(failOnError:true)
 				for(Gene gene:entry.getValue()){
-					gene.save(failOnError:true)
+					Gene gene0=Gene.findByName(gene.name)
+					if(!gene0){
+						gene.save(failOnError:true)
+						gene0=gene
+					}
 					new SNPRelation(
 						user:user,
-						gene:gene,
+						gene:gene0,
 						illness:illness
 						).save(failOnError:true)
 				}

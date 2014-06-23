@@ -20,7 +20,7 @@ class ShowResultController {
 		User user=User.findByUsername(username)
 		def illnesses=SNPRelation.findAllByUser(user,[sort:'id',order:'asc']).collect {
 			it.illness
-		}
+		}.toSet()
 		Map map=new HashMap<Illness, List>()
 		illnesses.each {illness->
 			def genes=SNPRelation.findAllByUserAndIllness(user,illness).collect {

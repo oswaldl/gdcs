@@ -1,10 +1,6 @@
 package com.zy.gdcs.webmagic;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,10 +8,8 @@ import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.selector.Selectable;
 
 import com.zy.gdcs.service.CrawService;
-import com.zy.vo.Gene;
 
 public class SnpediaRepoPageProcessor implements PageProcessor {
 	@Autowired
