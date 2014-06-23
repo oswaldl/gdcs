@@ -19,7 +19,7 @@
   		</li>
   		<g:each in="${illnesses }" var="illness">
   			<li>
-  				<g:link controller="illness" action="show" id="${illness.id }">${illness.chineseName?:illness.name }</g:link>
+  				<g:link controller="illness" action="showDetail" id="${illness.id }">${illness.chineseName?:illness.name }</g:link>
   			</li>
   		</g:each>
   	</ul>

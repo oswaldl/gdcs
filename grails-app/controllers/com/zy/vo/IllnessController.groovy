@@ -107,4 +107,10 @@ class IllnessController {
 		illnessList.addAll(Illness.findAllByChineseNameLike("%"+string+"%"))
 		[illnessInstanceList:illnessList]
 	}
+	
+	def showDetail(){
+		def illnessInstance = Illness.get(params.id)
+		[illnessInstance: illnessInstance]
+	}
+	
 }

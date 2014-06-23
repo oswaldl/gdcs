@@ -82,4 +82,5 @@ class ShowResultController {
 				.run();
 		render "success"
 	}
+	
 }
