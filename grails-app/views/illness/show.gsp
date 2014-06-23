@@ -32,11 +32,65 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${illnessInstance?.chineseName}">
+				<li class="fieldcontain">
+					<span id="chineseName-label" class="property-label"><g:message code="illness.chineseName.label" default="Chinese Name" /></span>
+					
+						<span class="property-value" aria-labelledby="chineseName-label"><g:fieldValue bean="${illnessInstance}" field="chineseName"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${illnessInstance?.description}">
 				<li class="fieldcontain">
 					<span id="description-label" class="property-label"><g:message code="illness.description.label" default="Description" /></span>
 					
 						<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${illnessInstance}" field="description"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${illnessInstance?.canDo}">
+				<li class="fieldcontain">
+					<span id="canDo-label" class="property-label"><g:message code="illness.canDo.label" default="Can Do" /></span>
+					
+						<span class="property-value" aria-labelledby="canDo-label"><g:fieldValue bean="${illnessInstance}" field="canDo"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${illnessInstance?.geneticEnvironment}">
+				<li class="fieldcontain">
+					<span id="geneticEnvironment-label" class="property-label"><g:message code="illness.geneticEnvironment.label" default="Genetic Environment" /></span>
+					
+						<span class="property-value" aria-labelledby="geneticEnvironment-label"><g:fieldValue bean="${illnessInstance}" field="geneticEnvironment"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${illnessInstance?.reference}">
+				<li class="fieldcontain">
+					<span id="reference-label" class="property-label"><g:message code="illness.reference.label" default="Reference" /></span>
+					
+						<span class="property-value" aria-labelledby="reference-label"><g:fieldValue bean="${illnessInstance}" field="reference"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${illnessInstance?.averageRisk}">
+				<li class="fieldcontain">
+					<span id="averageRisk-label" class="property-label"><g:message code="illness.averageRisk.label" default="Average Risk" /></span>
+					
+						<span class="property-value" aria-labelledby="averageRisk-label"><g:fieldValue bean="${illnessInstance}" field="averageRisk"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${illnessInstance?.illnessCat}">
+				<li class="fieldcontain">
+					<span id="illnessCat-label" class="property-label"><g:message code="illness.illnessCat.label" default="Illness Cat" /></span>
+					
+						<span class="property-value" aria-labelledby="illnessCat-label"><g:link controller="illnessCat" action="show" id="${illnessInstance?.illnessCat?.id}">${illnessInstance?.illnessCat?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

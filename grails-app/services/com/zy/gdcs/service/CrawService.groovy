@@ -8,6 +8,7 @@ import us.codecraft.webmagic.selector.Selectable
 import com.zy.vo.CrawlRecord
 import com.zy.vo.Gene
 import com.zy.vo.Illness;
+import com.zy.vo.IllnessCat;
 import com.zy.vo.SNPRelation;
 import com.zy.vo.User;
 
@@ -87,6 +88,7 @@ class CrawService {
 
 	public void process(ResultItems resultItems, Task task) {
 		User user=User.findByUsername('mike')
+		def illnessCat=IllnessCat.findByName("默认分类")
 		if (resultItems.get("MedicalConditionsUrl") != null) {
 			System.out.println("url1:" + resultItems.get("currentUrl"));
 			System.out.println("url2:" + resultItems.get("MedicalConditionsUrl"));
@@ -105,7 +107,7 @@ class CrawService {
 //				System.out.println("key = " + entry.getKey() + " and value = "
 //						+ entry.getValue());
 				def illnessName=entry.getKey()
-				def illness=Illness.findByName(illnessName) ?: new Illness(name:illnessName).save(failOnError:true)
+				def illness=Illness.findByName(illnessName) ?: new Illness(name:illnessName,illnessCat:illnessCat).save(failOnError:true)
 				for(Gene gene:entry.getValue()){
 					Gene gene0=Gene.findByName(gene.name)
 					if(!gene0){

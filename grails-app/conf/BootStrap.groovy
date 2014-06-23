@@ -7,7 +7,7 @@ import com.zy.vo.User;
 class BootStrap {
 
     def init = { servletContext ->
-		IllnessCat illnessCat=new IllnessCat(name:"循环系统");
+		IllnessCat illnessCat=new IllnessCat(name:"默认分类");
 		illnessCat.save(failOnError:true)
 		
 		Illness illness=new Illness(name:"心房颤动",illnessCat:illnessCat,description:"心房纤维性颤动的特点是心脏内的混乱电信号引起上心室颤动（心房）。");

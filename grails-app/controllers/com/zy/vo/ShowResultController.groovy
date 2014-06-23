@@ -11,16 +11,30 @@ class ShowResultController {
 
 	GrailsApplication grailsApplication
 	
-    def index() { 
-		redirect(action: "show", params: [username:'mike'])
+    def index() {
+		User user=User.findByUsername(params.username)
+		List illnesses=new ArrayList<Illness>()
+		SNPRelation.findAllByUser(user,[sort:'id',order:'asc']).collect {
+			it.illness
+		}.each {
+			if(!illnesses.contains(it)){
+				illnesses.add(it)
+			}
+		}
+		[illnesses:illnesses]
 	}
 	
 	def show(){
 		def username=params.username
 		User user=User.findByUsername(username)
-		def illnesses=SNPRelation.findAllByUser(user,[sort:'id',order:'asc']).collect {
+		List illnesses=new ArrayList<Illness>()
+		SNPRelation.findAllByUser(user,[sort:'id',order:'asc']).collect {
 			it.illness
-		}.toSet()
+		}.each {
+			if(!illnesses.contains(it)){
+				illnesses.add(it)
+			}
+		}
 		Map map=new HashMap<Illness, List>()
 		illnesses.each {illness->
 			def genes=SNPRelation.findAllByUserAndIllness(user,illness).collect {
@@ -51,7 +65,7 @@ class ShowResultController {
 		redirect(action: "show", params: [username:params.username])
 	}
 
-	def test(){
+	def getDataByURL(){
 		
 		SnpediaRepoPageProcessor processer=new SnpediaRepoPageProcessor();
 		SnpediaPipeline pline=new SnpediaPipeline();

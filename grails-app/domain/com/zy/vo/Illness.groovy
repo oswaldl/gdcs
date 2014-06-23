@@ -32,6 +32,6 @@ class Illness {
 		canDo nullable:true,maxSize: 3000
 		geneticEnvironment nullable:true,maxSize: 3000
 		reference nullable:true,maxSize: 3000
-		averageRisk nullable:true,maxSize: 3000
+		averageRisk nullable:true
     }
 }

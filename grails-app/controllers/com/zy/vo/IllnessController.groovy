@@ -26,8 +26,8 @@ class IllnessController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'illness.label', default: 'Illness'), illnessInstance.id])
-        redirect(action: "show", id: illnessInstance.id)
+        flash.message = "创建成功！"
+        redirect(action: "list")
     }
 
     def show(Long id) {
@@ -77,8 +77,8 @@ class IllnessController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'illness.label', default: 'Illness'), illnessInstance.id])
-        redirect(action: "show", id: illnessInstance.id)
+        flash.message = "更新成功！"
+        redirect(action: "list")
     }
 
     def delete(Long id) {
@@ -91,7 +91,7 @@ class IllnessController {
 
         try {
             illnessInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'illness.label', default: 'Illness'), id])
+            flash.message = "删除成功！"
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
@@ -100,13 +100,11 @@ class IllnessController {
         }
     }
 	
-	def createIllness(){
-		def name=params.name
-		if(!Illness.findByName(name)){
-			new Illness(
-				name:name
-				).save(failOnError:true)
-		}
-		render "success"
+	def getIllness(){
+		def string=params.searchString
+		def illnessList=new LinkedHashSet<User>()
+		illnessList.addAll(Illness.findAllByNameLike("%"+string+"%"))
+		illnessList.addAll(Illness.findAllByChineseNameLike("%"+string+"%"))
+		[illnessInstanceList:illnessList]
 	}
 }

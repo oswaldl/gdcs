@@ -7,7 +7,11 @@ package com.zy.vo
 class IllnessCat {
 	//名称
 	String name
-
+	
+	String toString(){
+		name
+	}
+	
     static constraints = {
     }
 }

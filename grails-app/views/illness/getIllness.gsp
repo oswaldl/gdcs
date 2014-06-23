@@ -48,9 +48,6 @@
 					</tr>
 				</g:each>
 			</table>
-			<div class="pagination">
-				<g:paginate total="${illnessInstanceTotal}" />
-			</div>
 			</div>
 			</div>
 	</body>
