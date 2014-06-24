@@ -21,7 +21,7 @@ class ShowResultController {
 				illnesses.add(it)
 			}
 		}
-		[illnesses:illnesses]
+		[illnesses:illnesses,username:user.username]
 	}
 	
 	def show(){

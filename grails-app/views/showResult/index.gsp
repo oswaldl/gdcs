@@ -9,17 +9,17 @@
   <div class="body">
   	<ul>
   		<li>
-  			<g:link controller="illness" action="showHighAll">较高风险疾病汇总</g:link>
+  			<g:link controller="illness" action="showHighAll" params='[username:"${username }"]'>较高风险疾病汇总</g:link>
   		</li>
   		<li>
-  			<g:link controller="illness" action="showLowAll">较低风险疾病汇总</g:link>
+  			<g:link controller="illness" action="showLowAll" params='[username:"${username }"]'>较低风险疾病汇总</g:link>
   		</li>
   		<li>
-  			<g:link controller="illness" action="showNormalAll">一般风险疾病汇总</g:link>
+  			<g:link controller="illness" action="showNormalAll" params='[username:"${username }"]'>一般风险疾病汇总</g:link>
   		</li>
-  		<g:each in="${illnesses }" var="illness">
+  		<g:each in="${illnesses }" var="illness" status="i">
   			<li>
-  				<g:link controller="illness" action="showDetail" id="${illness.id }">${illness.chineseName?:illness.name }</g:link>
+  				<g:link controller="illness" action="showDetail" params='[illnessId:"${illness.id }",status:"${i }",username:"${username }"]'> ${illness.chineseName?:illness.name }</g:link>
   			</li>
   		</g:each>
   	</ul>

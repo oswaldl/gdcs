@@ -32,16 +32,6 @@ public class DomainDAO {
 	}
 	
 	public static void main(String[] args) {
-//		try {
-//			System.out.println(DBHelper.getInstance().getConnection());
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 		CrawlRecord crawlRecord=new CrawlRecord();
 		crawlRecord.setUsername("username1");
 		crawlRecord.setUrl1("username1");
