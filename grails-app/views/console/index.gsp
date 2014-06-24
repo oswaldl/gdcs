@@ -5,6 +5,7 @@
 <%--<meta name="layout" content="main"/>--%>
 <title>Insert title here</title>
 <link href="css/common_2.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}" />
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/common_2.js"></script>
 </head>
@@ -36,11 +37,11 @@
 <%--            	<li>--%>
 <%--                	<a href="${createLink(controller:'user',action:'list')}" target="main_frame">用户管理</a>--%>
 <%--                </li>--%>
-<%--                <li>--%>
-<%--                	<a href="${createLink(controller:'illnessCat',action:'list')}" target="main_frame">病例分类配置</a>--%>
-<%--                </li>--%>
                 <li>
-                	<a href="${createLink(controller:'illness',action:'list')}" target="main_frame">病例说明配置</a>
+                	<a href="${createLink(controller:'illnessCat',action:'list')}" target="main_frame">病例分类配置</a>
+                </li>
+                <li>
+                	<a href="${createLink(controller:'illness',action:'list')}" target="main_frame">病例详细配置</a>
                 </li>
 <%--                <li>--%>
 <%--                	<a href="${createLink(controller:'illnessCat',action:'list')}" target="main_frame">风险划分</a>--%>

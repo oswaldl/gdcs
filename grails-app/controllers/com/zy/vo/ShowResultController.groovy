@@ -13,28 +13,18 @@ class ShowResultController {
 	
     def index() {
 		User user=User.findByUsername(params.username)
-		List illnesses=new ArrayList<Illness>()
-		SNPRelation.findAllByUser(user,[sort:'id',order:'asc']).collect {
+		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
-		}.each {
-			if(!illnesses.contains(it)){
-				illnesses.add(it)
-			}
-		}
+		}.toSet().sort{it.id}
 		[illnesses:illnesses,username:user.username]
 	}
 	
 	def show(){
 		def username=params.username
 		User user=User.findByUsername(username)
-		List illnesses=new ArrayList<Illness>()
-		SNPRelation.findAllByUser(user,[sort:'id',order:'asc']).collect {
+		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
-		}.each {
-			if(!illnesses.contains(it)){
-				illnesses.add(it)
-			}
-		}
+		}.toSet().sort{it.id}
 		Map map=new HashMap<Illness, List>()
 		illnesses.each {illness->
 			def genes=SNPRelation.findAllByUserAndIllness(user,illness).collect {

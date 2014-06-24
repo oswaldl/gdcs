@@ -113,7 +113,7 @@ class IllnessController {
 		int status=Integer.parseInt(params.status)
 		User user=User.findByUsername(params.username)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
-		int total=SNPRelation.findAllByUser(user,[sort:'id',order:'asc']).collect {
+		int total=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().size()
 		[illnessInstance: illnessInstance,status:status,total:total,username:user.username,snps:snps]
@@ -121,21 +121,14 @@ class IllnessController {
 	
 	def showDetailByStatus(){
 		User user=User.findByUsername(params.username)
-		List illnesses=new ArrayList<Illness>()
-		SNPRelation.findAllByUser(user,[sort:'id',order:'asc']).collect {
+		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
-		}.each {
-			if(!illnesses.contains(it)){
-				illnesses.add(it)
-			}
-		}
+		}.toSet().sort{it.id}
 		int status=Integer.parseInt(params.status)
 		def illnessInstance=illnesses.get(status)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		[illnessInstance: illnessInstance,status:status,total:illnesses.size(),username:user.username,snps:snps]
 	}
-	
-	
 	
 	def getRisk(Illness illness,User user){
 		double sum=0
@@ -144,7 +137,24 @@ class IllnessController {
 				sum=sum+Double.valueOf(it.oddRatio)
 			}
 		}
-		return sum
+		return sum*illness.averageRisk
+	}
+	
+	def showHighAll(){
+		Map<Illness, Double> illnesses=new HashMap<Illness, Double>()
+		User user=User.findByUsername(params.username)
+		SNPRelation.findAllByUser(user).collect {
+			it.illness
+		}.toSet().sort{it.averageRisk}.each {
+			if((getRisk(it,user)-it.averageRisk)){
+				illnesses.put(it, getRisk(it,user))
+			}
+		}
+		[illnesses:illnesses]
+	}
+	
+	def showLowAll(){
+		
 	}
 	
 }

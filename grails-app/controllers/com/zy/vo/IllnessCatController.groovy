@@ -26,8 +26,8 @@ class IllnessCatController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'illnessCat.label', default: 'IllnessCat'), illnessCatInstance.id])
-        redirect(action: "show", id: illnessCatInstance.id)
+        flash.message = "创建成功！"
+        redirect(action: "list")
     }
 
     def show(Long id) {
@@ -77,8 +77,8 @@ class IllnessCatController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'illnessCat.label', default: 'IllnessCat'), illnessCatInstance.id])
-        redirect(action: "show", id: illnessCatInstance.id)
+        flash.message = "修改成功！"
+        redirect(action: "list")
     }
 
     def delete(Long id) {
@@ -91,7 +91,7 @@ class IllnessCatController {
 
         try {
             illnessCatInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'illnessCat.label', default: 'IllnessCat'), id])
+            flash.message = "删除成功！"
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {

@@ -22,6 +22,5 @@
 					<g:actionSubmit class="delete" action="delete" value="删除" formnovalidate="" onclick="return confirm('确定删除？');" />
 				</fieldset>
 			</g:form>
-		</div>
 	</body>
 </html>
