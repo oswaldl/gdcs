@@ -99,7 +99,7 @@ class IllnessController {
             redirect(action: "show", id: id)
         }
     }
-	
+	//通过名字模糊查询病例
 	def getIllness(){
 		def string=params.searchString
 		def illnessList=new LinkedHashSet<User>()
@@ -107,7 +107,7 @@ class IllnessController {
 		illnessList.addAll(Illness.findAllByChineseNameLike("%"+string+"%"))
 		[illnessInstanceList:illnessList]
 	}
-	
+	//显示病例详细，通过列表查找过来的
 	def showDetail(){
 		def illnessInstance = Illness.get(params.illnessId)
 		int status=Integer.parseInt(params.status)
@@ -118,7 +118,7 @@ class IllnessController {
 		}.toSet().size()
 		[illnessInstance: illnessInstance,status:status,total:total,username:user.username,snps:snps]
 	}
-	
+	//显示病例详细，通过上一个下一个查找过来
 	def showDetailByStatus(){
 		User user=User.findByUsername(params.username)
 		def illnesses=SNPRelation.findAllByUser(user).collect {
@@ -129,7 +129,7 @@ class IllnessController {
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		[illnessInstance: illnessInstance,status:status,total:illnesses.size(),username:user.username,snps:snps]
 	}
-	
+	//获得风险等级
 	def getRisk(Illness illness,User user){
 		double sum=0
 		SNPRelation.findAllByIllnessAndUser(illness, user).each {
@@ -139,22 +139,44 @@ class IllnessController {
 		}
 		return sum*illness.averageRisk
 	}
-	
+	//获得所有高风险病例
 	def showHighAll(){
 		Map<Illness, Double> illnesses=new HashMap<Illness, Double>()
 		User user=User.findByUsername(params.username)
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.averageRisk}.each {
-			if((getRisk(it,user)-it.averageRisk)){
+			if(RiskRank.getHighRisk(getRisk(it,user)-it.averageRisk)){
 				illnesses.put(it, getRisk(it,user))
 			}
 		}
 		[illnesses:illnesses]
 	}
-	
+	//获得所有低风险病例
 	def showLowAll(){
-		
+		Map<Illness, Double> illnesses=new HashMap<Illness, Double>()
+		User user=User.findByUsername(params.username)
+		SNPRelation.findAllByUser(user).collect {
+			it.illness
+		}.toSet().sort{it.averageRisk}.each {
+			if(RiskRank.getLowRisk(getRisk(it,user)-it.averageRisk)){
+				illnesses.put(it, getRisk(it,user))
+			}
+		}
+		[illnesses:illnesses]
+	}
+	//获得一般风险病例
+	def showNormalAll(){
+		Map<Illness, Double> illnesses=new HashMap<Illness, Double>()
+		User user=User.findByUsername(params.username)
+		SNPRelation.findAllByUser(user).collect {
+			it.illness
+		}.toSet().sort{it.averageRisk}.each {
+			if(RiskRank.getNormalRisk(getRisk(it,user)-it.averageRisk)){
+				illnesses.put(it, getRisk(it,user))
+			}
+		}
+		[illnesses:illnesses]
 	}
 	
 }
