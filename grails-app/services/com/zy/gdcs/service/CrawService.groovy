@@ -47,11 +47,23 @@ class CrawService {
 					String name=div2.xpath("//div[@class='boxlink']/a[1]/text()").toString()+div2.xpath("//div[@class='boxlink']/a[2]/text()").toString();
 					String boxeffect=div2.xpath("//div[@class='boxeffect']/text()").toString();
 					String rstext=div2.xpath("//div[@class='rstext']/text()").toString();
+					String magnitudeDiv=div2.xpath("//div[@class='boxmag']/tidyText()").toString();
+					int index1=magnitudeDiv.indexOf("Magnitude: ")
+					String magnitude=null
+					if(index1!=-1){
+						int index2=magnitudeDiv.indexOf("\n")
+						if(index2==-1){
+							magnitude=magnitudeDiv.substring(index1+11)
+						}else{
+							magnitude=magnitudeDiv.substring(index1+11,index2)
+						}
+					}
 					Gene gene=new Gene();
 					gene.setName(name);
 					gene.setDescription1(boxeffect);
 					gene.setDescription2(rstext);
 					gene.setRepute("good");
+					gene.setMagnitude(magnitude);
 					list.add(gene);
 				}
 				//坏基因
@@ -60,11 +72,23 @@ class CrawService {
 					String name=div4.xpath("//div[@class='boxlink']/a[1]/text()").toString()+div4.xpath("//div[@class='boxlink']/a[2]/text()").toString();
 					String boxeffect=div4.xpath("//div[@class='boxeffect']/text()").toString();
 					String rstext=div4.xpath("//div[@class='rstext']/text()").toString();
+					String magnitudeDiv=div4.xpath("//div[@class='boxmag']/tidyText()").toString();
+					int index1=magnitudeDiv.indexOf("Magnitude: ")
+					String magnitude=null
+					if(index1!=-1){
+						int index2=magnitudeDiv.indexOf("\n")
+						if(index2==-1){
+							magnitude=magnitudeDiv.substring(index1+11)
+						}else{
+							magnitude=magnitudeDiv.substring(index1+11,index2)
+						}
+					}
 					Gene gene=new Gene();
 					gene.setName(name);
 					gene.setDescription1(boxeffect);
 					gene.setDescription2(rstext);
 					gene.setRepute("bad");
+					gene.setMagnitude(magnitude);
 					list.add(gene);
 				}
 				//一般基因
@@ -73,11 +97,23 @@ class CrawService {
 					String name=div3.xpath("//div[@class='boxlink']/a[1]/text()").toString()+div3.xpath("//div[@class='boxlink']/a[2]/text()").toString();
 					String boxeffect=div3.xpath("//div[@class='boxeffect']/text()").toString();
 					String rstext=div3.xpath("//div[@class='rstext']/text()").toString();
+					String magnitudeDiv=div3.xpath("//div[@class='boxmag']/tidyText()").toString();
+					int index1=magnitudeDiv.indexOf("Magnitude: ")
+					String magnitude=null
+					if(index1!=-1){
+						int index2=magnitudeDiv.indexOf("\n")
+						if(index2==-1){
+							magnitude=magnitudeDiv.substring(index1+11)
+						}else{
+							magnitude=magnitudeDiv.substring(index1+11,index2)
+						}
+					}
 					Gene gene=new Gene();
 					gene.setName(name);
 					gene.setDescription1(boxeffect);
 					gene.setDescription2(rstext);
 					gene.setRepute("normal");
+					gene.setMagnitude(magnitude);
 					list.add(gene);
 				}
 				map.put(caseName, list);
@@ -122,8 +158,6 @@ class CrawService {
 				}
 			}
 		}
-		
-		//activeUrl("http://localhost:8080/gdcs/crawlRecord/createCrawlRecord?username=abc11&url1=1213&url2=3121");
 		
 	}
 }

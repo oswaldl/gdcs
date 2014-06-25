@@ -178,5 +178,5 @@ class IllnessController {
 		}
 		[illnesses:illnesses]
 	}
-	
+
 }
