@@ -21,7 +21,12 @@ class Illness {
 	//平均人群风险值
 	String averageRisk
 	
-	
+	double getRisk(){
+		if(!this.averageRisk){
+			this.averageRisk="0"
+		}
+		return Double.valueOf(this.averageRisk)
+	}
 	
 	static belongsTo = [illnessCat: IllnessCat]
 

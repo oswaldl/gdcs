@@ -13,13 +13,13 @@ class BootStrap {
 		RiskRank riskRank=new RiskRank(high:0.4,low:0.1);
 		riskRank.save(failOnError:true)
 		
-		Illness illness=new Illness(name:"心房颤动",illnessCat:illnessCat,description:"心房纤维性颤动的特点是心脏内的混乱电信号引起上心室颤动（心房）。");
+		Illness illness=new Illness(name:"心房颤动",averageRisk:"0.2",illnessCat:illnessCat,description:"心房纤维性颤动的特点是心脏内的混乱电信号引起上心室颤动（心房）。");
 		illness.save(failOnError:true)
 		Gene gene=new Gene(name:"rs10757278(A;A)",repute:"good",description1:"0.78x reduced risk for Coronary Heart Disease.",description2:"0.77x reduced risk for Brain Aneurysm and Abdominal Aortic Aneurysm.");
 		gene.save(failOnError:true)
 		User user=new User(username:"mike",password:"mike");
 		user.save(failOnError:true)
-		SNPRelation relation=new SNPRelation(user:user,gene:gene,illness:illness);
+		SNPRelation relation=new SNPRelation(user:user,gene:gene,illness:illness,oddRatio:"0.9");
 		relation.save(failOnError:true)
 		
     }

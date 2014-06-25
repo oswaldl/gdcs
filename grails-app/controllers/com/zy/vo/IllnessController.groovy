@@ -116,7 +116,7 @@ class IllnessController {
 		int total=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().size()
-		[illnessInstance: illnessInstance,status:status,total:total,username:user.username,snps:snps]
+		[illnessInstance: illnessInstance,status:status,total:total,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
 	}
 	//显示病例详细，通过上一个下一个查找过来
 	def showDetailByStatus(){
@@ -127,7 +127,7 @@ class IllnessController {
 		int status=Integer.parseInt(params.status)
 		def illnessInstance=illnesses.get(status)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
-		[illnessInstance: illnessInstance,status:status,total:illnesses.size(),username:user.username,snps:snps]
+		[illnessInstance: illnessInstance,status:status,total:illnesses.size(),username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
 	}
 	//获得风险等级
 	def getRisk(Illness illness,User user){
@@ -137,7 +137,9 @@ class IllnessController {
 				sum=sum+Double.valueOf(it.oddRatio)
 			}
 		}
-		return sum*illness.averageRisk
+		double averageRisk=illness.getRisk()
+		double risk=(double)Math.round(sum*averageRisk*100)/100
+		return risk
 	}
 	//获得所有高风险病例
 	def showHighAll(){

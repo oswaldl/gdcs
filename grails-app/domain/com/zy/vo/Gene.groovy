@@ -16,7 +16,18 @@ class Gene {
 	String repute
 	//研究的人数多少，越高说明相关信息越准确
 	String magnitude
-
+	
+	String getName(String string){
+		int index=string.indexOf("(")
+		return string.substring(0, index)
+	}
+	
+	String getType(String string){
+		int index1=string.indexOf("(")
+		int index2=string.indexOf(")")
+		return string.substring(index1+1, index2)
+	}
+	
     static constraints = {
 		name blank: false, unique: true
 		magnitude nullable:true
