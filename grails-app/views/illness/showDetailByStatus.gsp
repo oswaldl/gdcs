@@ -74,31 +74,32 @@
 		<div class="contBox2">
 			<div class="tit4">疾病介绍</div>
 			<div class="cont jieshao">
-				<dl>
-					<dd>
-						<img src="../images/img2.jpg" width="190" height="139" />
-					</dd>
-					<dt>
+<%--				<dl>--%>
+<%--					<dd>--%>
+<%--						<img src="../images/img2.jpg" width="190" height="139" />--%>
+<%--					</dd>--%>
+<%--					<dt>--%>
 						${illnessInstance?.description }
-					</dt>
-				</dl>
+<%--					</dt>--%>
+<%--				</dl>--%>
 			</div>
 		</div>
 		<div class="contBox2">
 			<div class="tit4">遗传vs环境</div>
 			<div class="cont jieshao">
-				<dl>
-					<dd>
-						<img src="../images/img3.jpg" width="190" height="139" />
-					</dd>
-					<dt>
-						${illnessInstance?.geneticEnvironment }
-					</dt>
-				</dl>
+				${illnessInstance?.geneticEnvironment }
+<%--				<dl>--%>
+<%--					<dd>--%>
+<%--						<img src="../images/img3.jpg" width="190" height="139" />--%>
+<%--					</dd>--%>
+<%--					<dt>--%>
+<%--						${illnessInstance?.geneticEnvironment }--%>
+<%--					</dt>--%>
+<%--				</dl>--%>
 			</div>
 		</div>
-		<div class="contBox3">
-			<div class="tit">你可以做什么？</div>
+		<div class="contBox2">
+			<div class="tit4">你可以做什么？</div>
 			<div class="cont">
 				<div class="content">
 					${illnessInstance?.canDo }

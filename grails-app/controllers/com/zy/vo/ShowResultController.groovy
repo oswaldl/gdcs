@@ -45,14 +45,23 @@ class ShowResultController {
 	
 	def editDesc(){
 		Illness illness=Illness.get(params.illnessId)
-		[illness:illness,username:params.username]
+		[illness:illness,type:params.type]
 	}
 	
 	def saveDesc(){
 		Illness illness=Illness.get(params.illnessId)
-		illness.description=params.description
+		def type=params.type
+		if(type.equals("description")){
+			illness.description=params.description
+		}else if(type.equals("canDo")){
+			illness.canDo=params.description
+		}else if(type.equals("geneticEnvironment")){
+			illness.geneticEnvironment=params.description
+		}else{
+			println "no type"
+		}
 		illness.save(failOnError:true)
-		redirect(action: "show", params: [username:params.username])
+		redirect(controller:"illness",action:"edit",params:[id:illness.id])
 	}
 
 	def getDataByURL(){

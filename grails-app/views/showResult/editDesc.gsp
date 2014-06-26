@@ -9,7 +9,7 @@
   <div class="body">
   	<form action="saveDesc">
   	<input type="hidden" name="illnessId" value="${illness?.id }">
-  	<input type="hidden" name="username" value="${username }">
+  	<input type="hidden" name="type" value="${type }">
   	<ckeditor:editor name="description" height="400px" width="100%">
 		${illness?.description }
 	</ckeditor:editor>
