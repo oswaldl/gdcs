@@ -43,9 +43,9 @@
                 <li>
                 	<a href="${createLink(controller:'illness',action:'list')}" target="main_frame">病例详细配置</a>
                 </li>
-<%--                <li>--%>
-<%--                	<a href="${createLink(controller:'illnessCat',action:'list')}" target="main_frame">风险划分</a>--%>
-<%--                </li>--%>
+                <li>
+                	<a href="${createLink(controller:'riskRank',action:'index')}" target="main_frame">风险划分</a>
+                </li>
            	</ul>
         </div>
         <div class="content_main">

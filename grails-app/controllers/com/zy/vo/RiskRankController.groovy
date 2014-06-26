@@ -7,7 +7,7 @@ class RiskRankController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-        redirect(action: "list", params: params)
+        [riskRankInstance: RiskRank.findAll().get(0)]
     }
 
     def list(Integer max) {
@@ -70,15 +70,16 @@ class RiskRankController {
             }
         }
 
-        riskRankInstance.properties = params
+        riskRankInstance.high=Double.valueOf(params.high)/100
+        riskRankInstance.low=Double.valueOf(params.low)/100
 
         if (!riskRankInstance.save(flush: true)) {
             render(view: "edit", model: [riskRankInstance: riskRankInstance])
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'riskRank.label', default: 'RiskRank'), riskRankInstance.id])
-        redirect(action: "show", id: riskRankInstance.id)
+        flash.message = "更新成功！"
+        redirect(action: "index")
     }
 
     def delete(Long id) {

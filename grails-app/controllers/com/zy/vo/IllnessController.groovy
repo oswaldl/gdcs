@@ -143,42 +143,48 @@ class IllnessController {
 	}
 	//获得所有高风险病例
 	def showHighAll(){
-		Map<Illness, Double> illnesses=new HashMap<Illness, Double>()
+		Map<Illness, Double> map=new HashMap<Illness, Double>()
+		List illnesses=new ArrayList<Illness>()
 		User user=User.findByUsername(params.username)
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.averageRisk}.each {
-			if(RiskRank.getHighRisk(getRisk(it,user)-it.averageRisk)){
-				illnesses.put(it, getRisk(it,user))
+			if(RiskRank.getHighRisk(getRisk(it,user)-it.getRisk())){
+				map.put(it, getRisk(it,user))
+				illnesses.add(it)
 			}
 		}
-		[illnesses:illnesses]
+		[illnesses:illnesses,map:map]
 	}
 	//获得所有低风险病例
 	def showLowAll(){
-		Map<Illness, Double> illnesses=new HashMap<Illness, Double>()
+		Map<Illness, Double> map=new HashMap<Illness, Double>()
+		List illnesses=new ArrayList<Illness>()
 		User user=User.findByUsername(params.username)
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.averageRisk}.each {
-			if(RiskRank.getLowRisk(getRisk(it,user)-it.averageRisk)){
-				illnesses.put(it, getRisk(it,user))
+			if(RiskRank.getLowRisk(getRisk(it,user)-it.getRisk())){
+				map.put(it, getRisk(it,user))
+				illnesses.add(it)
 			}
 		}
-		[illnesses:illnesses]
+		[illnesses:illnesses,map:map]
 	}
 	//获得一般风险病例
 	def showNormalAll(){
-		Map<Illness, Double> illnesses=new HashMap<Illness, Double>()
+		Map<Illness, Double> map=new HashMap<Illness, Double>()
+		List illnesses=new ArrayList<Illness>()
 		User user=User.findByUsername(params.username)
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.averageRisk}.each {
-			if(RiskRank.getNormalRisk(getRisk(it,user)-it.averageRisk)){
-				illnesses.put(it, getRisk(it,user))
+			if(RiskRank.getNormalRisk(getRisk(it,user)-it.getRisk())){
+				map.put(it, getRisk(it,user))
+				illnesses.add(it)
 			}
 		}
-		[illnesses:illnesses]
+		[illnesses:illnesses,map:map]
 	}
 
 }

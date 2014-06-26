@@ -116,7 +116,7 @@
 		  	<g:if test="${total!=1&&status==(total-1) }">
 		  		<div class="pageBox1"><g:link class="s1" action="showDetailByStatus" params='[username:"${username }",status:"${status-1 }"]'>上一个</g:link></div>
 		  	</g:if>
-		  	<g:link controller="showResult" action="index" params='[username:"${username }"]'>返回列表</g:link>
+		  	<g:link class="pageBox1" controller="showResult" action="index" params='[username:"${username }"]'>返回列表</g:link>
 	    </div>
 	    </div>
 	</div>

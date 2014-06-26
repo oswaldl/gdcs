@@ -10,7 +10,7 @@ class BootStrap {
     def init = { servletContext ->
 		IllnessCat illnessCat=new IllnessCat(name:"默认分类");
 		illnessCat.save(failOnError:true)
-		RiskRank riskRank=new RiskRank(high:0.4,low:0.1);
+		RiskRank riskRank=new RiskRank(high:0.1,low:0.05);
 		riskRank.save(failOnError:true)
 		
 		Illness illness=new Illness(name:"心房颤动",averageRisk:"0.2",illnessCat:illnessCat,description:"心房纤维性颤动的特点是心脏内的混乱电信号引起上心室颤动（心房）。");
@@ -19,7 +19,7 @@ class BootStrap {
 		gene.save(failOnError:true)
 		User user=new User(username:"mike",password:"mike");
 		user.save(failOnError:true)
-		SNPRelation relation=new SNPRelation(user:user,gene:gene,illness:illness,oddRatio:"0.9");
+		SNPRelation relation=new SNPRelation(user:user,gene:gene,illness:illness,oddRatio:"1.9");
 		relation.save(failOnError:true)
 		
     }
