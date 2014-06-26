@@ -10,7 +10,7 @@
 	<div class="header">
 	<div class="lefts"><img src="../images/logo2.jpg" width="457" height="134" /></div>
 	<div class="rights">
-    	<p><span>王先生</span><a href="#">[注销]</a></p>
+    	<p><span>${username }</span><a href="#">[注销]</a></p>
         <p>欢迎进入基因检测报告！</p>
     </div>
 </div>
@@ -111,15 +111,17 @@
 		  	</g:if>
 		  	<g:if test="${total!=1&&status!=0&&status!=(total-1) }">
 		  		<div class="pageBox2"><g:link class="s2" action="showDetailByStatus" params='[username:"${username }",status:"${status+1 }"]'>下一个</g:link></div>
-		  		<div class="pageBox1"><g:link class="s1" action="showDetailByStatus" params='[username:"${username }",status:"${status-1 }"]'>上一个</g:link></div>
+		  		<div class="pageBox1"><g:link class="s2" action="showDetailByStatus" params='[username:"${username }",status:"${status-1 }"]'>上一个</g:link></div>
 		  	</g:if>
 		  	<g:if test="${total!=1&&status==(total-1) }">
-		  		<div class="pageBox1"><g:link class="s1" action="showDetailByStatus" params='[username:"${username }",status:"${status-1 }"]'>上一个</g:link></div>
+		  		<div class="pageBox1"><g:link class="s2" action="showDetailByStatus" params='[username:"${username }",status:"${status-1 }"]'>上一个</g:link></div>
 		  	</g:if>
-		  	<g:link class="pageBox1" controller="showResult" action="index" params='[username:"${username }"]'>返回列表</g:link>
-	    </div>
+				<div class="pageBox">
+					<g:link class="s1" controller="showResult" action="index"
+						params='[username:"${username }"]'>返回列表</g:link>
+				</div>
+			</div>
 	    </div>
 	</div>
-
 </body>
 </html>

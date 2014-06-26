@@ -9,7 +9,7 @@
 	<div class="header">
 	<div class="lefts"><img src="../images/logo2.jpg" width="457" height="134" /></div>
 	<div class="rights">
-    	<p><span>王先生</span><a href="#">[注销]</a></p>
+    	<p><span>${username }</span><a href="#">[注销]</a></p>
         <p>欢迎进入基因检测报告！</p>
     </div>
 	</div>
