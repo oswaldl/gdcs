@@ -5,12 +5,12 @@ import us.codecraft.webmagic.ResultItems
 import us.codecraft.webmagic.Task
 import us.codecraft.webmagic.selector.Selectable
 
+import com.zy.auth.User
 import com.zy.vo.CrawlRecord
 import com.zy.vo.Gene
-import com.zy.vo.Illness;
-import com.zy.vo.IllnessCat;
-import com.zy.vo.SNPRelation;
-import com.zy.vo.User;
+import com.zy.vo.Illness
+import com.zy.vo.IllnessCat
+import com.zy.vo.SNPRelation
 
 class CrawService {
 

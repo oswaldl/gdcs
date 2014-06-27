@@ -1,11 +1,12 @@
 package com.zy.vo
 
-import org.codehaus.groovy.grails.commons.GrailsApplication;
+import org.codehaus.groovy.grails.commons.GrailsApplication
 
-import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.Spider
 
-import com.zy.gdcs.webmagic.SnpediaPipeline;
-import com.zy.gdcs.webmagic.SnpediaRepoPageProcessor;
+import com.zy.auth.User
+import com.zy.gdcs.webmagic.SnpediaPipeline
+import com.zy.gdcs.webmagic.SnpediaRepoPageProcessor
 
 class ShowResultController {
 

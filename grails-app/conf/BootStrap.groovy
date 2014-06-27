@@ -1,12 +1,12 @@
+import com.zy.auth.User
 import com.zy.vo.Gene
-import com.zy.vo.Illness;
-import com.zy.vo.IllnessCat;
-import com.zy.vo.RiskRank;
-import com.zy.vo.SNPRelation;
-import com.zy.vo.User;
+import com.zy.vo.Illness
+import com.zy.vo.IllnessCat
+import com.zy.vo.RiskRank
+import com.zy.vo.SNPRelation
 
 class BootStrap {
-
+	def springSecurityService
     def init = { servletContext ->
 		IllnessCat illnessCat=new IllnessCat(name:"默认分类");
 		illnessCat.save(failOnError:true)
@@ -17,8 +17,11 @@ class BootStrap {
 		illness.save(failOnError:true)
 		Gene gene=new Gene(name:"rs10757278(A;A)",repute:"good",description1:"0.78x reduced risk for Coronary Heart Disease.",description2:"0.77x reduced risk for Brain Aneurysm and Abdominal Aortic Aneurysm.");
 		gene.save(failOnError:true)
-		User user=new User(username:"mike",password:"mike");
-		user.save(failOnError:true)
+		def user = User.findByUsername('mike') ?: new User(
+			username: 'mike',
+			email: 'anonymous@qq.com',
+			password: 'mike',
+			enabled: true).save(failOnError: true)
 		SNPRelation relation=new SNPRelation(user:user,gene:gene,illness:illness,oddRatio:"1.9");
 		relation.save(failOnError:true)
 		

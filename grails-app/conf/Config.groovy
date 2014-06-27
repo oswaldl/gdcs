@@ -126,3 +126,8 @@ ckeditor {
 
 		}
 	}
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.zy.auth.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.zy.auth.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.zy.auth.Role'

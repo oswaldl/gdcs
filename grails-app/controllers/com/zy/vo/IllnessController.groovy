@@ -2,6 +2,8 @@ package com.zy.vo
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import com.zy.auth.User
+
 class IllnessController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
