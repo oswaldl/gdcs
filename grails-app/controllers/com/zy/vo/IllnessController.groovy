@@ -104,7 +104,7 @@ class IllnessController {
 	//通过名字模糊查询病例
 	def getIllness(){
 		def string=params.searchString
-		def illnessList=new LinkedHashSet<User>()
+		def illnessList=new LinkedHashSet<Illness>()
 		illnessList.addAll(Illness.findAllByNameLike("%"+string+"%"))
 		illnessList.addAll(Illness.findAllByChineseNameLike("%"+string+"%"))
 		[illnessInstanceList:illnessList]

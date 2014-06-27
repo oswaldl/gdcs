@@ -46,17 +46,28 @@ class ShowResultController {
 	
 	def editDesc(){
 		Illness illness=Illness.get(params.illnessId)
-		[illness:illness,type:params.type]
+		String type=params.type
+		def description
+		if(type=="description"){
+			description=illness.description
+		}else if(type=="canDo"){
+			description=illness.canDo
+		}else if(type=="geneticEnvironment"){
+			description=illness.geneticEnvironment
+		}else{
+			println "no type"
+		}
+		[illness:illness,type:type,description:description]
 	}
 	
 	def saveDesc(){
 		Illness illness=Illness.get(params.illnessId)
-		def type=params.type
-		if(type.equals("description")){
+		String type=params.type
+		if(type=="description"){
 			illness.description=params.description
-		}else if(type.equals("canDo")){
+		}else if(type=="canDo"){
 			illness.canDo=params.description
-		}else if(type.equals("geneticEnvironment")){
+		}else if(type=="geneticEnvironment"){
 			illness.geneticEnvironment=params.description
 		}else{
 			println "no type"

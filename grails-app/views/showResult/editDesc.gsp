@@ -11,7 +11,7 @@
   	<input type="hidden" name="illnessId" value="${illness?.id }">
   	<input type="hidden" name="type" value="${type }">
   	<ckeditor:editor name="description" height="400px" width="100%">
-		${illness?.description }
+		${description }
 	</ckeditor:editor>
 	<input type="submit" value="提交"/>
 	</form>

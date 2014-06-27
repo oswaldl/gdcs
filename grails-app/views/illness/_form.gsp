@@ -24,16 +24,16 @@
     <td><g:textArea name="description" cols="40" rows="5" maxlength="3000" value="${illnessInstance?.description}"/></td>
   </tr>
   <tr>
-    <td class="fieldcontain ${hasErrors(bean: illnessInstance, field: 'canDo', 'error')} ">
-    	你能做什么&nbsp;&nbsp;<g:link controller="showResult" action="editDesc" params='[illnessId:"${illnessInstance?.id }",type:"canDo"]'>编辑</g:link>
-    </td>
-    <td><g:textArea name="canDo" cols="40" rows="5" maxlength="3000" value="${illnessInstance?.canDo}"/></td>
-  </tr>
-  <tr>
     <td class="fieldcontain ${hasErrors(bean: illnessInstance, field: 'geneticEnvironment', 'error')} ">
     	遗传与环境&nbsp;&nbsp;<g:link controller="showResult" action="editDesc" params='[illnessId:"${illnessInstance?.id }",type:"geneticEnvironment"]'>编辑</g:link>
     </td>
     <td><g:textArea name="geneticEnvironment" cols="40" rows="5" maxlength="3000" value="${illnessInstance?.geneticEnvironment}"/></td>
+  </tr>
+  <tr>
+    <td class="fieldcontain ${hasErrors(bean: illnessInstance, field: 'canDo', 'error')} ">
+    	你能做什么&nbsp;&nbsp;<g:link controller="showResult" action="editDesc" params='[illnessId:"${illnessInstance?.id }",type:"canDo"]'>编辑</g:link>
+    </td>
+    <td><g:textArea name="canDo" cols="40" rows="5" maxlength="3000" value="${illnessInstance?.canDo}"/></td>
   </tr>
 <%--  <tr>--%>
 <%--    <td class="fieldcontain ${hasErrors(bean: illnessInstance, field: 'reference', 'error')} ">引用文献</td>--%>

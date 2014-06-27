@@ -19,7 +19,7 @@ class BootStrap {
 		gene.save(failOnError:true)
 		def user = User.findByUsername('mike') ?: new User(
 			username: 'mike',
-			email: 'anonymous@qq.com',
+			chineseName: '迈克',
 			password: 'mike',
 			enabled: true).save(failOnError: true)
 		SNPRelation relation=new SNPRelation(user:user,gene:gene,illness:illness,oddRatio:"1.9");

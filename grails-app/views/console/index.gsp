@@ -34,9 +34,9 @@
     	<div class="content_menu">
         	<div class="menu_title">导航菜单 <span class="cosp">展开全部</span></div>
         	<ul class="menu_inner">
-<%--            	<li>--%>
-<%--                	<a href="${createLink(controller:'user',action:'list')}" target="main_frame">用户管理</a>--%>
-<%--                </li>--%>
+            	<li>
+                	<a href="${createLink(controller:'user',action:'index')}" target="main_frame">用户管理</a>
+                </li>
                 <li>
                 	<a href="${createLink(controller:'illnessCat',action:'list')}" target="main_frame">病例分类配置</a>
                 </li>
