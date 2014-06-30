@@ -3,14 +3,15 @@ import grails.converters.JSON
 import javax.servlet.http.HttpServletResponse
 
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
-
 import org.springframework.security.authentication.AccountExpiredException
 import org.springframework.security.authentication.CredentialsExpiredException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.LockedException
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 import org.springframework.security.web.WebAttributes
+import org.springframework.security.web.authentication.AbstractAuthenticationTargetUrlRequestHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.util.StringUtils;
 
 class LoginController {
 
@@ -42,6 +43,13 @@ class LoginController {
 	def auth = {
 
 		def config = SpringSecurityUtils.securityConfig
+		
+		def targetURI = request.forwardURI - request.contextPath
+		if(!params.lastVisited) {
+			session.putAt("lastVisited", "${targetURI+params?.toQueryString()}");
+		}else{
+			session.putAt("lastVisited", "${params.lastVisited}");
+		}
 
 		if (springSecurityService.isLoggedIn()) {
 			redirect uri: config.successHandler.defaultTargetUrl
@@ -52,6 +60,33 @@ class LoginController {
 		String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
 		render view: view, model: [postUrl: postUrl,
 		                           rememberMeParameter: config.rememberMe.parameter]
+	}
+	
+	def authSuccess = {
+		if(params.uid) {
+				def targetUrl = request.getParameter(AbstractAuthenticationTargetUrlRequestHandler.DEFAULT_TARGET_PARAMETER);
+				if (StringUtils.hasText(targetUrl)) {
+						try {
+								targetUrl = URLDecoder.decode(targetUrl, "UTF-8");
+						} catch (UnsupportedEncodingException e) {
+								throw new IllegalStateException("UTF-8 not supported. Shouldn't be possible");
+						}
+						
+						log.debug "Redirecting to target : $targetUrl";
+						(new DefaultAjaxAwareRedirectStrategy()).sendRedirect(request, response, targetUrl);
+						return;
+				}
+
+				def defaultSavedRequest = request.getSession()?.getAttribute(WebAttributes.SAVED_REQUEST)
+				log.debug "Redirecting to DefaultSavedRequest : $defaultSavedRequest";
+				if(defaultSavedRequest) {
+						(new DefaultAjaxAwareRedirectStrategy()).sendRedirect(request, response, defaultSavedRequest.getRedirectUrl());
+						return
+				} else {
+						redirect uri:"/";
+						return;
+				}
+		}
 	}
 
 	/**
@@ -93,19 +128,19 @@ class LoginController {
 		def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
 		if (exception) {
 			if (exception instanceof AccountExpiredException) {
-				msg = g.message(code: "springSecurity.errors.login.expired")
+				msg = g.message(code: "帐号已过期！")
 			}
 			else if (exception instanceof CredentialsExpiredException) {
-				msg = g.message(code: "springSecurity.errors.login.passwordExpired")
+				msg = g.message(code: "密码错误！")
 			}
 			else if (exception instanceof DisabledException) {
-				msg = g.message(code: "springSecurity.errors.login.disabled")
+				msg = g.message(code: "已经被禁用！")
 			}
 			else if (exception instanceof LockedException) {
-				msg = g.message(code: "springSecurity.errors.login.locked")
+				msg = g.message(code: "已经被锁定！")
 			}
 			else {
-				msg = g.message(code: "springSecurity.errors.login.fail")
+				msg = g.message(code: "登录失败！")
 			}
 		}
 
@@ -113,8 +148,14 @@ class LoginController {
 			render([error: msg] as JSON)
 		}
 		else {
-			flash.message = msg
-			redirect action: 'auth', params: params
+//			flash.message = msg
+//			redirect action: 'auth', params: params
+			def lastVisited=session.getAt("lastVisited");
+			if(lastVisited) {
+				redirect uri: lastVisited
+			}else{
+				redirect action: 'auth', params: params
+			}
 		}
 	}
 
