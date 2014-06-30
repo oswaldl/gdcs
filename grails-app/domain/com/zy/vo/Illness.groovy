@@ -28,6 +28,19 @@ class Illness {
 		return Double.valueOf(this.averageRisk)
 	}
 	
+	int getMagnitude(){
+		def lists=SNPRelation.findAllByIllness(this).collect {
+						it.gene.magnitude
+					}.toSet().sort{it}
+		int magnitude=0
+		def magnitudeString=lists.get(lists.size()-1)
+		if(magnitudeString){
+			Double mag=Double.valueOf(magnitudeString)
+			magnitude=(int)Math.ceil(mag)
+		}
+		return magnitude
+	}
+	
 	static belongsTo = [illnessCat: IllnessCat]
 
     static constraints = {

@@ -1,5 +1,8 @@
 package com.zy.gdcs.service
 
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 import us.codecraft.webmagic.Page
 import us.codecraft.webmagic.ResultItems
 import us.codecraft.webmagic.Task
@@ -144,20 +147,99 @@ class CrawService {
 //						+ entry.getValue());
 				def illnessName=entry.getKey()
 				def illness=Illness.findByName(illnessName) ?: new Illness(name:illnessName,illnessCat:illnessCat).save(failOnError:true)
+				println illness.name
 				for(Gene gene:entry.getValue()){
 					Gene gene0=Gene.findByName(gene.name)
 					if(!gene0){
 						gene.save(failOnError:true)
 						gene0=gene
 					}
+					String oddRatio
+					if(gene0.description1){
+						oddRatio=getOddRatio(gene0.description1.toLowerCase(),illnessName.toLowerCase())
+					}
+					
 					new SNPRelation(
 						user:user,
 						gene:gene0,
-						illness:illness
+						illness:illness,
+						oddRatio:oddRatio
 						).save(failOnError:true)
 				}
 			}
 		}
 		
 	}
+
+
+	def getOddRatio(String str,String illnessName){
+		String cur_sentense=""
+		String oddRatio
+		str.eachWithIndex {c,i->
+			//发现点，开始处理
+			if(".".equals(c)){
+				
+				if(i==0){//特殊情况，第一个字符就是.
+					
+				}else{
+					String pre=str[i-1]
+					try{
+						Integer.parseInt(pre+"")
+						//如果之前是数值，可能是float类型数值，也可能是句子结尾
+						if(str.length()==i){//特殊情况，已经是结尾了
+							if(cur_sentense.contains(illnessName)){
+								if(!oddRatio){
+									oddRatio=println2(cur_sentense)
+								}
+							}
+							cur_sentense=""
+						}else{
+							String aft=str[i+1]
+							try{
+								Integer.parseInt(aft)
+								//float类型数值
+								cur_sentense=cur_sentense+c;
+							}catch(e){
+								//句子结尾
+								if(cur_sentense.contains(illnessName)){
+									if(!oddRatio){
+										oddRatio=println2(cur_sentense)
+									}
+								}
+								cur_sentense=""
+							}
+						}
+					}catch(e){
+						//是一句话结尾
+						if(cur_sentense.contains(illnessName)){
+							if(!oddRatio){
+								oddRatio=println2(cur_sentense)
+							}
+						}
+						cur_sentense=""
+					}
+				}
+				
+			}else{//累加
+				cur_sentense=cur_sentense+c;
+			}
+		}
+		return oddRatio
+	}
+	
+	def println2(String str) {
+        String re = "([-\\+]?[0-9]([0-9]*)(\\.[0-9]+)?)|(^0\$)";
+  
+        Pattern p = Pattern.compile(re);
+        Matcher m = p.matcher(str);
+		String string=null
+		while(m.find()){
+			string=m.group(1);
+		}
+		if(string&&Double.valueOf(string)>10){
+			string=null
+		}
+		return string
+   }
+
 }

@@ -13,7 +13,7 @@ class ShowResultController {
 	GrailsApplication grailsApplication
 	
     def index() {
-		User user=User.findByUsername(params.username)
+		User user=User.findByUsername("mike")
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.id}
@@ -43,7 +43,7 @@ class ShowResultController {
 		}.toSet()
 		[gene:gene,illnesses:illnesses]
 	}
-	
+
 	def editDesc(){
 		Illness illness=Illness.get(params.illnessId)
 		String type=params.type
@@ -92,6 +92,15 @@ class ShowResultController {
 				//启动爬虫
 				.run();
 		render "success"
+	}
+	
+	def testData(){
+		def illness1=Illness.findByName("Abdominal aortic aneurysm")
+		def illness2=Illness.findByName("Acute myeloid leukemia")
+		def illness3=Illness.findByName("Gestational diabetes")
+		println illness1.getMagnitude()
+		println illness2.getMagnitude()
+		println illness3.getMagnitude()
 	}
 	
 }
