@@ -11,10 +11,14 @@
   </tr>
   <tr>
     <td class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">密码</td>
-    <td><g:textField name="password" required="" value="${userInstance?.password}"/></td>
+    <td><input name="password" type="password" value="${userInstance?.password }"></td>
   </tr>
   <tr>
     <td class="fieldcontain ${hasErrors(bean: userInstance, field: 'enabled', 'error')} ">是否启用</td>
     <td><g:checkBox name="enabled" value="${userInstance?.enabled}" /></td>
+  </tr>
+  <tr>
+    <td class="fieldcontain ${hasErrors(bean: userInstance, field: 'isAdmin', 'error')} ">是否为管理员</td>
+    <td><g:checkBox name="isAdmin" value="${userInstance?.isAdmin}" /></td>
   </tr>
 </table>

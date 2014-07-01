@@ -16,14 +16,12 @@ class ShowResultController {
     def index() {
 		User user=springSecurityService.getCurrentUser()
 		if(user.isAdmin){
-			println "admin"
 			redirect(controller:"console")
 			return
 		}
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.id}
-		println 1111111
 		[illnesses:illnesses,username:user.username]
 	}
 	
@@ -101,13 +99,22 @@ class ShowResultController {
 		render "success"
 	}
 	
-	def testData(){
-		def illness1=Illness.findByName("Abdominal aortic aneurysm")
-		def illness2=Illness.findByName("Acute myeloid leukemia")
-		def illness3=Illness.findByName("Gestational diabetes")
-		println illness1.getMagnitude()
-		println illness2.getMagnitude()
-		println illness3.getMagnitude()
+	def getUserData(){
+		String url=params.url
+		SnpediaRepoPageProcessor processer=new SnpediaRepoPageProcessor();
+		SnpediaPipeline pline=new SnpediaPipeline();
+		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(processer)
+		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(pline)
+		
+		Spider.create(processer)
+				//从"https://github.com/code4craft"开始抓
+				.addUrl(url)
+				.addPipeline(pline)
+				//开启5个线程抓取
+				.thread(1)
+				//启动爬虫
+				.run();
+		render "success"
 	}
 	
 }

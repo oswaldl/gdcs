@@ -45,6 +45,9 @@
                 <li>
                 	<a href="${createLink(controller:'riskRank',action:'index')}" target="main_frame">风险划分</a>
                 </li>
+                <li>
+                	<a href="${createLink(controller:'showResult',action:'getUserData')}" target="main_frame">添加新爬取人员</a>
+                </li>
            	</ul>
         </div>
         <div class="content_main">
