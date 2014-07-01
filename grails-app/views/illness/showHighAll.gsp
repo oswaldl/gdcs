@@ -13,7 +13,7 @@
 		</div>
 		<div class="rights">
 			<p>
-				<span>${username }</span><a href="#">[注销]</a>
+				<span>${username }</span><g:link controller="logout">[注销]</g:link>
 			</p>
 			<p>欢迎进入基因检测报告！</p>
 		</div>

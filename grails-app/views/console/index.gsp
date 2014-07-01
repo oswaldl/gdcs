@@ -15,7 +15,7 @@
   	<div class="sys_top">
     	<div class="sys_top_menu">
         	<div class="menu_left">
-            	欢迎您 <strong>admin</strong> 今天是2013年10月10日 星期四<span class="white"> | </span><a href="javascript:HC.logout();">注销登录</a>
+            	欢迎您 <strong>admin</strong> 今天是2014年7月10日 星期四<span class="white"> | </span><g:link controller="logout">[注销]</g:link>
             </div>
             <div class="menu_right">
             	 

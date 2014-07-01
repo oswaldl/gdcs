@@ -41,7 +41,6 @@ class LoginController {
 	 * Show the login page.
 	 */
 	def auth = {
-
 		def config = SpringSecurityUtils.securityConfig
 		
 		def targetURI = request.forwardURI - request.contextPath
@@ -122,7 +121,6 @@ class LoginController {
 	 * Callback after a failed login. Redirects to the auth page with a warning message.
 	 */
 	def authfail = {
-
 		def username = session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]
 		String msg = ''
 		def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
@@ -148,7 +146,7 @@ class LoginController {
 			render([error: msg] as JSON)
 		}
 		else {
-//			flash.message = msg
+			flash.message = msg
 //			redirect action: 'auth', params: params
 			def lastVisited=session.getAt("lastVisited");
 			if(lastVisited) {

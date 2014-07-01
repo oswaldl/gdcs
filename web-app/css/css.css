@@ -17,7 +17,7 @@ body{font-family:"微软雅黑"; font-size:15px; color:#4d4d4d; background:#f2f2
 .buttons{ background:#21c1bd; width:320px; display:block; text-align:center; line-height:52px; text-decoration:none; height:52px; border:none; cursor:pointer; color:#fff;  font-size:22px; color:#fff; font-family:"微软雅黑"; font-weight:bold;}
 a.buttons:hover{ background:#1da5a1;}
 
-.box{ padding: 50px 65px 0; width:320px; height:330px; background:#fff; border:1px solid #e5e3e3; border-top:8px solid #ffda3d;}
+.box{ padding: 50px 65px 0; width:320px; height:355px; background:#fff; border:1px solid #e5e3e3; border-top:8px solid #ffda3d;}
 .box li{ overflow:hidden; zoom:1; padding-bottom:35px;}
 .box .s1{ float:left;}
 .box .s2{ float: right;}
