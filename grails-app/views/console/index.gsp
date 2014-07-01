@@ -4,10 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <%--<meta name="layout" content="main"/>--%>
 <title>Insert title here</title>
-<link href="css/common_2.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}" />
-<script src="js/jquery-1.10.2.js"></script>
-<script src="js/common_2.js"></script>
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'common_2.css')}" />
+<r:external uri="/js/jquery-1.10.2.js" />
+<r:external uri="/js/common_2.js" />
 </head>
 <body>
   <div class="wrapper">
@@ -18,7 +18,6 @@
             	欢迎您 <strong>admin</strong> 今天是2014年7月10日 星期四<span class="white"> | </span><g:link controller="logout">[注销]</g:link>
             </div>
             <div class="menu_right">
-            	 
 	            <a href="index_2.html">后台首页</a><span class="white"> | </span><a href="../index.html">前台首页</a>
             </div>
         </div>

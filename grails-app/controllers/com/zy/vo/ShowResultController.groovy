@@ -11,12 +11,19 @@ import com.zy.gdcs.webmagic.SnpediaRepoPageProcessor
 class ShowResultController {
 
 	GrailsApplication grailsApplication
+	def springSecurityService
 	
     def index() {
-		User user=User.findByUsername("mike")
+		User user=springSecurityService.getCurrentUser()
+		if(user.isAdmin){
+			println "admin"
+			redirect(controller:"console")
+			return
+		}
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.id}
+		println 1111111
 		[illnesses:illnesses,username:user.username]
 	}
 	

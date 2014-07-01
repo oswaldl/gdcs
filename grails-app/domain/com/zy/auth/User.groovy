@@ -7,7 +7,7 @@ class User {
 	String username
 	String chineseName
 	String password
-	boolean isAdmin
+	boolean isAdmin=false
 	
 	boolean enabled
 	boolean accountExpired

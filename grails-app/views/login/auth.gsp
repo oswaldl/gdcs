@@ -19,9 +19,9 @@
         <div class="logo"><img src="../images/LOGO.png" width="243" height="166" /></div>
         <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
         <div class="box">
-        	<ul>${postUrl}
-            	<li>用户名<input type='text' class=inputs name='j_username' id='username'/></li>
-                <li>密码<input type='password' class='inputs' name='j_password' id='password'/></li>
+        	<ul>
+            	<li><input type='text' class=inputs name='j_username' id='username' placeholder="请输入用户名"/></li>
+                <li><input type='password' class='inputs' name='j_password' id='password' placeholder="请输入密码"/></li>
                 <li style="padding-bottom:15px;"><input class="buttons" type='submit' id="submit" value='登录'/></li>
                 <li style="color:#999999;">
                 	<g:if test='${flash.message}'>

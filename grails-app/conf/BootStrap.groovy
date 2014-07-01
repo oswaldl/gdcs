@@ -22,6 +22,12 @@ class BootStrap {
 			chineseName: '迈克',
 			password: 'mike',
 			enabled: true).save(failOnError: true)
+		def admin = User.findByUsername('admin') ?: new User(
+			username: 'admin',
+			chineseName: '管理员',
+			password: 'admin',
+			isAdmin: true,
+			enabled: true).save(failOnError: true)
 //		SNPRelation relation=new SNPRelation(user:user,gene:gene,illness:illness,oddRatio:"1.9");
 //		relation.save(failOnError:true)
 		
