@@ -130,6 +130,6 @@
     <img src="http://system76.com/images/nb1_front_med.jpg" alt="laptop2" title="laptop2" />
     
     <p><strong>Hint:</strong> One way to style gsp's that you intend to make into pdf's is to have two seperate style sheets one for media="print" and one for media="screen". The print style sheet will be used to style the PDF, and if PDF generation fails you will get a styled HTML view that isn't all weird because of fonts sized in pt and such.</p>
-  
+
 </body>
 </html>

@@ -24,7 +24,7 @@ class ShowResultController {
 		}.toSet().sort{it.id}
 		[illnesses:illnesses,username:user.username]
 	}
-	
+
 	def show(){
 		def username=params.username
 		User user=User.findByUsername(username)
@@ -40,7 +40,7 @@ class ShowResultController {
 		}
 		[user:user,illnesses:illnesses,map:map]
 	}
-	
+
 	def showIllnessByGene(){
 		Gene gene=Gene.get(params.id)
 		def illnesses=SNPRelation.findAllByGene(gene).collect {
@@ -64,7 +64,7 @@ class ShowResultController {
 		}
 		[illness:illness,type:type,description:description]
 	}
-	
+
 	def saveDesc(){
 		Illness illness=Illness.get(params.illnessId)
 		String type=params.type
@@ -82,7 +82,7 @@ class ShowResultController {
 	}
 
 	def getDataByURL(){
-		
+
 		SnpediaRepoPageProcessor processer=new SnpediaRepoPageProcessor();
 		SnpediaPipeline pline=new SnpediaPipeline();
 		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(processer)
@@ -90,7 +90,7 @@ class ShowResultController {
 		
 		Spider.create(processer)
 				//从"https://github.com/code4craft"开始抓
-				.addUrl("http://files.snpedia.com/reports/genome_Mike_Spear_pooled.html")
+				.addUrl("file:///C:/Users/ACER/Desktop/Promethease%20report/Promethease%20report/sun%20tian/Promethease_2014_05_12_genome_tian_sun_Full_20140511234445.html")
 				.addPipeline(pline)
 				//开启5个线程抓取
 				.thread(5)
@@ -98,23 +98,8 @@ class ShowResultController {
 				.run();
 		render "success"
 	}
-	
+
 	def getUserData(){
-		String url=params.url
-		SnpediaRepoPageProcessor processer=new SnpediaRepoPageProcessor();
-		SnpediaPipeline pline=new SnpediaPipeline();
-		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(processer)
-		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(pline)
-		
-		Spider.create(processer)
-				//从"https://github.com/code4craft"开始抓
-				.addUrl(url)
-				.addPipeline(pline)
-				//开启5个线程抓取
-				.thread(1)
-				//启动爬虫
-				.run();
-		render "success"
 	}
-	
+
 }
