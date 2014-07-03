@@ -36,7 +36,9 @@
 				<g:each in="${illnesses }" var="illness" status="i">
 					<tr bgcolor="${(i % 2) == 0 ? '#ffffff' : '#fafafa'}">
 						<td align="center" valign="middle" class="paddingT10">
+							<g:link controller="illness" action="showIllness" params='[illnessId:"${illness.id }",username:"${username }"]'>
 							${illness.name }
+							</g:link>
 						</td>
 						<td align="center" valign="middle" class="paddingT10"><img
 							src="../images/ico1.gif" /><img src="../images/ico1.gif" /><img

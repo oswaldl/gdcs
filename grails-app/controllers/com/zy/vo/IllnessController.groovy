@@ -101,6 +101,14 @@ class IllnessController {
             redirect(action: "show", id: id)
         }
     }
+	//展示单个病例
+	def showIllness(){
+		def illnessInstance = Illness.get(params.illnessId)
+		User user=User.findByUsername(params.username)
+		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
+		[illnessInstance: illnessInstance,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
+	}
+	
 	//通过名字模糊查询病例
 	def getIllness(){
 		def string=params.searchString
