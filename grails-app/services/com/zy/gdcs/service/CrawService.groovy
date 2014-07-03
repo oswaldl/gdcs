@@ -23,7 +23,7 @@ class CrawService {
 
 	public void process(Page page) {
 		// 部分二：定义如何抽取页面信息，并保存下来
-		String medicalConditionsUrl=page.getHtml().xpath("//div[9]/a/@href").toString();
+		String medicalConditionsUrl=page.getHtml().xpath("//div[7]/a/@href").toString();
 		if(medicalConditionsUrl!=null&&!"".equals(medicalConditionsUrl)){
 			page.putField("MedicalConditionsUrl", medicalConditionsUrl);
 			page.putField("currentUrl", page.getUrl());
@@ -32,7 +32,7 @@ class CrawService {
 				page.setSkip(true);
 			}
 			// 部分三：从页面发现后续的url地址来抓取
-			page.addTargetRequests(page.getHtml().links().regex(page.getHtml().xpath("//div[9]/a/@href").toString()).all());
+			page.addTargetRequests(page.getHtml().links().regex(medicalConditionsUrl).all());
 		}else{
 			//获取所有符合条件class='adiseasebox'的div集合，病例集合
 			List<Selectable> divs1 = page.getHtml().xpath("//div[@class='adiseasebox']").nodes();

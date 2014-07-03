@@ -90,7 +90,7 @@ class ShowResultController {
 		
 		Spider.create(processer)
 				//从"https://github.com/code4craft"开始抓
-				.addUrl("http://files.snpedia.com/reports/genome_Mike_Spear_pooled.html")
+				.addUrl("http://localhost:8888/zhuangjingyi/Promethease_2014_05_12_genome_jing_yi_Zhuang_Full_20140511234412.html")
 				.addPipeline(pline)
 				//开启5个线程抓取
 				.thread(5)
@@ -105,8 +105,7 @@ class ShowResultController {
 	def searchData(){
 		def searchString=params.searchString
 		def user=User.findByUsername(params.username)
-		Illness illness=Illness.findByName(searchString)
-		println illness.id
+		Illness illness=Illness.findAllByNameLike("%"+searchString+"%").get(0)
 		redirect(controller:"illness",action:"showIllness",params:[illnessId:illness.id,username:user.username])
 	}
 

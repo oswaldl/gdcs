@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" media="screen,print" href="${resource(dir: 'css', file: 'css.css')}" />
+<link rel="stylesheet" type="text/css" media="all" href="${resource(dir: 'css', file: 'css.css')}" />
 </head>
 <body>
 	<div class="header">
@@ -14,7 +14,7 @@
         <p>
         	<g:form url="[action:'searchData',controller:'showResult']" >
         		<input type="hidden" name="username" value="${username }"/>
-				<input name="searchString" id="search" placeholder="请输入病例名或SPN查询"/>
+				<input name="searchString" id="search" placeholder="请输入病例名"/>
 			</g:form>
         </p>
     </div>
