@@ -23,16 +23,26 @@ class CrawService {
 
 	public void process(Page page) {
 		// 部分二：定义如何抽取页面信息，并保存下来
-		String medicalConditionsUrl=page.getHtml().xpath("//div[7]/a/@href").toString();
-		if(medicalConditionsUrl!=null&&!"".equals(medicalConditionsUrl)){
-			page.putField("MedicalConditionsUrl", medicalConditionsUrl);
+		String medicalConditionsUrl
+		List<Selectable> adivs = page.getHtml().xpath("//div[@class='majorsection']").nodes();
+		for (Selectable divv : adivs) {
+			String content=divv.xpath("//a/text()").toString();
+			if(content.contains("Medical Conditions")){
+				medicalConditionsUrl=divv.xpath("//a/@href").toString();
+			}
+		}
+		if(medicalConditionsUrl!=null&&medicalConditionsUrl!=""){
+			page.putField("MedicalConditionsUrl", medicalConditionsUrl.replace("\\", "/"));
 			page.putField("currentUrl", page.getUrl());
 			if (page.getResultItems().get("MedicalConditionsUrl") == null) {
 				//skip this page
 				page.setSkip(true);
 			}
 			// 部分三：从页面发现后续的url地址来抓取
-			page.addTargetRequests(page.getHtml().links().regex(medicalConditionsUrl).all());
+//			page.addTargetRequests(page.getHtml().links().regex(medicalConditionsUrl).all());
+			List <String> lst = new ArrayList();
+			lst.add(medicalConditionsUrl.replace("\\", "/"))
+			page.addTargetRequests(lst);
 		}else{
 			//获取所有符合条件class='adiseasebox'的div集合，病例集合
 			List<Selectable> divs1 = page.getHtml().xpath("//div[@class='adiseasebox']").nodes();
