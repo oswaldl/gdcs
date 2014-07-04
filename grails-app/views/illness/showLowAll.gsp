@@ -40,10 +40,11 @@
 							${illness.name }
 							</g:link>
 						</td>
-						<td align="center" valign="middle" class="paddingT10"><img
-							src="../images/ico1.gif" /><img src="../images/ico1.gif" /><img
-							src="../images/ico1.gif" /><img src="../images/ico1.gif" /><img
-							src="../images/ico1.gif" /></td>
+						<td align="center" valign="middle" class="paddingT10">
+							<g:each in="${(0..illness.getMagnitude() ) }">
+							<img src="../images/ico1.gif" />
+							</g:each>
+						</td>
 						<td align="center" valign="middle" class="paddingT10"><table
 								width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
