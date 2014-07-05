@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Insert title here</title>
+<title>基因检测报告</title>
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'css.css')}" />
 </head>
 <body>
 
 	<div class="header">
-	<div class="lefts"><img src="../images/logo2.jpg" width="457" height="134" /></div>
+	<div class="lefts"><g:img dir="images" file="logo2.jpg" width="457" height="134"/></div>
 	<div class="rights">
     	<p><span>${username }</span><g:link controller="logout">[注销]</g:link></p>
         <p>欢迎进入基因检测报告！</p>

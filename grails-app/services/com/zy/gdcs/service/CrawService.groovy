@@ -31,6 +31,11 @@ class CrawService {
 				medicalConditionsUrl=divv.xpath("//a/@href").toString();
 			}
 		}
+		//获取正在爬取的用户
+		String url=page.getUrl()
+		int eindex=url.indexOf("/", 22)
+		String username=url.substring(22, eindex)
+		page.putField("username", username);
 		if(medicalConditionsUrl!=null&&medicalConditionsUrl!=""){
 			page.putField("MedicalConditionsUrl", medicalConditionsUrl.replace("\\", "/"));
 			page.putField("currentUrl", page.getUrl());
@@ -136,7 +141,8 @@ class CrawService {
 	}
 
 	public void process(ResultItems resultItems, Task task) {
-		User user=User.findByUsername('mike')
+		String username=resultItems.get("username")
+		User user=User.findByUsername(username)?:new User(username: username,password: username,isAdmin: false,enabled: true).save(failOnError: true)
 		def illnessCat=IllnessCat.findByName("默认分类")
 		if (resultItems.get("MedicalConditionsUrl") != null) {
 			System.out.println("url1:" + resultItems.get("currentUrl"));

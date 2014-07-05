@@ -158,7 +158,7 @@ class IllnessController {
 		User user=User.findByUsername(params.username)
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
-		}.toSet().sort{it.averageRisk}.each {
+		}.toSet().sort{it.getMagnitude()}.each {
 			if(RiskRank.getHighRisk(getRisk(it,user)-it.getRisk())){
 				map.put(it, getRisk(it,user))
 				illnesses.add(it)
@@ -173,7 +173,7 @@ class IllnessController {
 		User user=User.findByUsername(params.username)
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
-		}.toSet().sort{it.averageRisk}.each {
+		}.toSet().sort{it.getMagnitude()}.each {
 			if(RiskRank.getLowRisk(getRisk(it,user)-it.getRisk())){
 				map.put(it, getRisk(it,user))
 				illnesses.add(it)
@@ -188,7 +188,7 @@ class IllnessController {
 		User user=User.findByUsername(params.username)
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
-		}.toSet().sort{it.averageRisk}.each {
+		}.toSet().sort{it.getMagnitude()}.each {
 			if(RiskRank.getNormalRisk(getRisk(it,user)-it.getRisk())){
 				map.put(it, getRisk(it,user))
 				illnesses.add(it)

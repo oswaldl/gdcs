@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <%--<meta name="layout" content="main"/>--%>
-<title>Insert title here</title>
+<title>基因检测报告</title>
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}" />
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'common_2.css')}" />
 <r:external uri="/js/jquery-1.10.2.js" />

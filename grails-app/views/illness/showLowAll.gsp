@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Insert title here</title>
+<title>基因检测报告</title>
 <link rel="stylesheet" type="text/css"
 	href="${resource(dir: 'css', file: 'css.css')}" />
 </head>
 <body>
 	<div class="header">
 		<div class="lefts">
-			<img src="../images/logo2.jpg" width="457" height="134" />
+			<g:img dir="images" file="logo2.jpg" width="457" height="134"/>
 		</div>
 		<div class="rights">
 			<p>
@@ -42,7 +42,7 @@
 						</td>
 						<td align="center" valign="middle" class="paddingT10">
 							<g:each in="${(0..illness.getMagnitude() ) }">
-							<img src="../images/ico1.gif" />
+							<g:img dir="images" file="ico1.gif"/>
 							</g:each>
 						</td>
 						<td align="center" valign="middle" class="paddingT10"><table
