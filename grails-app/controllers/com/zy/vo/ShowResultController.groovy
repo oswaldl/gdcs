@@ -105,8 +105,16 @@ class ShowResultController {
 	def searchData(){
 		def searchString=params.searchString
 		def user=User.findByUsername(params.username)
-		Illness illness=Illness.findAllByNameLike("%"+searchString+"%").get(0)
-		redirect(controller:"illness",action:"showIllness",params:[illnessId:illness.id,username:user.username])
+		def illnesses=Illness.findAllByNameLike("%"+searchString+"%")
+		if(illnesses.size()>0){
+			Illness illness=illnesses.get(0)
+			redirect(controller:"illness",action:"showIllness",params:[illnessId:illness.id,username:user.username])
+			return
+		}else{
+			redirect(controller:"showResult",action:"index")
+			return
+		}
+		
 	}
 
 }
