@@ -16,7 +16,7 @@
 
 <div class="bg1" style="widht:100%;">
 	<div class="login">
-        <div class="logo"><g:img dir="images" file="LOGO.png" width="243" height="166"/></div>
+        <div class="logo"><g:img dir="images" file="logo.png" width="243" height="166"/></div>
         <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
         <div class="box">
         	<ul>

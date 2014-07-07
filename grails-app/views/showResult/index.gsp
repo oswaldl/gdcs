@@ -22,9 +22,6 @@
 	<div class="main">
 		<div class="titles">
 	    	目录
-	    	<g:pdfForm controller="showResult" action="index"  filename="sample.pdf" method="post">
-	            <g:submitButton name="printPdf" value="pdf" />
-            </g:pdfForm>
 	    </div>
 	    <div class="lists">
 	    	<div class="listBox">

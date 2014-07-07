@@ -118,12 +118,6 @@
 						<th height="36" align="center" valign="middle" bgcolor="#ff8470">Adjusted
 							Odds Ratio</th>
 					</tr>
-					<tr>
-						<td height="36" align="center" valign="middle">ITGAM<br /></td>
-						<td height="36" align="center" valign="middle">rs9888739</td>
-						<td height="36" align="center" valign="middle">CC<br /></td>
-						<td height="36" align="center" valign="middle">0.99</td>
-					</tr>
 					<g:each in="${snps }" var="snp">
 						<g:if test="${snp.oddRatio!=null }">
 							<tr>

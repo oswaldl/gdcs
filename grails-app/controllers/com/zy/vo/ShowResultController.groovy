@@ -87,10 +87,10 @@ class ShowResultController {
 		SnpediaPipeline pline=new SnpediaPipeline();
 		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(processer)
 		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(pline)
-		
+		String url=params.url
 		Spider.create(processer)
 				//从"https://github.com/code4craft"开始抓
-				.addUrl("http://localhost:8888/zhuangjingyi/Promethease_2014_05_12_genome_jing_yi_Zhuang_Full_20140511234412.html")
+				.addUrl(url)
 				.addPipeline(pline)
 				//开启5个线程抓取
 				.thread(5)
