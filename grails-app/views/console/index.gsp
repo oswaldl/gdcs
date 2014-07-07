@@ -37,6 +37,9 @@
                 	<a href="${createLink(controller:'user',action:'index')}" target="main_frame">用户管理</a>
                 </li>
                 <li>
+                	<a href="${createLink(controller:'showResult',action:'getUserData')}" target="main_frame">添加新爬取人员</a>
+                </li>
+                <li>
                 	<a href="${createLink(controller:'illnessCat',action:'list')}" target="main_frame">病例分类配置</a>
                 </li>
                 <li>
@@ -46,7 +49,10 @@
                 	<a href="${createLink(controller:'riskRank',action:'index')}" target="main_frame">风险划分</a>
                 </li>
                 <li>
-                	<a href="${createLink(controller:'showResult',action:'getUserData')}" target="main_frame">添加新爬取人员</a>
+                	<a href="${createLink(controller:'drugResponse',action:'index')}" target="main_frame">药品谱公有配置</a>
+                </li>
+                <li>
+                	<a href="${createLink(controller:'userDrugRelation',action:'index')}" target="main_frame">人员药品谱配置</a>
                 </li>
            	</ul>
         </div>
