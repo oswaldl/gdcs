@@ -2,12 +2,16 @@ package com.zy.vo
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import com.zy.auth.User;
+
 class UserDrugRelationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
-        redirect(action: "list", params: params)
+    def index(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		def userInstanceList=User.findAllByIsAdmin(false,params)
+		[userInstanceList:userInstanceList,userInstanceTotal:User.countByIsAdmin(false,params)]
     }
 
     def list(Integer max) {
@@ -41,13 +45,10 @@ class UserDrugRelationController {
         [userDrugRelationInstance: userDrugRelationInstance]
     }
 
-    def edit(Long id) {
-        def userDrugRelationInstance = UserDrugRelation.get(id)
-        if (!userDrugRelationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'userDrugRelation.label', default: 'UserDrugRelation'), id])
-            redirect(action: "list")
-            return
-        }
+    def edit() {
+		def drugResponse=DrugResponse.get(params.drugResponseId)
+		def user=User.get(params.userId)
+		def userDrugRelationInstance=UserDrugRelation.findByUsernameAndDrugResponse(user.username,drugResponse)?:new UserDrugRelation(username:user.username,drugResponse:drugResponse).save(failOnError:true)
 
         [userDrugRelationInstance: userDrugRelationInstance]
     }
@@ -77,8 +78,9 @@ class UserDrugRelationController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'userDrugRelation.label', default: 'UserDrugRelation'), userDrugRelationInstance.id])
-        redirect(action: "show", id: userDrugRelationInstance.id)
+        flash.message = "更新成功！"
+		def user=User.findByUsername(userDrugRelationInstance.username)
+        redirect(action: "showAllDrugResponse", id: user.id)
     }
 
     def delete(Long id) {
@@ -99,4 +101,51 @@ class UserDrugRelationController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def getUser(){
+		def string=params.searchString
+		def users=new LinkedHashSet<User>()
+		users.addAll(User.findAllByUsernameLike("%"+string+"%"))
+		users.addAll(User.findAllByChineseNameLike("%"+string+"%"))
+		[userInstanceList:users]
+	}
+	
+	def showAllDrugResponse(Integer max){
+		User user=User.get(params.id)
+		params.max = Math.min(max ?: 10, 100)
+		def drugResponseList=DrugResponse.list(params)
+		[user:user,drugResponseInstanceList:drugResponseList,drugResponseInstanceTotal:DrugResponse.count()]
+	}
+	
+	def editDesc(){
+		UserDrugRelation userDrugRelation=UserDrugRelation.get(params.userDrugRelationId)
+		String type=params.type
+		def description
+		if(type=="geneData"){
+			description=userDrugRelation.geneData
+		}else if(type=="oddRatio"){
+			description=userDrugRelation.oddRatio
+		}else if(type=="geneAbstract"){
+			description=userDrugRelation.geneAbstract
+		}else{
+			println "no type"
+		}
+		[userDrugRelation:userDrugRelation,type:type,description:description]
+	}
+	
+	def saveDesc(){
+		UserDrugRelation userDrugRelation=UserDrugRelation.get(params.userDrugRelationId)
+		String type=params.type
+		if(type=="geneData"){
+			userDrugRelation.geneData=params.description
+		}else if(type=="oddRatio"){
+			userDrugRelation.oddRatio=params.description
+		}else if(type=="geneAbstract"){
+			userDrugRelation.geneAbstract=params.description
+		}else{
+			println "no type"
+		}
+		userDrugRelation.save(failOnError:true)
+		redirect(controller:"userDrugRelation",action:"edit",params:[drugResponseId:userDrugRelation.drugResponse.id,userId:User.findByUsername(userDrugRelation.username).id])
+	}
 }

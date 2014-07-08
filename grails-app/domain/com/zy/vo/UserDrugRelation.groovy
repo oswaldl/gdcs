@@ -24,6 +24,7 @@ class UserDrugRelation {
 	String geneAbstract
 
     static constraints = {
+		state nullable:true
 		geneData nullable:true,maxSize: 3000
 		oddRatio nullable:true,maxSize: 3000
 		geneAbstract nullable:true,maxSize: 3000
