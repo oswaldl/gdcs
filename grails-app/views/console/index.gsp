@@ -17,9 +17,9 @@
         	<div class="menu_left">
             	欢迎您 <strong>admin</strong> 今天是2014年7月10日 星期四<span class="white"> | </span><g:link controller="logout">[注销]</g:link>
             </div>
-            <div class="menu_right">
-	            <a href="index_2.html">后台首页</a><span class="white"> | </span><a href="../index.html">前台首页</a>
-            </div>
+<%--            <div class="menu_right">--%>
+<%--	            <a href="index_2.html">后台首页</a><span class="white"> | </span><a href="../index.html">前台首页</a>--%>
+<%--            </div>--%>
         </div>
     	<div class="sys_top_banner">
     		<div class="menu_right">

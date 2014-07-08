@@ -22,7 +22,12 @@ class ShowResultController {
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.id}
-		[illnesses:illnesses,username:user.username]
+		
+		def drugResponses=UserDrugRelation.findAllByUsername(user.username).collect{
+			it.drugResponse
+		}.toSet().sort{it.id}
+		
+		[illnesses:illnesses,username:user.username,drugResponses:drugResponses]
 	}
 
 	def show(){

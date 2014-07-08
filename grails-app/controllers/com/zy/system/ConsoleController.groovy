@@ -1,6 +1,14 @@
 package com.zy.system
 
-class ConsoleController {
+import com.zy.auth.User;
 
-    def index() { }
+class ConsoleController {
+	def springSecurityService
+    def index() {
+		User user=springSecurityService.getCurrentUser()
+		if(!user.isAdmin){
+			redirect(controller:"showResult",action:"index")
+			return 
+		}
+	}
 }

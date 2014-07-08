@@ -148,4 +148,26 @@ class UserDrugRelationController {
 		userDrugRelation.save(failOnError:true)
 		redirect(controller:"userDrugRelation",action:"edit",params:[drugResponseId:userDrugRelation.drugResponse.id,userId:User.findByUsername(userDrugRelation.username).id])
 	}
+	
+	def showDetail(){
+		def drugResponse = DrugResponse.get(params.drugResponseId)
+		int status=Integer.parseInt(params.status)
+		User user=User.findByUsername(params.username)
+		def userDrugRelation=UserDrugRelation.findByDrugResponseAndUsername(drugResponse, user.username)
+		int total=UserDrugRelation.findAllByUsername(user.username).collect {
+			it.drugResponse
+		}.toSet().size()
+		[userDrugRelationInstance: userDrugRelation,status:status,total:total,username:user.username]
+	}
+	
+	def showDetailByStatus(){
+		User user=User.findByUsername(params.username)
+		def drugResponses=UserDrugRelation.findAllByUsername(user.username).collect{
+			it.drugResponse
+		}.toSet().sort{it.id}
+		int status=Integer.parseInt(params.status)
+		def drugResponseInstance=drugResponses.get(status)
+		def userDrugRelationInstance=UserDrugRelation.findByDrugResponseAndUsername(drugResponseInstance, user.username)
+		[userDrugRelationInstance: userDrugRelationInstance,status:status,total:drugResponses.size(),username:user.username]
+	}
 }
