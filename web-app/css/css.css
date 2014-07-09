@@ -17,7 +17,7 @@ body{font-family:"微软雅黑"; font-size:15px; color:#4d4d4d; background:#f2f2
 .buttons{ background:#21c1bd; width:320px; display:block; text-align:center; line-height:52px; text-decoration:none; height:52px; border:none; cursor:pointer; color:#fff;  font-size:22px; color:#fff; font-family:"微软雅黑"; font-weight:bold;}
 a.buttons:hover{ background:#1da5a1;}
 
-.box{ padding: 50px 65px 0; width:320px; height:355px; background:#fff; border:1px solid #e5e3e3; border-top:8px solid #ffda3d;}
+.box{ padding: 50px 65px 0; width:320px; height:330px; background:#fff; border:1px solid #e5e3e3; border-top:8px solid #ffda3d;}
 .box li{ overflow:hidden; zoom:1; padding-bottom:35px;}
 .box .s1{ float:left;}
 .box .s2{ float: right;}
@@ -37,13 +37,27 @@ a.buttons:hover{ background:#1da5a1;}
 .lists{ width:807px; float:right; background:#fff; margin-top:20px;}
 .listBox h5.tit1{ cursor:pointer; border-bottom:1px solid #fff; height:50px; background:#19b1ad; font-weight:normal; line-height:50px; color:#fff; font-size:20px; padding:0 20px;color:#8aedf2;}
 .listBox ul{ display:none;}
-.listBox li{ height:50px; line-height:50px; border-bottom:1px solid #f2f2f2; font-size:16px;}
-.listBox li a{ color:#4d4d4d; text-decoration:none; padding: 0 20px; display:block;}
-.listBox li a:hover{ background:#feef86; color:#7e4f05;}
+
+
+.listBox li{ height:50px; line-height:50px; border-bottom:1px solid #f2f2f2; font-size:16px;    overflow:hidden; zoom:1;}
+.listBox li.cur{ background:#feef86; color:#7e4f05;}
+.listBox .tit{ overflow:hidden;zoom:1; line-height:50px; background:#eefbfb; color:#19b1ad; border-bottom:1px solid #e2f1f1;}
+.listBox .tit .s1{ width:240px; height:50px;text-align:center;  float:left;}
+.listBox .tit .s2{  width:230px; height:50px; text-align:center; float:left; border-left:1px solid #e2f1f1;}
+.listBox .tit .s3{ width:320px;  height:50px; float:left;text-align:center;border-left:1px solid #e2f1f1;}
+.listBox li .s1{ width:200px; height:50px; padding:0 20px;  float:left;}
+.listBox li .s2{ width:230px; height:34px; padding:8px 0;text-align:center; float:left; border-left:1px solid #f2f2f2;}
+.listBox li .s3{ width:180px; height:50px; float:left;text-align:center;border-left:1px solid #f2f2f2;}
+.listBox li a{ color:#4d4d4d; text-decoration:none; display:block;}
+.listBox li a:hover{ }
 .listBox h5.tit1 span{ color:#fff; font-weight:bold; padding-left:10px; }
 .listBox h5.tit1 p{ float:right;}
 .listBox h5.jt01{ background:url(../images/jt01.jpg) no-repeat right center #19b1ad;}
 .listBox h5.jt02{ background:url(../images/jt02.jpg) no-repeat right center #19b1ad;}
+
+
+
+
 
 .tit2{ font-size:55px; font-weight:bold; color:#19b1ad;}
 table .paddingT10{ padding:25px 0;}
@@ -53,10 +67,9 @@ table .paddingT10{ padding:25px 0;}
 .tit3 p.s2{ font-size:27px; padding-bottom:15px;}
 .page1{ overflow:hidden; zoom:1; width:548px; position:absolute; top:77px; right:0;}
 .pageBox{ background:#fff; border:1px solid #e9e9e9; height:44px; line-height:44px; float:right; margin-left:10px; overflow:hidden; zoom:1;}
+.pageBox a.s1{ float:left; padding:0 20px; }
 .pageBox1{ background:#fff; border:1px solid #e9e9e9; height:44px; line-height:44px; float:right; margin-left:10px; overflow:hidden; zoom:1;}
 .pageBox2{ background:#fff; border:1px solid #e9e9e9; height:44px; line-height:44px; float:right; margin-left:10px; overflow:hidden; zoom:1;}
-.pageBox a.s1{ float:left; padding:0 20px; color:#666666; text-decoration:none;}
-.pageBox a.s1:hover{ color:#fe3c1c; text-decoration:underline;}
 .pageBox1 a.s2{ border-right:1px solid #e9e9e9; width:63px; height:44px; background:url(../images/ico6.gif) no-repeat 15px 20px; padding-left:25px;  display:block; float:left;}
 .pageBox1 a.s1{ float:left; padding:0 20px; }
 .pageBox2 a.s2{ border-left:1px solid #e9e9e9; width:68px; height:44px; display:block; float:left; padding-left:20px; background:url(../images/ico7.gif) no-repeat 70px 20px;}
@@ -97,9 +110,6 @@ table .paddingT10{ padding:25px 0;}
 .contBox3 { width:100%; margin-bottom:30px; }
 .contBox3 .tit{ font-size:47px; height:54px; overflow:hidden; color:#19b1ad; font-weight:bold; width:1000px; margin:0 auto; }
 .contBox3 .cont{ background:#fff; width:100%;}
-.contBox3 .content{ width:1000px; margin:0 auto; line-height:28px; padding:20px 0;}
-.contBox3 .content h6{ font-style:normal; font-size:18px; color:#19b1ad;}
-.contBox3 .content p{ padding-bottom:18px;}
 
 .pageContent{ background:#363a3e; padding:20px 0;}
 .page2{ overflow:hidden; zoom:1; width:1000px; margin:0 auto; }
@@ -111,3 +121,8 @@ table .paddingT10{ padding:25px 0;}
 .pageBox2 a.s1{ float:left; padding:0 20px;}
 .page2 a{ color:#666666; text-decoration:none;}
 .page2 a:hover{ color:#fe3c1c; text-decoration:underline;}
+
+
+.jieshao2 h6{ font-style:normal; font-size:18px; color:#19b1ad;}
+.jieshao2 p{ padding-bottom:18px; line-height:28px;}
+.paddingLR{ padding:0 20px;}

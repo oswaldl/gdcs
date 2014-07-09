@@ -8,6 +8,14 @@
 	href="${resource(dir: 'css', file: 'css.css')}" />
 <r:external uri="/js/jquery-1.4.2.min.js" />
 <script type="text/javascript">
+$(function(){
+	$(".listBox li").hover(function(){
+		$(this).addClass("cur")
+	},function(){
+		$(".listBox li").removeClass("cur")
+	})	
+})
+
 	$(document).ready(
 			function() {
 				$('.lists .listBox').each(
@@ -79,8 +87,21 @@
 					第二部分<span>先天性遗传疾病</span>
 				</h5>
 				<ul>
+					<div class="tit">
+	                <div class="s1">名称</div>
+	                <div class="s2">研究数量</div>
+	                <div class="s3">结果</div>
+	                </div>
 					<g:each in="${inheritedConditionses }" var="inheritedConditions">
-						<li>${inheritedConditions.name }</li>
+						<li>
+							<div class="s1">${inheritedConditions.name }</div>
+			                <div class="s2">
+				                <g:each in="${(1..inheritedConditions.magnitude ) }">
+								<g:img dir="images" file="ico1.gif"/>
+								</g:each>
+			                </div>
+			                <div class="s3">${inheritedConditions.result }</div>
+						</li>
 					</g:each>
 				</ul>
 			</div>
@@ -89,11 +110,25 @@
 					第三部分<span>个体化用药指导</span>
 				</h5>
 				<ul>
+					<div class="tit">
+	                <div class="s1">名称</div>
+	                <div class="s2">研究数量</div>
+	                <div class="s3">状态</div>
+	                </div>
 					<g:each in="${drugResponses }" var="drugResponse" status="i">
-						<li><g:link controller="userDrugRelation" action="showDetail"
-								params='[drugResponseId:"${drugResponse.id }",status:"${i }",username:"${username }"]'>
-								${drugResponse.chineseName?:drugResponse.name }&nbsp;&nbsp;&nbsp;${drugResponse.magnitude }&nbsp;&nbsp;&nbsp;${UserDrugRelation.findByDrugResponseAndUsername(drugResponse, username).state }
-							</g:link></li>
+						<li>
+							<div class="s1">
+								<g:link controller="userDrugRelation" action="showDetail" params='[drugResponseId:"${drugResponse.id }",status:"${i }",username:"${username }"]'>
+									${drugResponse.chineseName?:drugResponse.name }
+								</g:link>
+							</div>
+			                <div class="s2">
+			                	<g:each in="${(1..drugResponse.magnitude ) }">
+								<g:img dir="images" file="ico1.gif"/>
+								</g:each>
+			                </div>
+			                <div class="s3">${UserDrugRelation.findByDrugResponseAndUsername(drugResponse, username).state }</div>
+						</li>
 					</g:each>
 				</ul>
 			</div>

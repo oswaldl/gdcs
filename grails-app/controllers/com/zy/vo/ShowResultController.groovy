@@ -89,7 +89,6 @@ class ShowResultController {
 	}
 
 	def getDataByURL(){
-
 		SnpediaRepoPageProcessor processer=new SnpediaRepoPageProcessor();
 		SnpediaPipeline pline=new SnpediaPipeline();
 		grailsApplication.mainContext.autowireCapableBeanFactory.autowireBean(processer)

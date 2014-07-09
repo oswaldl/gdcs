@@ -5,6 +5,10 @@
 <title>基因检测报告</title>
 <link rel="stylesheet" type="text/css"
 	href="${resource(dir: 'css', file: 'css.css')}" />
+	<style type="text/css">
+		a{ color:#666666; text-decoration:none;}
+		a:hover{ color:#fe3c1c; text-decoration:underline;}
+	</style>
 </head>
 <body>
 	<div class="header">
