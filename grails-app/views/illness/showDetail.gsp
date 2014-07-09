@@ -26,7 +26,7 @@
    <div class="contBox1">
    		<div class="lefts">
         	<dl>
-            	<dd class="img4"></dd><!--命名分别为img0、img1、img2、img3、img4、img5-->
+            	<dd class="img${(int)Math.ceil(risk*100/20) }"></dd><!--命名分别为img0、img1、img2、img3、img4、img5-->
                 <dt>风险等级</dt>
             </dl>
         </div>

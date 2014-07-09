@@ -52,10 +52,14 @@
 						<td align="center" valign="middle" class="paddingT10"><table
 								width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td align="center" valign="middle"><img
-										src="../images/ico2.gif" /><img src="../images/ico2.gif" /><img
-										src="../images/ico3.gif" /><img src="../images/ico3.gif" /><img
-										src="../images/ico3.gif" /></td>
+									<td align="center" valign="middle">
+										<g:each in="${(1..(int)Math.ceil(map.get(illness)*100/20) ) }">
+											<g:img dir="images" file="ico2.gif"/>
+										</g:each>
+										<g:each in="${(((int)Math.ceil(map.get(illness)*100/20))..4 ) }">
+											<g:img dir="images" file="ico3.gif"/>
+										</g:each>
+									</td>
 								</tr>
 								<tr>
 									<td align="center" valign="middle">
@@ -66,10 +70,14 @@
 						<td align="center" valign="middle" class="paddingT10"><table
 								width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td align="center" valign="middle"><img
-										src="../images/ico2.gif" /><img src="../images/ico2.gif" /><img
-										src="../images/ico2.gif" /><img src="../images/ico3.gif" /><img
-										src="../images/ico3.gif" /></td>
+									<td align="center" valign="middle">
+										<g:each in="${(1..(int)Math.ceil(illness.getRisk()*100/20) ) }">
+											<g:img dir="images" file="ico2.gif"/>
+										</g:each>
+										<g:each in="${(((int)Math.ceil(illness.getRisk()*100/20))..4 ) }">
+											<g:img dir="images" file="ico3.gif"/>
+										</g:each>
+									</td>
 								</tr>
 								<tr>
 									<td align="center" valign="middle">
