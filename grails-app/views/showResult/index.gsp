@@ -79,11 +79,9 @@
 					第二部分<span>先天性遗传疾病</span>
 				</h5>
 				<ul>
-					<li><a href="#">较高风险疾病汇总</a></li>
-					<li><a href="#">较低风险疾病汇总</a></li>
-					<li><a href="#">一般风险疾病汇总</a></li>
-					<li><a href="#">年龄相关性黄斑变性</a></li>
-					<li><a href="#">心房颤动</a></li>
+					<g:each in="${inheritedConditionses }" var="inheritedConditions">
+						<li>${inheritedConditions.name }</li>
+					</g:each>
 				</ul>
 			</div>
 			<div class="listBox">

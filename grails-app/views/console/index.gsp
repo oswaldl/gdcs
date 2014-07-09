@@ -54,6 +54,9 @@
                 <li>
                 	<a href="${createLink(controller:'userDrugRelation',action:'index')}" target="main_frame">人员药品谱配置</a>
                 </li>
+                <li>
+                	<a href="${createLink(controller:'inheritedConditions',action:'index')}" target="main_frame">人员生命谱配置</a>
+                </li>
            	</ul>
         </div>
         <div class="content_main">

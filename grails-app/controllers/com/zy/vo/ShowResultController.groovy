@@ -27,7 +27,9 @@ class ShowResultController {
 			it.drugResponse
 		}.toSet().sort{it.id}
 		
-		[illnesses:illnesses,username:user.username,drugResponses:drugResponses]
+		def inheritedConditionses=InheritedConditions.findAllByUsername(user.username)
+		
+		[illnesses:illnesses,username:user.username,drugResponses:drugResponses,inheritedConditionses:inheritedConditionses]
 	}
 
 	def show(){
