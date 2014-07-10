@@ -109,7 +109,7 @@ class UserDrugRelationController {
 		users.addAll(User.findAllByChineseNameLike("%"+string+"%"))
 		[userInstanceList:users]
 	}
-	
+
 	def showAllDrugResponse(Integer max){
 		User user=User.get(params.id)
 		params.max = Math.min(max ?: 10, 100)

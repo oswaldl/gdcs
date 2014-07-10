@@ -93,8 +93,7 @@
 			</table>
 		</div>
 		<div class="pageBox">
-			<g:link class="s1" controller="showResult" action="index"
-				params='[username:"${username }"]'>返回列表</g:link>
+			<g:link class="s1" controller="showResult" action="index" params='[username:"${username }"]'>返回列表</g:link>
 		</div>
 	</div>
 </body>

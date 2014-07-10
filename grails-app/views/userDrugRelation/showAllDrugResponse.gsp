@@ -24,11 +24,9 @@
 		<div class="conmain">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr class="tbbg">
-
 					<td width="30%" align="center"><strong>中文名</strong></td>
 					<td width="30%" align="center"><strong>英文名</strong></td>
 					<td width="40%" align="center"><strong>操作</strong></td>
-
 				</tr>
 				<g:each in="${drugResponseInstanceList}" status="i"
 					var="drugResponseInstance">

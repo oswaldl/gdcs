@@ -7,7 +7,6 @@
 	href="${resource(dir: 'css', file: 'css.css')}" />
 </head>
 <body>
-
 	<div class="header">
 		<div class="lefts">
 			<g:img dir="images" file="logo2.jpg" width="457" height="134"/>
