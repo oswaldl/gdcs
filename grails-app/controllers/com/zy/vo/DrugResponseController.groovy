@@ -101,7 +101,7 @@ class DrugResponseController {
     }
 	
 	def editDesc(){
-		DrugResponse drugResponse=DrugResponse.get(params.drugResponseId)
+		DrugResponse drugResponse=params.drugResponseId=="null"?new DrugResponse(params).save(failOnError:true):DrugResponse.get(params.drugResponseId)
 		String type=params.type
 		def description
 		if(type=="genetics"){

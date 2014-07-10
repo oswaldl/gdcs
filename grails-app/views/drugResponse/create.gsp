@@ -7,7 +7,7 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<div class="title">病例新增界面</div>
+		<div class="title">药品谱新增界面</div>
 		<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 		</g:if>
