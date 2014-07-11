@@ -33,8 +33,10 @@ class CrawService {
 		}
 		//获取正在爬取的用户
 		String url=page.getUrl()
-		int eindex=url.indexOf("/", 22)
-		String username=url.substring(22, eindex)
+		int eindex=url.indexOf("/",36)
+//36		http://zhongyitech.chinacloudapp.cn/zhuangjingyi/Promethease_2014_05_12_genome_jing_yi_Zhuang_Full_20140511234412.html
+//22		http://localhost:8888/zhuangjingyi/Promethease_2014_05_12_genome_jing_yi_Zhuang_Full_20140511234412.html
+		String username=url.substring(36, eindex)
 		page.putField("username", username);
 		if(medicalConditionsUrl!=null&&medicalConditionsUrl!=""){
 			page.putField("MedicalConditionsUrl", medicalConditionsUrl.replace("\\", "/"));
