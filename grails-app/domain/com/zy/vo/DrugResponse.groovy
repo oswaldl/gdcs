@@ -21,6 +21,8 @@ class DrugResponse {
 	
 	//引言
 	String introduction
+	//基因摘要
+	GeneAbstract geneAbstract
 
     static constraints = {
 		name nullable:true
@@ -28,5 +30,6 @@ class DrugResponse {
 		genetics nullable:true,maxSize: 3000
 		reference nullable:true,maxSize: 3000
 		introduction nullable:true,maxSize: 3000
+		geneAbstract nullable:true
     }
 }

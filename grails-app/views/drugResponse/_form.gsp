@@ -31,5 +31,9 @@
     </td>
     <td><g:textArea name="introduction" cols="40" rows="5" maxlength="3000" value="${drugResponseInstance?.introduction}"/></td>
   </tr>
+  <tr>
+    <td>基因/SNP摘要</td>
+    <td><g:link controller="geneAbstract" action="edit" params='[drugResponseId:"${drugResponseInstance?.id }"]'>编辑</g:link></td>
+  </tr>
 </table>
 

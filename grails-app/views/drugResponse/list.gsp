@@ -49,7 +49,9 @@
 							</g:link></td>
 
 						<td>
-							${fieldValue(bean: drugResponseInstance, field: "magnitude")}
+							<g:link action="edit" id="${drugResponseInstance.id}">
+								${fieldValue(bean: drugResponseInstance, field: "magnitude")}
+							</g:link>
 						</td>
 					</tr>
 				</g:each>

@@ -39,12 +39,12 @@
 				</div>
 			</div>
 		</g:if>
-		<g:if test="${userDrugRelationInstance.geneAbstract!=null&&userDrugRelationInstance.geneAbstract!='' }">
+		<g:if test="${userDrugRelationInstance.drugResponse.geneAbstract!=null&&userDrugRelationInstance.drugResponse.geneAbstract!='' }">
 		<div class="contBox2">
 			<div class="tit4">基因/SNP摘要</div>
 			<div class="cont">
 				<div class="content">
-					${userDrugRelationInstance?.geneAbstract }
+					${userDrugRelationInstance?.drugResponse.geneAbstract }
 				</div>
 			</div>
 		</div>
