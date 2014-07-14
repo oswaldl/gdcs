@@ -17,10 +17,16 @@
   <div class="tit3">
   		<p class="s1">${illnessInstance?.name }</p>
         <p class="s2">${illnessInstance?.chineseName }</p>
-<%--        <div class="page1">--%>
-<%--        	<div class="pageBox2"><a href="#" class="s1">患乳腺癌的风险修饰符</a><a href="#" class="s2">下一篇</a></div>--%>
-<%--        	<div class="pageBox1"><a href="#" class="s2">上一篇</a><a href="#" class="s1">选择性IgA缺乏症</a></div>--%>
-<%--        </div>--%>
+        <div class="page1">
+			<div class="wenzi">
+            	<p class="s_1">good基因数目</p>
+            	<p class="s_2">bad基因数目</p>
+            </div>
+            <div class="tiaozhuang">
+            	<div class="red" style="width:${badNum*100/snps.size() }%;">${badNum }</div>
+            	<div class="green" style="width:${goodNum*100/snps.size() }%;">${goodNum }</div>
+            </div>
+        </div>
   </div>
    <div class="contBox1">
    		<div class="lefts">

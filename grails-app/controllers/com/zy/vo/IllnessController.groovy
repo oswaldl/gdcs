@@ -123,10 +123,22 @@ class IllnessController {
 		int status=Integer.parseInt(params.status)
 		User user=User.findByUsername(params.username)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
+		int goodNum=0
+		int badNum=0
+		snps.collect {
+			it.gene
+		}.each {
+			if(it.repute=="good"){
+				goodNum=goodNum+1
+			}
+			if(it.repute=="bad"){
+				badNum=badNum+1
+			}
+		}
 		int total=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().size()
-		[illnessInstance: illnessInstance,status:status,total:total,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
+		[goodNum:goodNum,badNum:badNum,illnessInstance: illnessInstance,status:status,total:total,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
 	}
 	//显示病例详细，通过上一个下一个查找过来
 	def showDetailByStatus(){
@@ -137,7 +149,19 @@ class IllnessController {
 		int status=Integer.parseInt(params.status)
 		def illnessInstance=illnesses.get(status)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
-		[illnessInstance: illnessInstance,status:status,total:illnesses.size(),username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
+		int goodNum=0
+		int badNum=0
+		snps.collect {
+			it.gene
+		}.each {
+			if(it.repute=="good"){
+				goodNum=goodNum+1
+			}
+			if(it.repute=="bad"){
+				badNum=badNum+1
+			}
+		}
+		[goodNum:goodNum,badNum:badNum,illnessInstance: illnessInstance,status:status,total:illnesses.size(),username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
 	}
 	//获得风险等级
 	def getRisk(Illness illness,User user){
