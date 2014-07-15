@@ -55,7 +55,6 @@ class CrawService {
 			List<Selectable> divs1 = page.getHtml().xpath("//div[@class='adiseasebox']").nodes();
 			Map<String, List<Gene>> map=new HashMap<String, List<Gene>>();
 			for (Selectable div1 : divs1) {
-				
 				String caseName=div1.xpath("//a[@class='diseaselink']/text()").toString();
 				
 				List<Gene> list=new ArrayList<Gene>();
@@ -67,6 +66,7 @@ class CrawService {
 					String name=div2.xpath("//div[@class='boxlink']/a[1]/text()").toString()+div2.xpath("//div[@class='boxlink']/a[2]/text()").toString();
 					String boxeffect=div2.xpath("//div[@class='boxeffect']/text()").toString();
 					String rstext=div2.xpath("//div[@class='rstext']/text()").toString();
+					String frequency=div2.xpath("//div[@class='boxmag']/span/text()").toString();
 					String magnitudeDiv=div2.xpath("//div[@class='boxmag']/tidyText()").toString();
 					int index1=magnitudeDiv.indexOf("Magnitude: ")
 					String magnitude=null
@@ -78,8 +78,20 @@ class CrawService {
 							magnitude=magnitudeDiv.substring(index1+11,index2)
 						}
 					}
+					int index0=magnitudeDiv.indexOf("References:")
+					String references=null
+					if(index0!=-1){
+						int index3=magnitudeDiv.indexOf("\n",index0+11)
+						if(index3==-1){
+							references=magnitudeDiv.substring(index0+11)
+						}else{
+							references=magnitudeDiv.substring(index0+11,index3)
+						}
+					}
 					Gene gene=new Gene();
 					gene.setName(name);
+					gene.setReferences(references);
+					gene.setFrequency(frequency);
 					gene.setDescription1(boxeffect);
 					gene.setDescription2(rstext);
 					gene.setRepute("good");
@@ -92,6 +104,7 @@ class CrawService {
 					String name=div4.xpath("//div[@class='boxlink']/a[1]/text()").toString()+div4.xpath("//div[@class='boxlink']/a[2]/text()").toString();
 					String boxeffect=div4.xpath("//div[@class='boxeffect']/text()").toString();
 					String rstext=div4.xpath("//div[@class='rstext']/text()").toString();
+					String frequency=div4.xpath("//div[@class='boxmag']/span/text()").toString();
 					String magnitudeDiv=div4.xpath("//div[@class='boxmag']/tidyText()").toString();
 					int index1=magnitudeDiv.indexOf("Magnitude: ")
 					String magnitude=null
@@ -103,8 +116,20 @@ class CrawService {
 							magnitude=magnitudeDiv.substring(index1+11,index2)
 						}
 					}
+					int index0=magnitudeDiv.indexOf("References:")
+					String references=null
+					if(index0!=-1){
+						int index3=magnitudeDiv.indexOf("\n",index0+11)
+						if(index3==-1){
+							references=magnitudeDiv.substring(index0+11)
+						}else{
+							references=magnitudeDiv.substring(index0+11,index3)
+						}
+					}
 					Gene gene=new Gene();
 					gene.setName(name);
+					gene.setReferences(references);
+					gene.setFrequency(frequency);
 					gene.setDescription1(boxeffect);
 					gene.setDescription2(rstext);
 					gene.setRepute("bad");
@@ -117,6 +142,7 @@ class CrawService {
 					String name=div3.xpath("//div[@class='boxlink']/a[1]/text()").toString()+div3.xpath("//div[@class='boxlink']/a[2]/text()").toString();
 					String boxeffect=div3.xpath("//div[@class='boxeffect']/text()").toString();
 					String rstext=div3.xpath("//div[@class='rstext']/text()").toString();
+					String frequency=div3.xpath("//div[@class='boxmag']/span/text()").toString();
 					String magnitudeDiv=div3.xpath("//div[@class='boxmag']/tidyText()").toString();
 					int index1=magnitudeDiv.indexOf("Magnitude: ")
 					String magnitude=null
@@ -128,8 +154,20 @@ class CrawService {
 							magnitude=magnitudeDiv.substring(index1+11,index2)
 						}
 					}
+					int index0=magnitudeDiv.indexOf("References:")
+					String references=null
+					if(index0!=-1){
+						int index3=magnitudeDiv.indexOf("\n",index0+11)
+						if(index3==-1){
+							references=magnitudeDiv.substring(index0+11)
+						}else{
+							references=magnitudeDiv.substring(index0+11,index3)
+						}
+					}
 					Gene gene=new Gene();
 					gene.setName(name);
+					gene.setReferences(references);
+					gene.setFrequency(frequency);
 					gene.setDescription1(boxeffect);
 					gene.setDescription2(rstext);
 					gene.setRepute("normal");

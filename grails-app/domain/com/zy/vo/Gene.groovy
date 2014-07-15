@@ -17,6 +17,9 @@ class Gene {
 	//研究的人数多少，越高说明相关信息越准确
 	String magnitude
 	
+	String frequency
+	String references
+	
 	String getName(String string){
 		int index=string.indexOf("(")
 		return string.substring(0, index)
@@ -31,6 +34,7 @@ class Gene {
     static constraints = {
 		name blank: false, unique: true
 		magnitude nullable:true
+		frequency nullable:true
 		description1 nullable:true,maxSize: 3000
 		description2 nullable:true,maxSize: 3000
     }
