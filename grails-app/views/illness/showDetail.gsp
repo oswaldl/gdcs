@@ -86,20 +86,20 @@
 	    	<div class="cont baokao">
 	        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	  <tr style="color:#fff;">
-	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Gene or Region</th>
-	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">SNP</th>
-	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Genotype</th>
-	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Adjusted Odds Ratio</th>
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">SPN</th>
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Magnitude</th>
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">References</th>
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Frequency</th>
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Repute</th>
 	  </tr>
 	  <g:each in="${snps }" var="snp">
-	  <g:if test="${snp.oddRatio!=null }">
 	  <tr>
-	    <td height="36" align="center" valign="middle">ITGAM<br /></td>
-	    <td height="36" align="center" valign="middle">${snp.gene.getName(snp.gene.name) }</td>
-	    <td height="36" align="center" valign="middle">${snp.gene.getType(snp.gene.name) }<br /></td>
-	    <td height="36" align="center" valign="middle">${snp?.oddRatio }</td>
+	    <td height="36" align="center" valign="middle">${snp.gene.name }<br /></td>
+	    <td height="36" align="center" valign="middle">${snp.gene.magnitude }</td>
+	    <td height="36" align="center" valign="middle">${snp.gene.references }<br /></td>
+	    <td height="36" align="center" valign="middle">${snp.gene.frequency }</td>
+	    <td height="36" align="center" valign="middle">${snp.gene.repute }</td>
 	  </tr>
-	  </g:if>
 	  </g:each>
 	</table>
 	

@@ -20,12 +20,12 @@
 				<fieldset class="form">
 					<table>
 						<tr>
-							<td width="60%" class="fieldcontain ${hasErrors(bean: riskRankInstance, field: 'high', 'error')} required">（本人风险-平均风险）高于此值将划分为高风险</td>
-							<td width="40%"><g:textField name="high" value="${riskRankInstance?.high*100}"/>%</td>
+							<td width="60%" class="fieldcontain ${hasErrors(bean: riskRankInstance, field: 'high', 'error')} required">（Repute为good时Magnitude为正，bad为负，算出其和）高于此值将划分为高风险</td>
+							<td width="40%"><g:textField name="high" value="${riskRankInstance?.high}"/></td>
 						</tr>
 						<tr>
-							<td width="60%" class="fieldcontain ${hasErrors(bean: riskRankInstance, field: 'low', 'error')} required">（本人风险-平均风险）高于此值将划分为低风险</td>
-							<td width="40%"><g:textField name="low" value="${riskRankInstance?.low*100}"/>%</td>
+							<td width="60%" class="fieldcontain ${hasErrors(bean: riskRankInstance, field: 'low', 'error')} required">（Repute为good时Magnitude为正，bad为负，算出其和）低于此值将划分为低风险</td>
+							<td width="40%"><g:textField name="low" value="${riskRankInstance?.low}"/></td>
 						</tr>
 					</table>
 				</fieldset>

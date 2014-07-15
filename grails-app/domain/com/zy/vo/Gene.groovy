@@ -35,6 +35,7 @@ class Gene {
 		name blank: false, unique: true
 		magnitude nullable:true
 		frequency nullable:true
+		references nullable:true
 		description1 nullable:true,maxSize: 3000
 		description2 nullable:true,maxSize: 3000
     }

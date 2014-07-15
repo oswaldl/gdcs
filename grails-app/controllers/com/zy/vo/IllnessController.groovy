@@ -175,6 +175,19 @@ class IllnessController {
 		double risk=(double)Math.round(sum*averageRisk*100)/100
 		return risk
 	}
+	//新的风险计算机制
+	def getIllnessRisk(Illness illness,User user){
+		double sum=0
+		SNPRelation.findAllByIllnessAndUser(illness, user).collect {it.gene}.each {
+			if(it.repute=="good"){
+				sum=sum+Double.valueOf(it.magnitude)
+			}
+			if(it.repute=="bad"){
+				sum=sum-Double.valueOf(it.magnitude)
+			}
+		}
+		return sum
+	}
 	//获得所有高风险病例
 	def showHighAll(){
 		Map<Illness, Double> map=new HashMap<Illness, Double>()
@@ -183,7 +196,7 @@ class IllnessController {
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.getMagnitude()}.each {
-			if(RiskRank.getHighRisk(getRisk(it,user)-it.getRisk())){
+			if(RiskRank.getHighRisk(getIllnessRisk(it,user))){
 				map.put(it, getRisk(it,user))
 				illnesses.add(it)
 			}
@@ -198,7 +211,7 @@ class IllnessController {
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.getMagnitude()}.each {
-			if(RiskRank.getLowRisk(getRisk(it,user)-it.getRisk())){
+			if(RiskRank.getLowRisk(getIllnessRisk(it,user))){
 				map.put(it, getRisk(it,user))
 				illnesses.add(it)
 			}
@@ -213,7 +226,7 @@ class IllnessController {
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.getMagnitude()}.each {
-			if(RiskRank.getNormalRisk(getRisk(it,user)-it.getRisk())){
+			if(RiskRank.getNormalRisk(getIllnessRisk(it,user))){
 				map.put(it, getRisk(it,user))
 				illnesses.add(it)
 			}

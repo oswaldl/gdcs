@@ -70,8 +70,8 @@ class RiskRankController {
             }
         }
 
-        riskRankInstance.high=Double.valueOf(params.high)/100
-        riskRankInstance.low=Double.valueOf(params.low)/100
+        riskRankInstance.high=Double.valueOf(params.high)
+        riskRankInstance.low=Double.valueOf(params.low)
 
         if (!riskRankInstance.save(flush: true)) {
             render(view: "edit", model: [riskRankInstance: riskRankInstance])
