@@ -22,7 +22,7 @@
     <td><g:textArea name="description" cols="40" rows="5" maxlength="3000" value="${geneAbstractInstance?.description}"/></td>
   </tr>
   <tr>
-    <td class="fieldcontain ${hasErrors(bean: geneAbstractInstance, field: 'types', 'error')} ">类型及影响</td>
+    <td class="fieldcontain ${hasErrors(bean: geneAbstractInstance, field: 'types', 'error')} ">类型及影响（格式如 AA:增加风险,BB:降低风险）</td>
     <td><g:textArea name="types" cols="40" rows="5" maxlength="3000" value="${geneAbstractInstance?.types}"/></td>
   </tr>
 </table>

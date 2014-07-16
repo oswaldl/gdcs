@@ -79,27 +79,14 @@ padding-bottom: 15px;
 width: 500px;
 overflow: hidden;
 }
-
-/*0714*/
-.page1 {
-overflow: hidden;
-zoom: 1;
-position: absolute;
-bottom: 24px;
-right: 0;
-}
-.page1 .wenzi {
-float: left;
-overflow: hidden;
-zoom: 1;
-margin-right: 10px;
-}
+.page1{ overflow:hidden; zoom:1;}
+.page1 .wenzi{ overflow:hidden; zoom:1; margin:15px 0; font-size:18px;}
 .page1 .wenzi p{ float:left;}
 .page1 .wenzi p.s_1{ background:url(../images/a01.gif) no-repeat 0 center; padding-left:18px;}
-.page1 .wenzi p.s_2{ background:url(../images/a02.gif) no-repeat 0 center; padding-left:18px; margin-left:15px}
-.page1 .tiaozhuang{ float:right; width:263px; overflow:hidden; zoom:1; height:20px; background:#e0e0e0;}
-.page1 .tiaozhuang .red{ height:20px; float:left; background:#fe9495; text-align:center; color:#fff; }
-.page1 .tiaozhuang .green{ height:20px; float:right; background:#75cd5f; text-align:center; color:#fff;}
+.page1 .wenzi p.s_2{ background:url(../images/a02.gif) no-repeat 0 center; padding-left:18px; margin-left:25px}
+.page1 .tiaozhuang{ width:500px; overflow:hidden; zoom:1; height:22px; background:#e0e0e0; line-height:22px; font-size:18px;}
+.page1 .tiaozhuang .red{ height:22px; float:left; background:#fe9495; text-align:center; color:#fff; }
+.page1 .tiaozhuang .green{ height:22px; float:right; background:#75cd5f; text-align:center; color:#fff;}
 .wzCont{ padding:15px 0; line-height:28px;}
 h5.tit{ font-size:17px; font-weight:normal; color:#19b1ad; padding-bottom:10px;}
 

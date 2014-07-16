@@ -10,7 +10,7 @@ class BootStrap {
     def init = { servletContext ->
 		IllnessCat illnessCat=new IllnessCat(name:"默认分类");
 		illnessCat.save(failOnError:true)
-		RiskRank riskRank=new RiskRank(high:0.1,low:0.05);
+		RiskRank riskRank=new RiskRank(high:5,low:-5);
 		riskRank.save(failOnError:true)
 		
 //		Illness illness=new Illness(name:"心房颤动",averageRisk:"0.2",illnessCat:illnessCat,description:"心房纤维性颤动的特点是心脏内的混乱电信号引起上心室颤动（心房）。");

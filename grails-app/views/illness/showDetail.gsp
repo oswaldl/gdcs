@@ -17,16 +17,6 @@
   <div class="tit3">
   		<p class="s1">${illnessInstance?.name }</p>
         <p class="s2">${illnessInstance?.chineseName }</p>
-        <div class="page1">
-			<div class="wenzi">
-            	<p class="s_1">good基因数目</p>
-            	<p class="s_2">bad基因数目</p>
-            </div>
-            <div class="tiaozhuang">
-            	<div class="red" style="width:${badNum*100/snps.size() }%;">${badNum }</div>
-            	<div class="green" style="width:${goodNum*100/snps.size() }%;">${goodNum }</div>
-            </div>
-        </div>
   </div>
    <div class="contBox1">
    		<div class="lefts">
@@ -36,15 +26,25 @@
             </dl>
         </div>
         <div class="rights">
-        	<div class="jdBxo1">
-            	<div class="tit">您的<br/>基因</div>
-                <div class="bfb"><div class="bx" style="width:${risk*100 }%;"><div class="num1">${risk*100 }%</div></div></div><!--这里由百分比控制宽度-->
-               
+        	<div class="page1">
+			<div class="wenzi">
+            	<p class="s_1">good基因数目</p>
+            	<p class="s_2">bad基因数目</p>
             </div>
-        	<div class="jdBxo2">
-            	<div class="tit">平均<br/>风险</div>
-                <div class="bfb"><div class="bx" style=" width:${Double.valueOf(illnessInstance?.averageRisk)*100 }%;"><div class="num1">${Double.valueOf(illnessInstance?.averageRisk)*100 }%</div></div></div><!--这里由百分比控制宽度-->
+            <div class="tiaozhuang">
+            	<div class="red" style="width:${badNum*100/snps.size() }%;">${badNum }</div>
+            	<div class="green" style="width:${goodNum*100/snps.size() }%;">${goodNum }</div>
             </div>
+        	</div>
+<%--        	<div class="jdBxo1">--%>
+<%--            	<div class="tit">您的<br/>基因</div>--%>
+<%--                <div class="bfb"><div class="bx" style="width:${risk*100 }%;"><div class="num1">${risk*100 }%</div></div></div><!--这里由百分比控制宽度-->--%>
+<%--               --%>
+<%--            </div>--%>
+<%--        	<div class="jdBxo2">--%>
+<%--            	<div class="tit">平均<br/>风险</div>--%>
+<%--                <div class="bfb"><div class="bx" style=" width:${Double.valueOf(illnessInstance?.averageRisk)*100 }%;"><div class="num1">${Double.valueOf(illnessInstance?.averageRisk)*100 }%</div></div></div><!--这里由百分比控制宽度-->--%>
+<%--            </div>--%>
         </div>
    </div> 
     <div class="contBox2">

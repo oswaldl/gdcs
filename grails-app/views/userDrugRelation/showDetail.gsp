@@ -44,7 +44,42 @@
 			<div class="tit4">基因/SNP摘要</div>
 			<div class="cont">
 				<div class="content">
-					${userDrugRelationInstance?.drugResponse.geneAbstract }
+					<div class="cont jieshao">
+			       	  <h5 class="tit">${userDrugRelationInstance?.drugResponse.geneAbstract.name }</h5>
+			          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+						  <tr>
+						    <td width="15%" height="40" bgcolor="#f4f4f4" class="paddingLR">杂志</td>
+						    <td width="85%" bgcolor="#f4f4f4" class="paddingLR">${userDrugRelationInstance?.drugResponse.geneAbstract.journal }</td>
+						  </tr>
+						  <tr>
+						    <td height="40" class="paddingLR">研究规模</td>
+						    <td class="paddingLR">
+						    	<g:each in="${(1..userDrugRelationInstance?.drugResponse.geneAbstract.studySize ) }">
+								<g:img dir="images" file="ico1.gif"/>
+								</g:each>
+						    </td>
+						  </tr>
+						  <tr>
+						    <td height="40" bgcolor="#f4f4f4" class="paddingLR">标记</td>
+						    <td bgcolor="#f4f4f4" class="paddingLR">${userDrugRelationInstance?.drugResponse.geneAbstract.marker }</td>
+						  </tr>
+						</table>
+						<p class="wzCont" style="padding-bottom:20px;">${userDrugRelationInstance?.drugResponse.geneAbstract.description }</p>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					  <tr style="color:#fff;">
+					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Who</th>
+					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">基因型</th>
+					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">意义</th>
+					  </tr>
+					  <g:each in="${lists }" var="key">
+					   <tr>
+					    <td height="36" align="center" valign="middle">${key==type?username:'' }=${type }</td>
+					    <td height="36" align="center" valign="middle">${key }</td>
+					    <td height="36" align="center" valign="middle">${maps.get(key) }</td>
+					    </tr>
+					  </g:each>
+					  </table>
+			      </div>
 				</div>
 			</div>
 		</div>
