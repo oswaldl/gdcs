@@ -180,10 +180,10 @@ class IllnessController {
 		double sum=0
 		SNPRelation.findAllByIllnessAndUser(illness, user).collect {it.gene}.each {
 			if(it.repute=="good"){
-				sum=sum+Double.valueOf(it.magnitude)
+				sum=sum+Double.valueOf(it.magnitude?:'0')
 			}
 			if(it.repute=="bad"){
-				sum=sum-Double.valueOf(it.magnitude)
+				sum=sum-Double.valueOf(it.magnitude?:'0')
 			}
 		}
 		return sum
