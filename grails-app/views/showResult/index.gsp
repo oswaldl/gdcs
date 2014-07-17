@@ -7,6 +7,11 @@
 <link rel="stylesheet" type="text/css" media="all"
 	href="${resource(dir: 'css', file: 'css.css')}" />
 <r:external uri="/js/jquery-1.4.2.min.js" />
+<style type="text/css">
+body {
+	font-family: SimSun;
+}
+</style>
 <script type="text/javascript">
 $(function(){
 	$(".listBox li").hover(function(){
