@@ -18,7 +18,7 @@ $(function(){
 		$(this).addClass("cur")
 	},function(){
 		$(".listBox li").removeClass("cur")
-	})	
+	})
 })
 
 	$(document).ready(

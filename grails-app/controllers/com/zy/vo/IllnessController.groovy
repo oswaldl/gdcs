@@ -120,7 +120,7 @@ class IllnessController {
 	//显示病例详细，通过列表查找过来的
 	def showDetail(){
 		def illnessInstance = Illness.get(params.illnessId)
-		int status=Integer.parseInt(params.status)
+		int status=Integer.parseInt(params.status?:'0')
 		User user=User.findByUsername(params.username)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		int goodNum=0
@@ -146,7 +146,7 @@ class IllnessController {
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.id}
-		int status=Integer.parseInt(params.status)
+		int status=Integer.parseInt(params.status?:'0')
 		def illnessInstance=illnesses.get(status)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		int goodNum=0

@@ -34,6 +34,7 @@ class CrawService {
 		//获取正在爬取的用户
 		String url=page.getUrl()
 		int eindex=url.indexOf("/",36)
+//28		http://203.195.153.248:8080/zhuangjingyi/promethease_data/Promethease_2014_05_12_genome_jing_yi_Zhuang_Full_20140511234412_is-a-medical-condition.html
 //36		http://zhongyitech.chinacloudapp.cn/zhuangjingyi/Promethease_2014_05_12_genome_jing_yi_Zhuang_Full_20140511234412.html
 //22		http://localhost:8888/zhuangjingyi/Promethease_2014_05_12_genome_jing_yi_Zhuang_Full_20140511234412.html
 		String username=url.substring(36, eindex)

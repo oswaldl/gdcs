@@ -37,6 +37,9 @@
                 	<a href="${createLink(controller:'user',action:'index')}" target="main_frame">用户管理</a>
                 </li>
                 <li>
+                	<a href="${createLink(controller:'console',action:'fileUpload')}" target="main_frame">上传须爬取人员网页</a>
+                </li>
+                <li>
                 	<a href="${createLink(controller:'showResult',action:'getUserData')}" target="main_frame">添加新爬取人员</a>
                 </li>
                 <li>
