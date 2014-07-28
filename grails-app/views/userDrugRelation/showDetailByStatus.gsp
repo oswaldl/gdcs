@@ -72,11 +72,13 @@
 					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">意义</th>
 					  </tr>
 					  <g:each in="${lists }" var="key">
+					   <g:if test="${key==type }">
 					   <tr>
-					    <td height="36" align="center" valign="middle">${key==type?username:'' }</td>
+					    <td height="36" align="center" valign="middle">${username }</td>
 					    <td height="36" align="center" valign="middle">${key }</td>
 					    <td height="36" align="center" valign="middle">${maps.get(key) }</td>
 					    </tr>
+					    </g:if>
 					  </g:each>
 					  </table>
 			      </div>

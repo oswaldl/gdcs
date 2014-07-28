@@ -37,8 +37,8 @@ class GeneController {
             redirect(action: "list")
             return
         }
-
-        [geneInstance: geneInstance]
+		
+        [geneInstance: geneInstance,params:params]
     }
 
     def edit(Long id) {
@@ -99,18 +99,4 @@ class GeneController {
             redirect(action: "show", id: id)
         }
     }
-	
-	def createGene(){
-		def name=params.name
-		def description1=params.description1
-		def description2=params.description2
-		if(!Gene.findByNameAndDescription1AndDescription2(name, description1, description2)){
-			new Gene(
-				name:name,
-				description1:description1,
-				description2:description2
-				).save(failOnError:true)
-		}
-		render "success"
-	}
 }

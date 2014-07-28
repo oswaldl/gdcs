@@ -14,11 +14,17 @@ class ShowResultController {
 	def springSecurityService
 	
     def index() {
-		User user=springSecurityService.getCurrentUser()
-		if(user.isAdmin){
-			redirect(controller:"console")
-			return
+		def user
+		if(params.username){
+			user=User.findByUsername(params.username)
+		}else{
+			user=springSecurityService.getCurrentUser()
+			if(user.isAdmin){
+				redirect(controller:"console")
+				return
+			}
 		}
+		def currenUser=springSecurityService.getCurrentUser()
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.id}
@@ -29,7 +35,7 @@ class ShowResultController {
 		
 		def inheritedConditionses=InheritedConditions.findAllByUsername(user.username)
 		
-		[illnesses:illnesses,username:user.username,drugResponses:drugResponses,inheritedConditionses:inheritedConditionses]
+		[currenUser:currenUser,illnesses:illnesses,username:user.username,drugResponses:drugResponses,inheritedConditionses:inheritedConditionses]
 	}
 
 	def show(){

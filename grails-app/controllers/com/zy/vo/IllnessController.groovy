@@ -123,11 +123,10 @@ class IllnessController {
 		int status=Integer.parseInt(params.status?:'0')
 		User user=User.findByUsername(params.username)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
+		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
 		int goodNum=0
 		int badNum=0
-		snps.collect {
-			it.gene
-		}.each {
+		genes.each {
 			if(it.repute=="good"){
 				goodNum=goodNum+1
 			}
@@ -138,7 +137,7 @@ class IllnessController {
 		int total=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().size()
-		[goodNum:goodNum,badNum:badNum,illnessInstance: illnessInstance,status:status,total:total,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
+		[genes:genes,goodNum:goodNum,badNum:badNum,illnessInstance: illnessInstance,status:status,total:total,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
 	}
 	//显示病例详细，通过上一个下一个查找过来
 	def showDetailByStatus(){
@@ -149,11 +148,10 @@ class IllnessController {
 		int status=Integer.parseInt(params.status?:'0')
 		def illnessInstance=illnesses.get(status)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
+		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
 		int goodNum=0
 		int badNum=0
-		snps.collect {
-			it.gene
-		}.each {
+		genes.each {
 			if(it.repute=="good"){
 				goodNum=goodNum+1
 			}
@@ -161,18 +159,21 @@ class IllnessController {
 				badNum=badNum+1
 			}
 		}
-		[goodNum:goodNum,badNum:badNum,illnessInstance: illnessInstance,status:status,total:illnesses.size(),username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
+		[genes:genes,goodNum:goodNum,badNum:badNum,illnessInstance: illnessInstance,status:status,total:illnesses.size(),username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
 	}
 	//获得风险等级
 	def getRisk(Illness illness,User user){
-		double sum=0
-		SNPRelation.findAllByIllnessAndUser(illness, user).each {
-			if(it.oddRatio){
-				sum=sum+Double.valueOf(it.oddRatio)
-			}
-		}
+		double sum=getIllnessRisk(illness,user)/4
 		double averageRisk=illness.getRisk()
-		double risk=(double)Math.round(sum*averageRisk*100)/100
+		double risk
+		if(sum>0){
+			risk=(double)Math.round(averageRisk/sum*100)/100
+		}else if(sum==0){
+			risk=averageRisk
+		}else{
+			sum=-sum
+			risk=(double)Math.round(averageRisk*sum*100)/100
+		}
 		return risk
 	}
 	//新的风险计算机制

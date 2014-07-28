@@ -31,9 +31,9 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr class="tbbg">
 						
-						<td width="19%" align="center"><strong>用户名</strong></td>
-   						<td width="19%" align="center"><strong>中文名</strong></td>
-					
+						<td width="30%" align="center"><strong>用户名</strong></td>
+   						<td width="30%" align="center"><strong>中文名</strong></td>
+						<td width="40%" align="center"><strong>查看报告</strong></td>
 					</tr>
 				<g:each in="${userInstanceList}" status="i" var="userInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
@@ -41,7 +41,8 @@
 						<td><g:link action="edit" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
 					
 						<td><g:link action="edit" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "chineseName")}</g:link></td>
-					
+						
+						<td><g:link target="_parent" controller="showResult" action="index" params='[username:"${userInstance.username }"]'>查看用户详细报告</g:link></td>
 					</tr>
 				</g:each>
 			</table>

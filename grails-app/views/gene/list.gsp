@@ -26,11 +26,15 @@
 					
 						<g:sortableColumn property="name" title="${message(code: 'gene.name.label', default: 'Name')}" />
 					
+						<g:sortableColumn property="magnitude" title="${message(code: 'gene.magnitude.label', default: 'Magnitude')}" />
+					
+						<g:sortableColumn property="frequency" title="${message(code: 'gene.frequency.label', default: 'Frequency')}" />
+					
+						<g:sortableColumn property="references" title="${message(code: 'gene.references.label', default: 'References')}" />
+					
 						<g:sortableColumn property="description1" title="${message(code: 'gene.description1.label', default: 'Description1')}" />
 					
 						<g:sortableColumn property="description2" title="${message(code: 'gene.description2.label', default: 'Description2')}" />
-					
-						<g:sortableColumn property="isReputeGood" title="${message(code: 'gene.isReputeGood.label', default: 'Is Repute Good')}" />
 					
 					</tr>
 				</thead>
@@ -40,11 +44,15 @@
 					
 						<td><g:link action="show" id="${geneInstance.id}">${fieldValue(bean: geneInstance, field: "name")}</g:link></td>
 					
+						<td>${fieldValue(bean: geneInstance, field: "magnitude")}</td>
+					
+						<td>${fieldValue(bean: geneInstance, field: "frequency")}</td>
+					
+						<td>${fieldValue(bean: geneInstance, field: "references")}</td>
+					
 						<td>${fieldValue(bean: geneInstance, field: "description1")}</td>
 					
 						<td>${fieldValue(bean: geneInstance, field: "description2")}</td>
-					
-						<td><g:formatBoolean boolean="${geneInstance.isReputeGood}" /></td>
 					
 					</tr>
 				</g:each>

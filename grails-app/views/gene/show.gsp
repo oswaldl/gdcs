@@ -3,70 +3,66 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<title>基因检测报告</title>
+		<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'css.css')}"/>
+		<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}"/>
 		<g:set var="entityName" value="${message(code: 'gene.label', default: 'Gene')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#show-gene" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+		<div class="header">
+			<div class="lefts"><g:img dir="images" file="logo2.jpg" width="457" height="134"/></div>
+			<div class="rights">
+		    	<p><span>${params.username }</span><g:link controller="logout">[注销]</g:link></p>
+		        <p>欢迎进入基因检测报告！</p>
+		    </div>
 		</div>
-		<div id="show-gene" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<ol class="property-list gene">
-			
-				<g:if test="${geneInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="gene.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${geneInstance}" field="name"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${geneInstance?.description1}">
-				<li class="fieldcontain">
-					<span id="description1-label" class="property-label"><g:message code="gene.description1.label" default="Description1" /></span>
-					
-						<span class="property-value" aria-labelledby="description1-label"><g:fieldValue bean="${geneInstance}" field="description1"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${geneInstance?.description2}">
-				<li class="fieldcontain">
-					<span id="description2-label" class="property-label"><g:message code="gene.description2.label" default="Description2" /></span>
-					
-						<span class="property-value" aria-labelledby="description2-label"><g:fieldValue bean="${geneInstance}" field="description2"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${geneInstance?.isReputeGood}">
-				<li class="fieldcontain">
-					<span id="isReputeGood-label" class="property-label"><g:message code="gene.isReputeGood.label" default="Is Repute Good" /></span>
-					
-						<span class="property-value" aria-labelledby="isReputeGood-label"><g:formatBoolean boolean="${geneInstance?.isReputeGood}" /></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${geneInstance?.id}" />
-					<g:link class="edit" action="edit" id="${geneInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
+		<div class="main2">
+		  <div class="tit3">
+		  		<p class="s1">${geneInstance?.name }</p>
+		  </div>
 		</div>
+		<div class="contBox2">
+	   	  <div class="tit4">基因详细信息</div>
+	        <div class="cont">
+	        	<div class="content">
+		          <table>
+		          	<tr>
+		          		<td>名称</td>
+		          		<td>${geneInstance?.name }</td>
+		          	</tr>
+		          	<tr>
+		          		<td>repute</td>
+		          		<td>${geneInstance?.repute }</td>
+		          	</tr>
+		          	<tr>
+		          		<td>magnitude</td>
+		          		<td>${geneInstance?.magnitude }</td>
+		          	</tr>
+		          	<tr>
+		          		<td>frequency</td>
+		          		<td>${geneInstance?.frequency }</td>
+		          	</tr>
+		          	<tr>
+		          		<td>references</td>
+		          		<td>${geneInstance?.references }</td>
+		          	</tr>
+		          	<tr>
+		          		<td>介绍</td>
+		          		<td>${geneInstance?.description2 }</td>
+		          	</tr>
+		          	<tr>
+		          		<td>影响病例</td>
+		          		<td>${geneInstance?.description1 }</td>
+		          	</tr>
+		 			<tr>
+		 				<td colspan="2">
+		 					<g:link class="button" controller="illness" action="showDetail" params='[illnessId:"${params.illnessId }",status:"${params.status }",username:"${params.username }"]' >返回</g:link>
+		 				</td>
+		 			</tr>
+		          </table>
+	       		</div>
+	        </div>
+	  </div>
 	</body>
 </html>

@@ -92,13 +92,13 @@
 	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Frequency</th>
 	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Repute</th>
 	  </tr>
-	  <g:each in="${snps }" var="snp">
+	  <g:each in="${genes }" var="gene">
 	  <tr>
-	    <td height="36" align="center" valign="middle">${snp.gene.name }<br /></td>
-	    <td height="36" align="center" valign="middle">${snp.gene.magnitude }</td>
-	    <td height="36" align="center" valign="middle">${snp.gene.references }<br /></td>
-	    <td height="36" align="center" valign="middle">${snp.gene.frequency }</td>
-	    <td height="36" align="center" valign="middle">${snp.gene.repute }</td>
+	    <td height="36" align="center" valign="middle">${gene.name }<br /></td>
+	    <td height="36" align="center" valign="middle">${gene.magnitude }</td>
+	    <td height="36" align="center" valign="middle">${gene.references }<br /></td>
+	    <td height="36" align="center" valign="middle">${gene.frequency }</td>
+	    <td height="36" align="center" valign="middle">${gene.repute }</td>
 	  </tr>
 	  </g:each>
 	</table>

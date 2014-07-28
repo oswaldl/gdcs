@@ -55,6 +55,9 @@ $(function(){
 					${username }
 				</span>
 				<g:link controller="logout">[注销]</g:link>
+				<g:if test="${currenUser.isAdmin }">
+					<g:link controller="console" action="index">[进入后台]</g:link>
+				</g:if>
 			</p>
 			<p>欢迎进入基因检测报告！</p>
 			<p>

@@ -25,6 +25,14 @@ class Gene {
 		return string.substring(0, index)
 	}
 	
+	double Magnitude(){
+		double mag=0
+		if(this.magnitude){
+			mag=Double.valueOf(this.magnitude)
+		}
+		return mag
+	}
+	
 	String getType(String string){
 		int index1=string.indexOf("(")
 		int index2=string.indexOf(")")
