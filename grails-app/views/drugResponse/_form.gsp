@@ -2,6 +2,10 @@
 
 <table>
   <tr>
+    <td>基因/SNP摘要</td>
+    <td><g:link controller="geneAbstract" action="edit" params='[drugResponseId:"${drugResponseInstance?.id }"]'>编辑</g:link></td>
+  </tr>
+  <tr>
     <td class="fieldcontain ${hasErrors(bean: drugResponseInstance, field: 'chineseName', 'error')} ">中文名</td>
     <td><g:textField name="chineseName" value="${drugResponseInstance?.chineseName}"/></td>
   </tr>
@@ -30,10 +34,6 @@
     	引言&nbsp;&nbsp;<g:link controller="drugResponse" action="editDesc" params='[drugResponseId:"${drugResponseInstance?.id }",type:"introduction"]'>编辑</g:link>
     </td>
     <td><g:textArea name="introduction" cols="40" rows="5" maxlength="3000" value="${drugResponseInstance?.introduction}"/></td>
-  </tr>
-  <tr>
-    <td>基因/SNP摘要</td>
-    <td><g:link controller="geneAbstract" action="edit" params='[drugResponseId:"${drugResponseInstance?.id }"]'>编辑</g:link></td>
   </tr>
 </table>
 

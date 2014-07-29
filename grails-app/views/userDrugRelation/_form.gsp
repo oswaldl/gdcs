@@ -6,10 +6,6 @@
     <td>${userDrugRelationInstance?.username}</td>
   </tr>
   <tr>
-    <td class="fieldcontain ${hasErrors(bean: userDrugRelationInstance, field: 'state', 'error')} ">检测状态</td>
-    <td><g:textField name="state" value="${userDrugRelationInstance?.state}"/></td>
-  </tr>
-  <tr>
     <td class="fieldcontain ${hasErrors(bean: userDrugRelationInstance, field: 'geneData', 'error')} ">
     	基因数据&nbsp;&nbsp;<g:link controller="userDrugRelation" action="editDesc" params='[userDrugRelationId:"${userDrugRelationInstance?.id }",type:"geneData"]'>编辑</g:link></td>
     <td><g:textArea name="geneData" cols="40" rows="5" maxlength="3000" value="${userDrugRelationInstance?.geneData}"/></td>

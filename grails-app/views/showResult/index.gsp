@@ -135,7 +135,7 @@ $(function(){
 								<g:img dir="images" file="ico1.gif"/>
 								</g:each>
 			                </div>
-			                <div class="s3">${UserDrugRelation.findByDrugResponseAndUsername(drugResponse, username).state }</div>
+			                <div class="s3">${UserDrugRelation.findByDrugResponseAndUsername(drugResponse, username).getState() }</div>
 						</li>
 					</g:each>
 				</ul>
