@@ -9,134 +9,105 @@
 <body>
 
 	<div class="header">
-		<div class="lefts">
-			<g:img dir="images" file="logo2.jpg" width="457" height="134" />
-		</div>
-		<div class="rights">
-			<p>
-				<span>
-					${username }
-				</span>
-				<g:link controller="logout">[注销]</g:link>
-			</p>
-			<p>欢迎进入基因检测报告！</p>
-		</div>
-	</div>
-	<div class="main2">
-		<div class="tit3">
-			<p class="s1">
-				${illnessInstance?.name }
-			</p>
-			<p class="s2">
-				${illnessInstance?.chineseName }
-			</p>
-			<%--        <div class="page1">--%>
-			<%--        	<div class="pageBox2"><a href="#" class="s1">患乳腺癌的风险修饰符</a><a href="#" class="s2">下一篇</a></div>--%>
-			<%--        	<div class="pageBox1"><a href="#" class="s2">上一篇</a><a href="#" class="s1">选择性IgA缺乏症</a></div>--%>
-			<%--        </div>--%>
-		</div>
-		<div class="contBox1">
-			<div class="lefts">
-				<dl>
-					<dd class="img4"></dd>
-					<!--命名分别为img0、img1、img2、img3、img4、img5-->
-					<dt>风险等级</dt>
-				</dl>
-			</div>
-			<div class="rights">
-				<div class="jdBxo1">
-					<div class="tit">
-						您的<br />基因
-					</div>
-					<div class="bfb">
-						<div class="bx" style="width:${risk*100 }%;">
-							<div class="num1">
-								${risk*100 }%
-							</div>
-						</div>
-					</div>
-					<!--这里由百分比控制宽度-->
-
-				</div>
-				<div class="jdBxo2">
-					<div class="tit">
-						平均<br />风险
-					</div>
-					<div class="bfb">
-						<div class="bx"
-							style=" width:${Double.valueOf(illnessInstance?.averageRisk)*100 }%;">
-							<div class="num1">
-								${Double.valueOf(illnessInstance?.averageRisk)*100 }%
-							</div>
-						</div>
-					</div>
-					<!--这里由百分比控制宽度-->
-				</div>
-			</div>
-		</div>
-		<div class="contBox2">
-			<div class="tit4">疾病介绍</div>
-			<div class="cont jieshao">
-				${illnessInstance?.description }
-				<%--        	<dl>--%>
-				<%--            	<dd><img src="../images/img2.jpg" width="190" height="139" /></dd>--%>
-				<%--                <dt>${illnessInstance?.description }</dt>--%>
-				<%--	           </dl>--%>
-			</div>
-		</div>
-		<div class="contBox2">
-			<div class="tit4">遗传vs环境</div>
-			<div class="cont jieshao">
-				${illnessInstance?.geneticEnvironment }
-				<%--	        	<dl>--%>
-				<%--	            	<dd><img src="../images/img3.jpg" width="190" height="139" /></dd>--%>
-				<%--	                <dt>${illnessInstance?.geneticEnvironment }</dt>--%>
-				<%--	            </dl>--%>
-			</div>
-		</div>
-		<div class="contBox2">
-			<div class="tit4">你可以做什么？</div>
-			<div class="cont">
-				<div class="content">
-					${illnessInstance?.canDo }
-				</div>
-			</div>
-		</div>
-		<div class="contBox2">
-			<div class="tit4">技术报告</div>
-			<div class="cont baokao">
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr style="color: #fff;">
-						<th height="36" align="center" valign="middle" bgcolor="#ff8470">Gene
-							or Region</th>
-						<th height="36" align="center" valign="middle" bgcolor="#ff8470">SNP</th>
-						<th height="36" align="center" valign="middle" bgcolor="#ff8470">Genotype</th>
-						<th height="36" align="center" valign="middle" bgcolor="#ff8470">Adjusted
-							Odds Ratio</th>
-					</tr>
-					<tr>
-						<td height="36" align="center" valign="middle">ITGAM<br /></td>
-						<td height="36" align="center" valign="middle">rs9888739</td>
-						<td height="36" align="center" valign="middle">CC<br /></td>
-						<td height="36" align="center" valign="middle">0.99</td>
-					</tr>
-					<g:each in="${snps }" var="snp">
-						<g:if test="${snp.oddRatio!=null }">
-							<tr>
-								<td height="36" align="center" valign="middle">ITGAM<br /></td>
-								<td height="36" align="center" valign="middle">
-									${snp.gene.getName(snp.gene.name) }
-								</td>
-								<td height="36" align="center" valign="middle">
-									${snp.gene.getType(snp.gene.name) }<br />
-								</td>
-								<td height="36" align="center" valign="middle">
-									${snp?.oddRatio }
-								</td>
-							</tr>
-						</g:if>
-					</g:each>
-				</table>
+	<div class="lefts"><g:img dir="images" file="logo2.jpg" width="457" height="134"/></div>
+	<div class="rights">
+    	<p><span>${username }</span><g:link controller="logout">[注销]</g:link></p>
+        <p>欢迎进入基因检测报告！</p>
+    </div>
+</div>
+<div class="main2">
+  <div class="tit3">
+  		<p class="s1">${illnessInstance?.name }</p>
+        <p class="s2">${illnessInstance?.chineseName }</p>
+  </div>
+   <div class="contBox1">
+   		<div class="lefts">
+        	<dl>
+            	<dd class="img${(int)Math.ceil(risk*100/20) }"></dd><!--命名分别为img0、img1、img2、img3、img4、img5-->
+                <dt>风险等级</dt>
+            </dl>
+        </div>
+        <div class="rights">
+        	<div class="page1">
+			<div class="wenzi">
+            	<p class="s_1">good基因数目</p>
+            	<p class="s_2">bad基因数目</p>
+            </div>
+            <div class="tiaozhuang">
+            	<div class="red" style="width:${badNum*100/snps.size() }%;">${badNum }</div>
+            	<div class="green" style="width:${goodNum*100/snps.size() }%;">${goodNum }</div>
+            </div>
+        	</div>
+<%--        	<div class="jdBxo1">--%>
+<%--            	<div class="tit">您的<br/>基因</div>--%>
+<%--                <div class="bfb"><div class="bx" style="width:${risk*100 }%;"><div class="num1">${risk*100 }%</div></div></div><!--这里由百分比控制宽度-->--%>
+<%--               --%>
+<%--            </div>--%>
+<%--        	<div class="jdBxo2">--%>
+<%--            	<div class="tit">平均<br/>风险</div>--%>
+<%--                <div class="bfb"><div class="bx" style=" width:${Double.valueOf(illnessInstance?.averageRisk)*100 }%;"><div class="num1">${Double.valueOf(illnessInstance?.averageRisk)*100 }%</div></div></div><!--这里由百分比控制宽度-->--%>
+<%--            </div>--%>
+        </div>
+   </div> 
+    <div class="contBox2">
+   	  <div class="tit4">
+        	疾病介绍
+      </div>
+    	<div class="cont jieshao">
+    		${illnessInstance?.description }
+<%--        	<dl>--%>
+<%--            	<dd><img src="../images/img2.jpg" width="190" height="139" /></dd>--%>
+<%--                <dt>${illnessInstance?.description }</dt>--%>
+<%--	           </dl>--%>
+	        </div>
+	    </div>
+	    <div class="contBox2">
+	   	  <div class="tit4">
+	       	遗传vs环境
+	  </div>
+	    	<div class="cont jieshao">
+	    		${illnessInstance?.geneticEnvironment }
+<%--	        	<dl>--%>
+<%--	            	<dd><img src="../images/img3.jpg" width="190" height="139" /></dd>--%>
+<%--	                <dt>${illnessInstance?.geneticEnvironment }</dt>--%>
+<%--	            </dl>--%>
+	        </div>
+	    </div>
+	    <div class="contBox2">
+	   	  <div class="tit4">你可以做什么？</div>
+	        <div class="cont">
+	        	<div class="content">
+		          ${illnessInstance?.canDo }
+	       		</div>
+	        </div>
+	  </div>
+	    <div class="contBox2">
+	   	  <div class="tit4">
+	       技术报告
+	  </div>
+	    	<div class="cont baokao">
+	        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr style="color:#fff;">
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">SPN</th>
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Magnitude</th>
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">References</th>
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Frequency</th>
+	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Repute</th>
+	  </tr>
+	  <g:each in="${genes }" var="gene">
+	  <tr>
+	    <td height="36" align="center" valign="middle">
+			${gene.description1!=null?'<a href="'+createLink(controller:"gene",action:"show")+'?id='+gene.id+'&username='+username+'&illnessId='+illnessInstance.id+'&status='+status+'">':'' }
+	    	${gene.name }
+	    	${gene.description1!=null?'</g:link>':'' }
+	    </td>
+	    <td height="36" align="center" valign="middle">${gene.magnitude }</td>
+	    <td height="36" align="center" valign="middle">${gene.references }<br /></td>
+	    <td height="36" align="center" valign="middle">${gene.frequency }</td>
+	    <td height="36" align="center" valign="middle">${gene.repute }</td>
+	  </tr>
+	  </g:each>
+	</table>
 			</div>
 		</div>
 		<div class="pageContent">

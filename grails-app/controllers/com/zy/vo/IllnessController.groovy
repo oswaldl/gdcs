@@ -106,7 +106,18 @@ class IllnessController {
 		def illnessInstance = Illness.get(params.illnessId)
 		User user=User.findByUsername(params.username)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
-		[illnessInstance: illnessInstance,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
+		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
+		int goodNum=0
+		int badNum=0
+		genes.each {
+			if(it.repute=="good"){
+				goodNum=goodNum+1
+			}
+			if(it.repute=="bad"){
+				badNum=badNum+1
+			}
+		}
+		[genes:genes,goodNum:goodNum,badNum:badNum,illnessInstance: illnessInstance,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
 	}
 	
 	//通过名字模糊查询病例

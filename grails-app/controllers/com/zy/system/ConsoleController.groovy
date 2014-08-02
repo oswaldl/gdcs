@@ -79,7 +79,8 @@ class ConsoleController {
 			
 			def baseUri = request.scheme + "://" + request.serverName + ":" + request.serverPort + grailsAttributes.getApplicationUri(request)
 			def content = g.include(controller:'showResult', action:'index')
-			byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+			def contentStr= content.readAsString()
+			byte[] b1 = myPdfService.buildPdfFromString(contentStr, baseUri + (params.url ?: ""))
 			File file1 = new File((params.filepath ?: "D:/Documents/document1.pdf"));
 			file1<<b1
 			
