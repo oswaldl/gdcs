@@ -102,7 +102,7 @@ body {
 	    <td height="36" align="center" valign="middle">
 			${gene.description1!=null?'<a href="'+createLink(controller:"gene",action:"show")+'?id='+gene.id+'&username='+username+'&illnessId='+illnessInstance.id+'&status='+status+'">':'' }
 	    	${gene.name }
-	    	${gene.description1!=null?'</g:link>':'' }
+	    	${gene.description1!=null?'</a>':'' }
 	    </td>
 	    <td height="36" align="center" valign="middle">${gene.magnitude }</td>
 	    <td height="36" align="center" valign="middle">${gene.references }<br /></td>

@@ -107,6 +107,9 @@ class IllnessController {
 		User user=User.findByUsername(params.username)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
+		if(genes.size()>10){
+			genes=getGenes(snps)
+		}
 		int goodNum=0
 		int badNum=0
 		genes.each {
@@ -117,7 +120,11 @@ class IllnessController {
 				badNum=badNum+1
 			}
 		}
-		[genes:genes,goodNum:goodNum,badNum:badNum,illnessInstance: illnessInstance,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
+		def inPDF=false
+		if(params.inPDF){
+			inPDF=true
+		}
+		[inPDF:inPDF,genes:genes,goodNum:goodNum,badNum:badNum,illnessInstance: illnessInstance,username:user.username,snps:snps,risk:getRisk(illnessInstance,user)]
 	}
 	
 	//通过名字模糊查询病例
@@ -128,6 +135,19 @@ class IllnessController {
 		illnessList.addAll(Illness.findAllByChineseNameLike("%"+string+"%"))
 		[illnessInstanceList:illnessList]
 	}
+	//获取References大于10的集合
+	def getGenes(def snps){
+		def lists=new ArrayList<Gene>()
+		snps.collect{it.gene}.each {
+			if(it.references){
+				if(Integer.parseInt(it.references)>9){
+					lists.add(it)
+				}
+			}
+		}
+		return lists.sort{it.getMagnitude()}.reverse()
+	}
+	
 	//显示病例详细，通过列表查找过来的
 	def showDetail(){
 		def illnessInstance = Illness.get(params.illnessId)
@@ -135,6 +155,9 @@ class IllnessController {
 		User user=User.findByUsername(params.username)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
+		if(genes.size()>10){
+			genes=getGenes(snps)
+		}
 		int goodNum=0
 		int badNum=0
 		genes.each {
@@ -160,6 +183,9 @@ class IllnessController {
 		def illnessInstance=illnesses.get(status)
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
+		if(genes.size()>10){
+			genes=getGenes(snps)
+		}
 		int goodNum=0
 		int badNum=0
 		genes.each {

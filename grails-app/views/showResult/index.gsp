@@ -91,10 +91,10 @@ $(function(){
 				</ul>
 			</div>
 			<div class="listBox">
-				<h5 class="tit1 jt02">
+				<h5 class="tit1 jt0${inPDF?'1':'2' }">
 					第二部分<span>先天性遗传疾病</span>
 				</h5>
-				<ul>
+				<ul style="${inPDF?'display: block':'' }">
 					<div class="tit">
 	                <div class="s1">名称</div>
 	                <div class="s2">研究数量</div>
@@ -114,10 +114,10 @@ $(function(){
 				</ul>
 			</div>
 			<div class="listBox">
-				<h5 class="tit1 jt02">
+				<h5 class="tit1 jt0${inPDF?'1':'2' }">
 					第三部分<span>个体化用药指导</span>
 				</h5>
-				<ul>
+				<ul style="${inPDF?'display: block':'' }">
 					<div class="tit">
 	                <div class="s1">名称</div>
 	                <div class="s2">研究数量</div>

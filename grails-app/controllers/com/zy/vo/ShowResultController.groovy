@@ -24,6 +24,7 @@ class ShowResultController {
 				return
 			}
 		}
+		
 		def currenUser=springSecurityService.getCurrentUser()
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
@@ -35,7 +36,12 @@ class ShowResultController {
 		
 		def inheritedConditionses=InheritedConditions.findAllByUsername(user.username)
 		
-		[currenUser:currenUser,illnesses:illnesses,username:user.username,drugResponses:drugResponses,inheritedConditionses:inheritedConditionses]
+		def inPDF=false
+		if(params.inPDF){
+			inPDF=true
+		}
+		
+		[inPDF:inPDF,currenUser:currenUser,illnesses:illnesses,username:user.username,drugResponses:drugResponses,inheritedConditionses:inheritedConditionses]
 	}
 
 	def show(){

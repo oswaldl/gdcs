@@ -14,7 +14,7 @@ class MyPdfService {
 			// step 3 解决中文支持
 			org.xhtmlrenderer.pdf.ITextFontResolver fontResolver = renderer
 					.getFontResolver();
-			fontResolver.addFont("./font/simsun.ttc", BaseFont.IDENTITY_H,
+			fontResolver.addFont("C:/evn/font/simsun.ttc", BaseFont.IDENTITY_H,
 					BaseFont.NOT_EMBEDDED);
 
 
@@ -32,14 +32,14 @@ class MyPdfService {
 	byte[] buildPdfFromString(content, baseUri) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ITextRenderer renderer = new ITextRenderer();
+		
 		try {
-  
 			// step 3 解决中文支持
 			org.xhtmlrenderer.pdf.ITextFontResolver fontResolver = renderer
 					.getFontResolver();
-			fontResolver.addFont("./font/simsun.ttc", BaseFont.IDENTITY_H,
+//			fontResolver.addFont("./font/simsun.ttc", BaseFont.IDENTITY_H,
+					fontResolver.addFont("C:/evn/font/simsun.ttc", BaseFont.IDENTITY_H,
 					BaseFont.NOT_EMBEDDED);
-  
 			renderer.setDocumentFromString(content, baseUri);
 			renderer.layout();
 			renderer.createPDF(baos);

@@ -57,7 +57,12 @@
 		          	</tr>
 		 			<tr>
 		 				<td colspan="2">
-		 					<g:link class="button" controller="illness" action="showDetail" params='[illnessId:"${params.illnessId }",status:"${params.status }",username:"${params.username }"]' >返回</g:link>
+		 					<g:if test="${params.status=='null' }">
+		 						<g:link class="button" controller="illness" action="showIllness" params='[illnessId:"${params.illnessId }",username:"${params.username }"]' >返回</g:link>
+		 					</g:if>
+		 					<g:if test="${params.status!='null' }">
+		 						<g:link class="button" controller="illness" action="showDetail" params='[illnessId:"${params.illnessId }",status:"${params.status }",username:"${params.username }"]' >返回</g:link>
+		 					</g:if>
 		 				</td>
 		 			</tr>
 		          </table>

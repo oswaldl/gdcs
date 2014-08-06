@@ -3,8 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>基因检测报告</title>
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css" media="all"
 	href="${resource(dir: 'css', file: 'css.css')}" />
+<style type="text/css">
+body {
+	font-family: SimSun;
+}
+</style>
 </head>
 <body>
 
@@ -97,9 +102,14 @@
 	  <g:each in="${genes }" var="gene">
 	  <tr>
 	    <td height="36" align="center" valign="middle">
-			${gene.description1!=null?'<a href="'+createLink(controller:"gene",action:"show")+'?id='+gene.id+'&username='+username+'&illnessId='+illnessInstance.id+'&status='+status+'">':'' }
+	    	<g:if test="${inPDF }">
 	    	${gene.name }
-	    	${gene.description1!=null?'</g:link>':'' }
+	    	</g:if>
+	    	<g:if test="${!inPDF }">
+	    	${gene.description1!=null?'<a href="'+createLink(controller:"gene",action:"show")+'?id='+gene.id+'&username='+username+'&illnessId='+illnessInstance.id+'&status='+status+'">':'' }
+	    	${gene.name }
+	    	${gene.description1!=null?'</a>':'' }
+	    	</g:if>
 	    </td>
 	    <td height="36" align="center" valign="middle">${gene.magnitude }</td>
 	    <td height="36" align="center" valign="middle">${gene.references }<br /></td>

@@ -7,6 +7,7 @@ import com.lowagie.text.pdf.PdfCopy;
 import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader
 import com.zy.auth.User
+import com.zy.vo.SNPRelation;
 
 class ConsoleController {
 	def springSecurityService
@@ -32,7 +33,7 @@ class ConsoleController {
 			//获得文件的大小（默认单位是B）和类型
 			println(new Date().toString()+"--name:"+fileName+";size:"+(f.size/1024)+"kb;type:"+f.contentType);
 			//文件要保存在哪个目录
-			String filePath="D:/java/apache-tomcat-6.0.14/webapps/";
+			String filePath="C:/evn/apache-tomcat-7.0.54/webapps/";
 			
 			//开始写入，比Java简单多了吧！
 			f.transferTo(new File(filePath+fileName));
@@ -78,20 +79,20 @@ class ConsoleController {
 		try{
 			
 			def baseUri = request.scheme + "://" + request.serverName + ":" + request.serverPort + grailsAttributes.getApplicationUri(request)
-			def content = g.include(controller:'showResult', action:'index')
+			def content = g.include(controller:'showResult', action:'index',params:[username:"mike"])
 			def contentStr= content.readAsString()
 			byte[] b1 = myPdfService.buildPdfFromString(contentStr, baseUri + (params.url ?: ""))
-			File file1 = new File((params.filepath ?: "D:/Documents/document1.pdf"));
+			File file1 = new File((params.filepath ?: "C:/Documents/document1.pdf"));
 			file1<<b1
 			
 			//尝试第二个页面，这里用测试页面
 			content = g.include(controller:'pdf', action:'demo2')
 			byte[] b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-			File file2 = new File((params.filepath ?: "D:/Documents/document2.pdf"));
+			File file2 = new File((params.filepath ?: "C:/Documents/document2.pdf"));
 			file2<<b2
 			
-			
-			render "please check "+file1.getPath()
+			//合并下载文件
+			mergePDF()
 		}catch (Throwable e) {
 			println "there was a problem with PDF generation ${e}"
 			//if(params.template) render(template:params.template)
@@ -100,9 +101,22 @@ class ConsoleController {
 		}
 	}
 	
+	//删除生成的pdf
+	def delPDF(){
+		String filePath="C:/Documents"
+		File root = new File(filePath);
+		File[] files = root.listFiles();
+		for (File file : files) {
+			if (!file.isDirectory()) {
+				//file为pdf文件
+				file.delete()
+			}
+		}
+	}
+	
 	def mergePDF(){
 		//pdf所在的文件夹
-		String filePath="D:/Documents"
+		String filePath="C:/Documents"
 		
 		List<String> lis=new ArrayList<String>()
 		File root = new File(filePath);
@@ -110,18 +124,38 @@ class ConsoleController {
 		for (File file : files) {
 			if (!file.isDirectory()) {
 				//file为pdf文件
-				println file.getPath()
 				lis.add(file.getPath())
 			}
 		}
 		String[] filePaths = new String[lis.size()];
 		lis.toArray(filePaths);
 		
-		boolean b=mergePdfFiles(filePaths,"D:\\Documents\\MergeFile\\temp.pdf")
-		render b?"成功":"失败"
+		boolean b=mergePdfFiles(filePaths,"C:/Documents/MergeFile/temp.pdf")
+		//删除生成的单个pdf
+		delPDF()
+		if(b){
+			
+			response.setHeader("Content-disposition", "attachment; filename=gdcs.pdf")
+			response.contentType = "application/x-rarx-rar-compressed"
+			
+			def out = response.outputStream
+			InputStream inputStream = new FileInputStream("C:/Documents/MergeFile/temp.pdf")
+			byte[] buffer = new byte[1024]
+			int i = -1
+			while ((i = inputStream.read(buffer)) != -1) {
+			out.write(buffer, 0, i)
+			}
+			out.flush()
+			out.close()
+			inputStream.close()
+			
+		}else{
+			render "失败"
+		}
+		
 	}
 	
-	public static boolean mergePdfFiles(String[] files, String newfile) {
+	def boolean mergePdfFiles(String[] files, String newfile) {
 		boolean retValue = false;
 		Document document = null;
 		try {
@@ -148,5 +182,35 @@ class ConsoleController {
 	
 	def exportPdf(){
 		User user=User.findByUsername(params.username)
+		try{
+			def baseUri = request.scheme + "://" + request.serverName + ":" + request.serverPort + grailsAttributes.getApplicationUri(request)
+			//首页
+			def content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
+			byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+			File file1 = new File("C:/Documents/document.pdf");
+			file1<<b1
+			//病例页面
+			def illnesses=SNPRelation.findAllByUser(user).collect {
+				it.illness
+			}.toSet().sort{it.id}
+			int i=0
+			for(;i<illnesses.size();i++){
+				content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
+				byte[] b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+				File file2 = new File("C:/Documents/document"+i+".pdf");
+				file2<<b2
+			}
+			
+			//合并下载pdf
+			mergePDF()
+			render ""
+		}catch (Throwable e) {
+			println "there was a problem with PDF generation ${e}"
+			if(params.pdfController) redirect(controller:params.pdfController, action:params.pdfAction, params:params)
+			else redirect(uri:params.url + '?' + request.getQueryString())
+		}
+		
 	}
+	
+	
 }
