@@ -77,15 +77,15 @@ $(function(){
 				</h5>
 				<ul style="display: block;">
 					<li><g:link controller="illness" action="showHighAll"
-							params='[username:"${username }"]'>&nbsp;&nbsp;&nbsp;较高风险疾病汇总</g:link></li>
+							params='[username:"${username }"]'>较高风险疾病汇总</g:link></li>
 					<li><g:link controller="illness" action="showLowAll"
-							params='[username:"${username }"]'>&nbsp;&nbsp;&nbsp;较低风险疾病汇总</g:link></li>
+							params='[username:"${username }"]'>较低风险疾病汇总</g:link></li>
 					<li><g:link controller="illness" action="showNormalAll"
-							params='[username:"${username }"]'>&nbsp;&nbsp;&nbsp;一般风险疾病汇总</g:link></li>
+							params='[username:"${username }"]'>一般风险疾病汇总</g:link></li>
 					<g:each in="${illnesses }" var="illness" status="i">
 						<li><g:link controller="illness" action="showDetail"
 								params='[illnessId:"${illness.id }",status:"${i }",username:"${username }"]'>
-								&nbsp;&nbsp;&nbsp;${illness.chineseName?:illness.name }
+								${illness.chineseName?:illness.name }
 							</g:link></li>
 					</g:each>
 				</ul>

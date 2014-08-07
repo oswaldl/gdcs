@@ -101,9 +101,8 @@ class ConsoleController {
 		}
 	}
 	
-	//删除生成的pdf
-	def delPDF(){
-		String filePath="D:/Documents"
+	//删除filePath文件夹中生成的pdf
+	def delPDF(String filePath){
 		File root = new File(filePath);
 		File[] files = root.listFiles();
 		for (File file : files) {
@@ -115,10 +114,7 @@ class ConsoleController {
 	}
 	
 	//合并文件夹filePath中的所有pdf，生成新的一个pdf（D:/Documents/MergeFile/temp.pdf），删除所有的单个pdf，下载
-	def mergePDF(){
-		//pdf所在的文件夹
-		String filePath="D:/Documents"
-		
+	def mergePDF(String filePath,String resultPdf){
 		List<String> lis=new ArrayList<String>()
 		File root = new File(filePath);
 		File[] files = root.listFiles();
@@ -131,33 +127,13 @@ class ConsoleController {
 		String[] filePaths = new String[lis.size()];
 		lis.toArray(filePaths);
 		
-		boolean b=mergePdfFiles(filePaths,"D:/Documents/MergeFile/temp.pdf")
-		//删除生成的单个pdf
-		delPDF()
-		if(b){
-			
-			response.setHeader("Content-disposition", "attachment; filename=gdcs.pdf")
-			response.contentType = "application/x-rarx-rar-compressed"
-			
-			def out = response.outputStream
-			InputStream inputStream = new FileInputStream("D:/Documents/MergeFile/temp.pdf")
-			byte[] buffer = new byte[1024]
-			int i = -1
-			while ((i = inputStream.read(buffer)) != -1) {
-			out.write(buffer, 0, i)
-			}
-			out.flush()
-			out.close()
-			inputStream.close()
-			
-		}else{
-			render "失败"
-		}
+		boolean b=mergePdfFiles(filePaths,resultPdf)
+		return b
 		
 	}
 	
 	//合并pdf
-	def boolean mergePdfFiles(String[] files, String newfile) {
+	def mergePdfFiles(String[] files, String newfile) {
 		boolean retValue = false;
 		Document document = null;
 		try {
@@ -184,16 +160,20 @@ class ConsoleController {
 	
 	
 	//下载完整的PDF,参数username要下载的用户名
-	def exportPdf(){
+	def downloadPdf(){
 		User user=User.findByUsername(params.username)
+		//生成的单个pdf存放路径，合并后会被删除
+		String filePath="D:/Documents"
+		//合并后的pdf
+		String resultPDF="D:/Documents/MergeFile/temp.pdf"
+		
 		try{
-			
 			//先生成多个单个的pdf，然后在合并，合并完成后将单个的全部删除
 			def baseUri = request.scheme + "://" + request.serverName + ":" + request.serverPort + grailsAttributes.getApplicationUri(request)
 			//首页
 			def content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
 			byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-			File file1 = new File("D:/Documents/document.pdf");
+			File file1 = new File(filePath+"/document.pdf");
 			file1<<b1
 			//病例页面
 			def illnesses=SNPRelation.findAllByUser(user).collect {
@@ -203,13 +183,35 @@ class ConsoleController {
 			for(;i<illnesses.size();i++){
 				content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
 				byte[] b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-				File file2 = new File("D:/Documents/document"+i+".pdf");
+				File file2 = new File(filePath+"/document"+i+".pdf");
 				file2<<b2
 			}
 			
-			//合并下载pdf
-			mergePDF()
-			render ""
+			//合并pdf
+			boolean b=mergePDF(filePath,resultPDF)
+			
+			//删除生成的单个pdf
+			delPDF(filePath)
+			
+			//合并成功就下载
+			if(b){
+				response.setHeader("Content-disposition", "attachment; filename=gdcs.pdf")
+				response.contentType = "application/x-rarx-rar-compressed"
+				
+				def out = response.outputStream
+				InputStream inputStream = new FileInputStream(resultPDF)
+				byte[] buffer = new byte[1024]
+				int j = -1
+				while ((j = inputStream.read(buffer)) != -1) {
+				out.write(buffer, 0, j)
+				}
+				out.flush()
+				out.close()
+				inputStream.close()
+				
+			}else{
+				render "失败"
+			}
 		}catch (Throwable e) {
 			println "there was a problem with PDF generation ${e}"
 			if(params.pdfController) redirect(controller:params.pdfController, action:params.pdfAction, params:params)
