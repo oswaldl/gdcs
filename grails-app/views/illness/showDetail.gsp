@@ -15,6 +15,9 @@ body {
 		page-break-after:always;
 		background-color: lightblue;
 	}
+	.div_hidden{
+		display:none;
+	}
 } 
 </style>
 </head>
