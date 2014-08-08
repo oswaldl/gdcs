@@ -1,17 +1,24 @@
 package com.zy.system
 
-import java.nio.ByteBuffer
-
-import com.lowagie.text.Document;
-import com.lowagie.text.pdf.PdfCopy;
-import com.lowagie.text.pdf.PdfImportedPage;
+import com.lowagie.text.Document
+import com.lowagie.text.pdf.PdfCopy
+import com.lowagie.text.pdf.PdfImportedPage
 import com.lowagie.text.pdf.PdfReader
 import com.zy.auth.User
-import com.zy.vo.SNPRelation;
+import com.zy.vo.SNPRelation
 
 class ConsoleController {
 	def springSecurityService
 	def myPdfService
+	
+	/**
+	 * 既然要写死，就不要放在方法里面
+	 */
+	//生成的单个pdf存放路径，合并后会被删除
+	String filePath="D:/Documents"
+	//合并后的pdf
+	String resultPDF="D:/Documents/MergeFile/temp.pdf"
+	
 	
     def index() {
 		User user=springSecurityService.getCurrentUser()
@@ -75,6 +82,7 @@ class ConsoleController {
 	 * 写文件方式
 	 * @return
 	 */
+	@Deprecated
 	def write2Pdf(){
 		try{
 			
@@ -114,31 +122,30 @@ class ConsoleController {
 	}
 	
 	//合并文件夹filePath中的所有pdf，生成新的一个pdf（D:/Documents/MergeFile/temp.pdf），删除所有的单个pdf，下载
-	def mergePDF(String filePath,String resultPdf){
+	private boolean mergePDF(){
 		List<String> lis=new ArrayList<String>()
 		File root = new File(filePath);
 		File[] files = root.listFiles();
 		for (File file : files) {
 			if (!file.isDirectory()) {
 				//file为pdf文件
-				lis.add(file.getPath())
+				if(file.getPath().endsWith(".pdf"))
+					lis.add(file.getPath())
 			}
 		}
-		String[] filePaths = new String[lis.size()];
-		lis.toArray(filePaths);
 		
-		boolean b=mergePdfFiles(filePaths,resultPdf)
+		boolean b=mergePdfFiles(lis.toArray(new String[lis.size()]))
 		return b
 		
 	}
 	
 	//合并pdf
-	def mergePdfFiles(String[] files, String newfile) {
+	private boolean mergePdfFiles(String[] files) {
 		boolean retValue = false;
 		Document document = null;
 		try {
 			document = new Document(new PdfReader(files[0]).getPageSize(1));
-			PdfCopy copy = new PdfCopy(document, new FileOutputStream(newfile));
+			PdfCopy copy = new PdfCopy(document, new FileOutputStream(resultPDF));
 			document.open();
 			for (int i = 0; i < files.length; i++) {
 				PdfReader reader = new PdfReader(files[i]);
@@ -162,33 +169,13 @@ class ConsoleController {
 	//下载完整的PDF,参数username要下载的用户名
 	def downloadPdf(){
 		User user=User.findByUsername(params.username)
-		//生成的单个pdf存放路径，合并后会被删除
-		String filePath="D:/Documents"
-		//合并后的pdf
-		String resultPDF="D:/Documents/MergeFile/temp.pdf"
 		
 		try{
-			//先生成多个单个的pdf，然后在合并，合并完成后将单个的全部删除
-			def baseUri = request.scheme + "://" + request.serverName + ":" + request.serverPort + grailsAttributes.getApplicationUri(request)
-			//首页
-			def content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
-			byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-			File file1 = new File(filePath+"/document.pdf");
-			file1<<b1
-			//病例页面
-			def illnesses=SNPRelation.findAllByUser(user).collect {
-				it.illness
-			}.toSet().sort{it.id}
-			int i=0
-			for(;i<illnesses.size();i++){
-				content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-				byte[] b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-				File file2 = new File(filePath+"/document"+i+".pdf");
-				file2<<b2
-			}
+			generateSinglePdfs(user);
 			
+			println "trying to merge pdf..."
 			//合并pdf
-			boolean b=mergePDF(filePath,resultPDF)
+			boolean b=mergePDF()
 			
 			//删除生成的单个pdf
 			delPDF(filePath)
@@ -214,10 +201,40 @@ class ConsoleController {
 			}
 		}catch (Throwable e) {
 			println "there was a problem with PDF generation ${e}"
-			if(params.pdfController) redirect(controller:params.pdfController, action:params.pdfAction, params:params)
-			else redirect(uri:params.url + '?' + request.getQueryString())
+			if(params.pdfController) {
+				println "error:"+params.pdfController
+				redirect(controller:params.pdfController, action:params.pdfAction, params:params)
+			}else if(params.url) {
+				println "url:"+params.url
+				redirect(uri:params.url + '?' + request.getQueryString())
+			}
+			else {
+				render "there was a problem with PDF generation ${e}"
+			}
 		}
 		
+	}
+	
+	
+	private void generateSinglePdfs(def user){
+		//先生成多个单个的pdf，然后在合并，合并完成后将单个的全部删除
+		def baseUri = request.scheme + "://" + request.serverName + ":" + request.serverPort + grailsAttributes.getApplicationUri(request)
+		//首页
+		def content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
+		byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+		File file1 = new File(filePath+"/document.pdf");
+		file1<<b1
+		//病例页面
+		def illnesses=SNPRelation.findAllByUser(user).collect {
+			it.illness
+		}.toSet().sort{it.id}
+		int i=0
+		for(;i<illnesses.size();i++){
+			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
+			byte[] b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+			File file2 = new File(filePath+"/document"+i+".pdf");
+			file2<<b2
+		}
 	}
 	
 	

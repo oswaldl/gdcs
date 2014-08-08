@@ -3,11 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>基因检测报告</title>
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'css.css')}"/>
+<link rel="stylesheet" type="text/css" media="all" href="${resource(dir: 'css', file: 'css.css')}"/>
 <style type="text/css">
 body {
 	font-family: SimSun;
 }
+
+
+@media print {   
+	body{
+		page-break-after:always;
+		background-color: lightblue;
+	}
+} 
 </style>
 </head>
 <body>

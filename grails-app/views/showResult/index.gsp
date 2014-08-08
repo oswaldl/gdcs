@@ -11,6 +11,13 @@
 body {
 	font-family: SimSun;
 }
+
+@media print {   
+	body{
+		page-break-after:always;
+		background-color: lightblue;
+	}
+} 
 </style>
 <script type="text/javascript">
 $(function(){
