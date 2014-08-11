@@ -17,8 +17,8 @@
 				<fieldset class="form">
 					<table>
 						<tr>
-							<td width="40%" >URL</td>
-							<td width="60%"><g:textField name="url"/></td>
+							<td width="30%" >URL</td>
+							<td width="70%"><g:textField name="url" size="100" /></td>
 						</tr>
 					</table>
 				</fieldset>
