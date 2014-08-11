@@ -14,7 +14,7 @@ class MyPdfService {
 			// step 3 解决中文支持
 			org.xhtmlrenderer.pdf.ITextFontResolver fontResolver = renderer
 					.getFontResolver();
-			fontResolver.addFont("C:/evn/font/simsun.ttc", BaseFont.IDENTITY_H,
+			fontResolver.addFont("C:/Users/Administrator/git/gdcs/font/simsun.ttc", BaseFont.IDENTITY_H,
 					BaseFont.NOT_EMBEDDED);
 
 
@@ -38,7 +38,7 @@ class MyPdfService {
 			org.xhtmlrenderer.pdf.ITextFontResolver fontResolver = renderer
 					.getFontResolver();
 //			fontResolver.addFont("./font/simsun.ttc", BaseFont.IDENTITY_H,
-					fontResolver.addFont("C:/evn/font/simsun.ttc", BaseFont.IDENTITY_H,
+			fontResolver.addFont("C:/Users/Administrator/git/gdcs/font/simsun.ttc", BaseFont.IDENTITY_H,
 					BaseFont.NOT_EMBEDDED);
 			renderer.setDocumentFromString(content, baseUri);
 			renderer.layout();
