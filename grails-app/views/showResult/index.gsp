@@ -17,6 +17,10 @@ body {
 		page-break-after:always;
 		background-color: lightblue;
 	}
+	
+	.div_hidden{
+		display:none;
+	}
 } 
 </style>
 <script type="text/javascript">
@@ -56,24 +60,24 @@ $(function(){
 		<div class="lefts">
 			<g:img dir="images" file="logo2.jpg" width="457" height="134" />
 		</div>
-		<div class="rights">
-			<p>
-				<span>
-					${username }
-				</span>
-				<g:link controller="logout">[注销]</g:link>
-				<g:if test="${currenUser.isAdmin }">
+        <div class="rights">
+            <p><span>${username }</span>
+                <g:link controller="logout">[注销]</g:link>
+                <g:if test="${currenUser.isAdmin }">
 					<g:link controller="console" action="index">[进入后台]</g:link>
 				</g:if>
-			</p>
-			<p>欢迎进入基因检测报告！</p>
-			<p>
-				<g:form url="[action:'searchData',controller:'showResult']">
-					<input type="hidden" name="username" value="${username }" />
-					<input name="searchString" id="search" placeholder="请输入病例名" />
-				</g:form>
-			</p>
-		</div>
+            </p>
+            <p>欢迎进入基因检测报告！</p>
+			<div class="div_hidden">
+				<p>
+					<g:form url="[action:'searchData',controller:'showResult']">
+						<input type="hidden" name="username" value="${username }" />
+						<input name="searchString" id="search" placeholder="请输入病例名" />
+					</g:form>
+				</p>
+			</div>
+        </div>
+		
 	</div>
 	<div class="main">
 		<div style=" background:url(images/mulu_bg2.jpg) repeat-y; overflow:hidden; zoom:1;">
