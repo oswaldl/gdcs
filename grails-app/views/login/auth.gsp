@@ -6,7 +6,8 @@
 	<script type="text/javascript">
 		$(function(){
 			var heights = $(window).height(); 
-			$(".bg1").height(heights/2)
+			$(".bg1").height(heights/2);
+			document.getElementById("username").focus();
 		})
 	</script>
 	
@@ -16,11 +17,11 @@
 
 <div class="bg1" style="widht:100%;">
 	<div class="login">
-        <div class="logo"><g:img dir="images" file="logo.png" width="243" height="166"/></div>
+        <div class="logo"><g:img dir="images" file="LOGO.png" width="243" height="166"/></div>
         <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
         <div class="box">
         	<ul>
-            	<li><input type='text' class=inputs name='j_username' id='username' placeholder="请输入用户名"/></li>
+            	<li><input type='text' class='inputs' name='j_username' id='username' placeholder="请输入用户名"/></li>
                 <li><input type='password' class='inputs' name='j_password' id='password' placeholder="请输入密码"/></li>
                 <li style="padding-bottom:15px;"><input class="buttons" type='submit' id="submit" value='登录'/></li>
                 <li style="color:#999999;">
