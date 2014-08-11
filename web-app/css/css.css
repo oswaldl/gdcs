@@ -33,13 +33,13 @@ a.buttons:hover{ background:#1da5a1;}
 
 
 .main{ width:1000px; margin:0 auto; padding:30px 0; overflow:hidden; zoom:1;}
-.titles{ width: 192px; float:left; text-align:center; color:#18b1ae; font-weight:bold; font-size:67px; background:url(../images/mulu_bg.jpg) no-repeat center 20px; min-height:810px; _height:810px;}
+.titles{ width: 192px; float:left; text-align:center; color:#18b1ae; font-weight:bold; font-size:67px; _height:810px;}
 .lists{ width:807px; float:right; background:#fff; margin-top:20px;}
 .listBox h5.tit1{ cursor:pointer; border-bottom:1px solid #fff; height:50px; background:#19b1ad; font-weight:normal; line-height:50px; color:#fff; font-size:20px; padding:0 20px;color:#8aedf2;}
 .listBox ul{ display:none;}
 
 
-.listBox li{ height:50px; line-height:50px; border-bottom:1px solid #f2f2f2; font-size:16px;    overflow:hidden; zoom:1;}
+.listBox li{padding-left:30px; height:50px; line-height:50px; border-bottom:1px solid #f2f2f2; font-size:16px;    overflow:hidden; zoom:1;}
 .listBox li.cur{ background:#feef86; color:#7e4f05;}
 .listBox .tit{ overflow:hidden;zoom:1; line-height:50px; background:#eefbfb; color:#19b1ad; border-bottom:1px solid #e2f1f1;}
 .listBox .tit .s1{ width:300px; height:50px;text-align:center;  float:left;}

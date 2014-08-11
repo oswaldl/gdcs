@@ -15,9 +15,9 @@ class ConsoleController {
 	 * 既然要写死，就不要放在方法里面
 	 */
 	//生成的单个pdf存放路径，合并后会被删除
-	String filePath="D:/Documents"
+	String filePath="C:/Documents"
 	//合并后的pdf
-	String resultPDF="D:/Documents/MergeFile/temp.pdf"
+	String resultPDF="C:/Documents/MergeFile/temp.pdf"
 	
 	
     def index() {

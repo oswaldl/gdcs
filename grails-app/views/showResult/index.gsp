@@ -76,7 +76,10 @@ $(function(){
 		</div>
 	</div>
 	<div class="main">
-		<div class="titles">目录</div>
+		<div style=" background:url(images/mulu_bg2.jpg) repeat-y; overflow:hidden; zoom:1;">
+		<div class="titles">
+		<p style="background-color:#F2F2F2;">目录</p>
+		</div>
 		<div class="lists">
 			<div class="listBox">
 				<h5 class="tit1 jt01">
@@ -147,6 +150,7 @@ $(function(){
 					</g:each>
 				</ul>
 			</div>
+		</div>
 		</div>
 	</div>
 </body>
