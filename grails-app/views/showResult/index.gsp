@@ -29,27 +29,7 @@
                         $(".listBox li").removeClass("cur")
                     })
                 })
-                 $(document).ready(
-                    function() {
-                        $('.lists .listBox').each(
-                            function(i) {
-                                $('.lists .listBox:eq(' + i + ')').click(
-                                    function() {
-                                        $('.lists .listBox:eq(' + i + ')')
-                                            .children('ul').show();
-                                        $('.lists .listBox:eq(' + i + ')')
-                                            .children('h5').show()
-                                            .removeClass('jt02').addClass(
-                                                'jt01');
-                                        $('.lists .listBox:eq(' + i + ')')
-                                            .siblings().children().hide();
-                                        $('.lists .listBox:eq(' + i + ')')
-                                            .siblings().children('h5')
-                                            .show().removeClass('jt01')
-                                            .addClass('jt02');
-                                    });
-                            });
-                    });
+                
             </script>
         </head>
 
@@ -84,7 +64,7 @@
 				    </div>
 				    <div class="lists">
 				      <div class="listBox">
-				        <h5 class="titl1 jt01">第一部分<span>疾病风险评估</span></h5>
+				        <h5 class="titl1 jt01" onclick="$(this).next().toggle()">第一部分<span>疾病风险评估</span></h5>
 				        <ul style="display:block;">
 				          <li>
 				            <div class="s1"><g:link controller="illness" action="showHighAll" params='[username:"${username }"]'>较高风险疾病汇总</g:link></div>
