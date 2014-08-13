@@ -11,7 +11,7 @@
 <body>
   <div class="content">
 		<div class="contiter">
-			<h2>${user.chineseName?:user.name }-药品谱列表</h2>
+			<h2>${user.chineseName?:user.username }-药品谱列表</h2>
 		</div>
 		<div class="conmain">
 			<strong class="Orange"> <g:if test="${flash.message}">
