@@ -71,7 +71,7 @@ class ConsoleController {
 			response.getOutputStream().write(b)
 		}
 		catch (Throwable e) {
-			println "there was a problem with PDF generation ${e}"
+			e.printStackTrace()
 			//if(params.template) render(template:params.template)
 			if(params.pdfController) redirect(controller:params.pdfController, action:params.pdfAction, params:params)
 			else redirect(uri:params.url + '?' + request.getQueryString())
@@ -103,7 +103,7 @@ class ConsoleController {
 			//合并下载文件
 			mergePDF()
 		}catch (Throwable e) {
-			println "there was a problem with PDF generation ${e}"
+			e.printStackTrace()
 			//if(params.template) render(template:params.template)
 			if(params.pdfController) redirect(controller:params.pdfController, action:params.pdfAction, params:params)
 			else redirect(uri:params.url + '?' + request.getQueryString())
@@ -289,7 +289,7 @@ class ConsoleController {
 				render "失败"
 			}
 		}catch (Throwable e) {
-			println "there was a problem with PDF generation ${e}"
+			e.printStackTrace()
 			if(params.pdfController) {
 				println "error:"+params.pdfController
 				redirect(controller:params.pdfController, action:params.pdfAction, params:params)
