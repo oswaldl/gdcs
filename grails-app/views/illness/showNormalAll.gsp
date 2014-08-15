@@ -95,21 +95,23 @@
           <td align="center" valign="middle" bgcolor="#eeefef" class="paddingT10">
 		     <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <div class="tubiao">
-                	<g:if test="${illness.getRisk()<1||illness.getRisk()>4}">
-						<g:each in="${0..4 }">
-							<div class="ico1b"></div>
-						</g:each>
-                	</g:if>
-                	<g:else>
-	                	<g:each in="${(0..(int)Math.ceil(illness.getRisk()*100/20) ) }">
-							<div class="ico1a"></div>
-						</g:each>
-						<g:each in="${(((int)Math.ceil(illness.getRisk()*100/20))..4 ) }">
-							<div class="ico1b"></div>
-						</g:each>
-                	</g:else>
-                </div>
+              	<td>
+	                <div class="tubiao">
+	                	<g:if test="${illness.getRisk()<1||illness.getRisk()>4}">
+							<g:each in="${0..4 }">
+								<div class="ico1b"></div>
+							</g:each>
+	                	</g:if>
+	                	<g:else>
+		                	<g:each in="${(0..(int)Math.ceil(illness.getRisk()*100/20) ) }">
+								<div class="ico1a"></div>
+							</g:each>
+							<g:each in="${(((int)Math.ceil(illness.getRisk()*100/20))..4 ) }">
+								<div class="ico1b"></div>
+							</g:each>
+	                	</g:else>
+	                </div>
+                </td>
               </tr>
               <tr>
                 <td align="center" valign="middle">${illness.getRisk()*100 }%</td>

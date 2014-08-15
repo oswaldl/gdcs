@@ -134,5 +134,36 @@ class ShowResultController {
 		}
 		
 	}
+	
+	def allInOne(){
+		def user
+		if(params.username){
+			user=User.findByUsername(params.username)
+		}else{
+			user=springSecurityService.getCurrentUser()
+			if(user.isAdmin){
+				redirect(controller:"console")
+				return
+			}
+		}
+		
+		def currenUser=springSecurityService.getCurrentUser()
+		def illnesses=SNPRelation.findAllByUser(user).collect {
+			it.illness
+		}.toSet().sort{it.id}
+		
+		def drugResponses=UserDrugRelation.findAllByUsername(user.username).collect{
+			it.drugResponse
+		}.toSet().sort{it.id}
+		
+		def inheritedConditionses=InheritedConditions.findAllByUsername(user.username)
+		
+		def inPDF=false
+		if(params.inPDF){
+			inPDF=true
+		}
+		
+		[inPDF:inPDF,currenUser:currenUser,illnesses:illnesses,username:user.username,drugResponses:drugResponses,inheritedConditionses:inheritedConditionses]
+	}
 
 }
