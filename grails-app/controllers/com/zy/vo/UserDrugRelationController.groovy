@@ -159,7 +159,7 @@ class UserDrugRelationController {
 		}.toSet().size()
 		def maps=new HashMap<String, String>()
 		List lists=new ArrayList<String>()
-		userDrugRelation?.drugResponse.geneAbstract.types.split(',').each {
+		userDrugRelation?.drugResponse?.geneAbstract?.types?.split(',').each {
 			String key=it.split(":")[0]
 			String value=it.split(":")[1]
 			maps.put(key, value)
@@ -167,7 +167,7 @@ class UserDrugRelationController {
 		}
 		String type=""
 		SNPRelation.findAllByUser(user).collect{it.gene}.each {
-			if(it.getName(it.name)==userDrugRelation?.drugResponse.geneAbstract.marker){
+			if(it.getName(it.name)==userDrugRelation?.drugResponse?.geneAbstract?.marker){
 				type=it.getType(it.name).replaceAll(';', '')
 			}
 		}

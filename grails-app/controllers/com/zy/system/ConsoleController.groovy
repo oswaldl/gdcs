@@ -320,26 +320,36 @@ class ConsoleController {
 		
 		
 		int i=0
-		//高风险
-		content = g.include(controller:'illness', action:'showHighAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-		byte[] b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		File file2 = new File(filePath+"/document0.pdf");
-		file2<<b2
+		byte[] b2
+		File file2
 		
-		//低风险
-		content = g.include(controller:'illness', action:'showLowAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		file2 = new File(filePath+"/document1.pdf");
-		file2<<b2
+//		//高风险
+//		content = g.include(controller:'illness', action:'showHighAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
+//		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+//		file2 = new File(filePath+"/document0.pdf");
+//		file2<<b2
+//		
+//		//低风险
+//		content = g.include(controller:'illness', action:'showLowAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
+//		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+//		file2 = new File(filePath+"/document1.pdf");
+//		file2<<b2
+//		
+//		//一般风险
+//		content = g.include(controller:'illness', action:'showNormalAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
+//		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+//		file2 = new File(filePath+"/document2.pdf");
+//		file2<<b2
 		
-		//一般风险
-		content = g.include(controller:'illness', action:'showNormalAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		file2 = new File(filePath+"/document2.pdf");
-		file2<<b2
+//		i=3
+//		for(;i<illnesses.size()+3;i++){
+//			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i-3).id,username:user.username,inPDF:true])
+//			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+//			file2 = new File(filePath+"/document"+i+".pdf");
+//			file2<<b2
+//		}
 		
-		i=3
-		for(;i<illnesses.size()+3;i++){
+		for(;i<3;i++){
 			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
 			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
 			file2 = new File(filePath+"/document"+i+".pdf");

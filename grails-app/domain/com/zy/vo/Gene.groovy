@@ -22,6 +22,8 @@ class Gene {
 	
 	String getName(String string){
 		int index=string.indexOf("(")
+		if(index==-1)
+			return string
 		return string.substring(0, index)
 	}
 	

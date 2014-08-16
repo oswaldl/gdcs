@@ -239,7 +239,8 @@ class IllnessController {
 				illnesses.add(it)
 			}
 		}
-		[illnesses:illnesses.reverse(),map:map,username:user.username]
+		illnesses.sort{it.name}
+		[illnesses:illnesses,map:map,username:user.username]
 	}
 	//获得所有低风险病例
 	def showLowAll(){
@@ -254,7 +255,8 @@ class IllnessController {
 				illnesses.add(it)
 			}
 		}
-		[illnesses:illnesses.reverse(),map:map,username:user.username]
+		illnesses.sort{it.name}
+		[illnesses:illnesses,map:map,username:user.username]
 	}
 	//获得一般风险病例
 	def showNormalAll(){
@@ -269,7 +271,8 @@ class IllnessController {
 				illnesses.add(it)
 			}
 		}
-		[illnesses:illnesses.reverse(),map:map,username:user.username]
+		illnesses.sort{it.name}
+		[illnesses:illnesses,map:map,username:user.username]
 	}
 
 }

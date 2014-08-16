@@ -40,8 +40,13 @@ class ShowResultController {
 		if(params.inPDF){
 			inPDF=true
 		}
-		
-		[inPDF:inPDF,currenUser:currenUser,illnesses:illnesses,username:user.username,drugResponses:drugResponses,inheritedConditionses:inheritedConditionses]
+		println "drugResponses:"+drugResponses
+		[inPDF:inPDF,
+			currenUser:currenUser,
+			illnesses:illnesses,
+			username:user.username,
+			drugResponses:drugResponses,
+			inheritedConditionses:inheritedConditionses]
 	}
 
 	def show(){
