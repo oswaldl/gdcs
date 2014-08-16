@@ -35,6 +35,23 @@
     </td>
     <td><g:textArea name="canDo" cols="40" rows="5" maxlength="3000" value="${illnessInstance?.canDo}"/></td>
   </tr>
+  
+  <tr>
+    <td class="fieldcontain ${hasErrors(bean: illnessInstance, field: 'isShow', 'error')} ">
+    	是否显示&nbsp;&nbsp;
+    </td>
+    <td>
+    	<g:if test="${illnessInstance.isShow }">
+	    	<input type="radio" name="isShow" value="true" checked="checked" />显示 
+			<input type="radio" name="isShow" value="false" />不显示 
+    	</g:if>
+    	<g:else>
+	    	<input type="radio" name="isShow" value="true" />显示 
+			<input type="radio" name="isShow" value="false" checked="checked"/>不显示 
+    	</g:else>
+    	
+	</td>
+  </tr>
 <%--  <tr>--%>
 <%--    <td class="fieldcontain ${hasErrors(bean: illnessInstance, field: 'reference', 'error')} ">引用文献</td>--%>
 <%--    <td><g:textArea name="reference" cols="40" rows="5" maxlength="3000" value="${illnessInstance?.reference}"/></td>--%>

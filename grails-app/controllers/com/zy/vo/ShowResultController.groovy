@@ -28,6 +28,8 @@ class ShowResultController {
 		def currenUser=springSecurityService.getCurrentUser()
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
+		}.grep(){
+			it.isShow
 		}.toSet().sort{it.id}
 		
 		def drugResponses=UserDrugRelation.findAllByUsername(user.username).collect{
@@ -40,7 +42,6 @@ class ShowResultController {
 		if(params.inPDF){
 			inPDF=true
 		}
-		println "drugResponses:"+drugResponses
 		[inPDF:inPDF,
 			currenUser:currenUser,
 			illnesses:illnesses,

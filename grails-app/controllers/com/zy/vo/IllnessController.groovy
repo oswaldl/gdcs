@@ -135,18 +135,7 @@ class IllnessController {
 		illnessList.addAll(Illness.findAllByChineseNameLike("%"+string+"%"))
 		[illnessInstanceList:illnessList]
 	}
-	//获取References大于10的集合
-	def getGenes(def snps){
-		def lists=new ArrayList<Gene>()
-		snps.collect{it.gene}.each {
-			if(it.references){
-				if(Integer.parseInt(it.references)>9){
-					lists.add(it)
-				}
-			}
-		}
-		return lists.sort{it.getMagnitude()}.reverse()
-	}
+	
 	
 	//显示病例详细，通过列表查找过来的
 	def showDetail(){
@@ -156,7 +145,7 @@ class IllnessController {
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
 		if(genes.size()>10){
-			genes=getGenes(snps)
+			genes=Gene.getGenes(snps)
 		}
 		int goodNum=0
 		int badNum=0
@@ -233,6 +222,8 @@ class IllnessController {
 		User user=User.findByUsername(params.username)
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
+		}.grep(){
+			it.isShow
 		}.toSet().sort{it.getMagnitude()}.each {
 			if(RiskRank.getHighRisk(getIllnessRisk(it,user))){
 				map.put(it, getRisk(it,user))
@@ -248,7 +239,9 @@ class IllnessController {
 		List illnesses=new ArrayList<Illness>()
 		User user=User.findByUsername(params.username)
 		SNPRelation.findAllByUser(user).collect {
-			it.illness
+				it.illness
+		}.grep(){
+			it.isShow
 		}.toSet().sort{it.getMagnitude()}.each {
 			if(RiskRank.getLowRisk(getIllnessRisk(it,user))){
 				map.put(it, getRisk(it,user))
@@ -266,7 +259,7 @@ class IllnessController {
 		SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.getMagnitude()}.each {
-			if(RiskRank.getNormalRisk(getIllnessRisk(it,user))){
+			if(it.isShow && RiskRank.getNormalRisk(getIllnessRisk(it,user))){
 				map.put(it, getRisk(it,user))
 				illnesses.add(it)
 			}
