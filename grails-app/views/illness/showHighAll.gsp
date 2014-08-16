@@ -5,7 +5,22 @@
 <title>基因检测报告</title>
 <link rel="stylesheet" type="text/css"
 	href="${resource(dir: 'css', file: 'css.css')}" />
-	
+<style type="text/css">
+body {
+	font-family: SimSun;
+}
+
+
+@media print {   
+	body{
+		page-break-after:always;
+		background-color: lightblue;
+	}
+	.div_hidden{
+		display:none;
+	}
+} 
+</style>
 </head>
 <body>
 	<div class="header">
@@ -51,9 +66,11 @@
           <td align="center" valign="middle" bgcolor="#dcdddd" class="paddingT10">
 			<div class="tubiao">
 				<g:if test="${illness.getMagnitude()==0}">
+				<%--
 					<g:each in="${(0..4 ) }">
 						<div class="ico"></div>
 			  		</g:each>
+			  		--%>
 				</g:if>
 				<g:else>
 					<g:each in="${(0..illness.getMagnitude() ) }">
@@ -70,10 +87,12 @@
 				  <tr>
 					<td align="center" valign="middle" class="tubiao">
 						<div class="tubiao">
-							<g:if test="${map.get(illness)<1||map.get(illness)>4}">
+							<g:if test="${((int)Math.ceil(map.get(illness)*100/20)) ==0}">
+							<%--
 								<g:each in="${0..4 }">
 									<div class="ico1b"></div>
 								</g:each>
+								--%>
 		                	</g:if>
 		                	<g:else>
 								<g:each in="${0..((int)Math.ceil(map.get(illness)*100/20))}">
@@ -84,7 +103,7 @@
 								</g:each>
 							</g:else>
 						</div>
-						
+					 </td>
 				  </tr>
 				  <tr>
 					<td align="center" valign="middle">${map.get(illness)*100 }%</td>
@@ -98,10 +117,12 @@
               <tr>
               	<td>
 	                <div class="tubiao">
-	                	<g:if test="${illness.getRisk()<1||illness.getRisk()>4}">
+	                	<g:if test="${((int)Math.ceil(illness.getRisk()*100/20))==0}">
+	                	<%--
 							<g:each in="${0..4 }">
 								<div class="ico1b"></div>
 							</g:each>
+							--%>
 	                	</g:if>
 	                	<g:else>
 		                	<g:each in="${(0..(int)Math.ceil(illness.getRisk()*100/20) ) }">

@@ -3,23 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>基因检测报告</title>
-<link rel="stylesheet" type="text/css" media="all" href="${resource(dir: 'css', file: 'css.css')}"/>
-<style type="text/css">
-body {
-	font-family: SimSun;
-}
-
-
-@media print {   
-	body{
-		page-break-after:always;
-		background-color: lightblue;
-	}
-	.div_hidden{
-		display:none;
-	}
-} 
-</style>
+<link rel="stylesheet" type="text/css" media="screen" 
+	href="${resource(dir: 'css', file: 'css.css')}" />
+<link rel="stylesheet" type="text/css" media="print" 
+	href="${resource(dir: 'css', file: 'print.css')}" />
 </head>
 <body>
 	<div class="header">
@@ -52,15 +39,6 @@ body {
             	<div class="green" style="width:${goodNum*100/snps.size() }%;">${goodNum }</div>
             </div>
         	</div>
-<%--        	<div class="jdBxo1">--%>
-<%--            	<div class="tit">您的<br/>基因</div>--%>
-<%--                <div class="bfb"><div class="bx" style="width:${risk*100 }%;"><div class="num1">${risk*100 }%</div></div></div><!--这里由百分比控制宽度-->--%>
-<%--               --%>
-<%--            </div>--%>
-<%--        	<div class="jdBxo2">--%>
-<%--            	<div class="tit">平均<br/>风险</div>--%>
-<%--                <div class="bfb"><div class="bx" style=" width:${Double.valueOf(illnessInstance?.averageRisk)*100 }%;"><div class="num1">${Double.valueOf(illnessInstance?.averageRisk)*100 }%</div></div></div><!--这里由百分比控制宽度-->--%>
-<%--            </div>--%>
         </div>
    </div> 
     <div class="contBox2">
@@ -69,17 +47,13 @@ body {
       </div>
     	<div class="cont">
     		${illnessInstance?.description }
-<%--        	<dl>--%>
-<%--            	<dd><img src="../images/img2.jpg" width="190" height="139" /></dd>--%>
-<%--                <dt>${illnessInstance?.description }</dt>--%>
-<%--	           </dl>--%>
 	        </div>
 	    </div>
 	    <div class="contBox2">
 	   	  <div class="title"> 遗传vs环境 </div>
 	    	<div class="cont jieshao">
 		      <dl>
-		        <dd><img src="../images/img3.jpg" width="190" height="139" /></dd>
+		        <dd><g:img dir="images" file="img3.jpg" width="190" height="139" /></dd>
 		        <dt>
 					${illnessInstance?.geneticEnvironment }
 				</dt>
@@ -92,18 +66,7 @@ body {
 		    <div class="cont jieshao2">
 		      <p>
 			  	${illnessInstance?.canDo }
-			  <p>
-		      <h6>了解症状，如果您担心的话，和你的医生谈谈。</h6>
-		      狼疮是一种复杂的疾病，常常被误认为是其他疾病，如类风湿关节炎，血液系统疾病，纤维肌痛，糖尿病，甲状腺问题，和莱姆病。
-		      </p>
-		      <p>
-		      <h6>了解你的家族病史</h6>
-		      虽然关于狼疮是怎么引起的人们所知不多，但美国狼疮基金会指出，这种疾病会在家族中延续。家族病史中有其他自身免疫性疾病，如类风湿关节炎或牛皮癣，也可能是引起狼疮的风险因素。美国总医师研究的&quot;我家族的健康肖像&quot;工具可以帮你收集你的家族病史。
-		      </p>
-		      <p>
-		      <h6>咨询遗传咨询师</h6>
-		      遗传咨询师专门帮助人们了解遗传性疾病和遗传测试结果。点击这里了解更多关于基因咨询事宜。
-		      </p>
+			  </p>
 		    </div>
 	   	  
 	  </div>
