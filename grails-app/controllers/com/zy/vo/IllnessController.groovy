@@ -108,7 +108,7 @@ class IllnessController {
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
 		if(genes.size()>10){
-			genes=getGenes(snps)
+			genes=Gene.getGenes(snps)
 		}
 		int goodNum=0
 		int badNum=0
@@ -173,7 +173,7 @@ class IllnessController {
 		def snps=SNPRelation.findAllByIllnessAndUser(illnessInstance, user)
 		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
 		if(genes.size()>10){
-			genes=getGenes(snps)
+			genes=Gene.getGenes(snps)
 		}
 		int goodNum=0
 		int badNum=0
