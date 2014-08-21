@@ -308,20 +308,24 @@ class ConsoleController {
 	private void generateSinglePdfs(def user){
 		//先生成多个单个的pdf，然后在合并，合并完成后将单个的全部删除
 		def baseUri = request.scheme + "://" + request.serverName + ":" + request.serverPort + grailsAttributes.getApplicationUri(request)
+		
+		def content
+		int i=0
+		byte[] b2
+		File file2
+		
 		//首页
-		def content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
-		byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		File file1 = new File(filePath+"/document.pdf");
-		file1<<b1
+//		content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
+//		byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+//		File file1 = new File(filePath+"/document.pdf");
+//		file1<<b1
+		
+		
 		//病例页面
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.toSet().sort{it.id}
 		
-		
-		int i=0
-		byte[] b2
-		File file2
 		
 //		//高风险
 //		content = g.include(controller:'illness', action:'showHighAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
@@ -349,7 +353,7 @@ class ConsoleController {
 //			file2<<b2
 //		}
 		
-		for(;i<3;i++){
+		for(;i<2;i++){
 			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
 			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
 			file2 = new File(filePath+"/document"+i+".pdf");

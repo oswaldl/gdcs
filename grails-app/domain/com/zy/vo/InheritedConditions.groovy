@@ -1,5 +1,10 @@
 package com.zy.vo
 
+/**
+ * 先天性遗传
+ * @author oswaldl
+ *
+ */
 class InheritedConditions {
 	
 	//名称

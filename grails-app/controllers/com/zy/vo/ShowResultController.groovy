@@ -26,22 +26,32 @@ class ShowResultController {
 		}
 		
 		def currenUser=springSecurityService.getCurrentUser()
+		
+		//疾病风险
 		def illnesses=SNPRelation.findAllByUser(user).collect {
 			it.illness
 		}.grep(){
 			it.isShow
 		}.toSet().sort{it.id}
 		
+		//非公用-用药指导
 		def drugResponses=UserDrugRelation.findAllByUsername(user.username).collect{
 			it.drugResponse
 		}.toSet().sort{it.id}
 		
+		//先天性遗传
 		def inheritedConditionses=InheritedConditions.findAllByUsername(user.username)
 		
+		//个性谱
+		
+		
+		//未知参数
 		def inPDF=false
 		if(params.inPDF){
 			inPDF=true
 		}
+		
+		
 		[inPDF:inPDF,
 			currenUser:currenUser,
 			illnesses:illnesses,
