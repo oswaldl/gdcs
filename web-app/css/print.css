@@ -1,10 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
 
-*{ margin:0; padding:0; page-break-after: avoid;}
+*{ margin:0; padding:0; }
 img{ border:none;}
 li,ul{ list-style:none;}
-body{font-family:"SimSun"; font-size:15px; color:#4d4d4d; background:#fff;page-break-after: always;}
+body{font-family:"SimSun"; font-size:15px; color:#4d4d4d; background:#fff;}
 .c_19b1ad{ color:#19b1ad; }
 .b_19b1ad{background:#19b1ad;}
 th{ font-weight:normal;}

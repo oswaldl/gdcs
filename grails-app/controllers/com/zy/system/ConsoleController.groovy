@@ -6,6 +6,7 @@ import com.lowagie.text.pdf.PdfImportedPage
 import com.lowagie.text.pdf.PdfReader
 import com.zy.auth.User
 import com.zy.vo.SNPRelation
+import com.zy.vo.UserDrugRelation
 
 class ConsoleController {
 	def springSecurityService
@@ -332,31 +333,47 @@ class ConsoleController {
 		}.toSet().sort{it.id}
 		
 		
-//		//高风险
-//		content = g.include(controller:'illness', action:'showHighAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-//		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-//		file2 = new File(filePath+"/document0.pdf");
-//		file2<<b2
-//		
-//		//低风险
-//		content = g.include(controller:'illness', action:'showLowAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-//		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-//		file2 = new File(filePath+"/document1.pdf");
-//		file2<<b2
-//		
-//		//一般风险
-//		content = g.include(controller:'illness', action:'showNormalAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-//		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-//		file2 = new File(filePath+"/document2.pdf");
-//		file2<<b2
-//		
-//		i=3
-//		for(;i<illnesses.size()+3;i++){
-//			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i-3).id,username:user.username,inPDF:true])
-//			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-//			file2 = new File(filePath+"/document"+i+".pdf");
-//			file2<<b2
-//		}
+		//高风险
+		content = g.include(controller:'illness', action:'showHighAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
+		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+		file2 = new File(filePath+"/document0.pdf");
+		file2<<b2
+		
+		//低风险
+		content = g.include(controller:'illness', action:'showLowAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
+		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+		file2 = new File(filePath+"/document1.pdf");
+		file2<<b2
+		
+		//一般风险
+		content = g.include(controller:'illness', action:'showNormalAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
+		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+		file2 = new File(filePath+"/document2.pdf");
+		file2<<b2
+		
+		
+		
+		i=3
+		for(;i<illnesses.size()+3;i++){
+			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i-3).id,username:user.username,inPDF:true])
+			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+			file2 = new File(filePath+"/document"+i+".pdf");
+			file2<<b2
+		}
+		
+		
+		int start =i;
+		//药物页面
+		def drugResponses=UserDrugRelation.findAllByUsername(user.username).collect{
+			it.drugResponse
+		}.toSet().sort{it.id}
+		for(;i<drugResponses.size()+start;i++){
+			println "in drug..."+i
+			content = g.include(controller:'userDrugRelation', action:'showDetail',params:[drugResponseId:drugResponses.get(i-start).id,username:user.username,status:"0",inPDF:true])
+			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+			file2 = new File(filePath+"/document"+i+".pdf");
+			file2<<b2
+		}
 		
 //		for(;i<2;i++){
 //			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
