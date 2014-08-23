@@ -32,7 +32,7 @@
 					<th width="172" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">研究数量</th>
 					<th width="140" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">你的风险</th>
 					<%--<th width="140" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">平均风险</th>
-					--%><th width="110" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">Good VS Bad</th>
+					--%><th width="150" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">Good VS Bad</th>
 				</tr>
 
 <g:each in="${illnesses }" var="illness" status="i">

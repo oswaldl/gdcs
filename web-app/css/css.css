@@ -257,3 +257,18 @@ h5.tit{ font-size:23px; font-weight:normal; }
 .A4 .wenzi p.s_1{ background:url(../images/d01.gif) no-repeat 0 center; padding-left:24px;}
 .A4 .wenzi p.s_2{ background:url(../images/a02.gif) no-repeat 0 center; padding-left:24px; margin-left:45px}
 .paddingLR{ padding:0 20px;}
+
+/*0821星期四改*/
+.A1 .fx li.s1{ color:#af4284;}
+.A1 .fx li.s1 .boxR{ background:#af4284;}
+.A2 .fx li.s1{ color:#f08337;}
+.A2 .fx li.s1 .boxR{ background:#f08337;}
+.A3 .fx li.s1{ color:#fbc30a;}
+.A3 .fx li.s1 .boxR{ background:#fbc30a;}
+.A4 .fx li.s1{ color:#5aa572;}
+.A4 .fx li.s1 .boxR{ background:#5aa572;}
+ul.fx li{ overflow:hidden; zoom:1; margin-bottom:15px; color:#18b1ae}
+ul.fx li h5{ font-weight:normal; line-height:20px; width:110px; display:block; float:left;}
+ul.fx li .boxN{ float:left; width:550px; height:43px; font-size:42px; line-height:43px;}
+ul.fx li .boxR{ height:43px; float:left;  position:relative; background:#18b1ae; }
+ul.fx li .boxR p{ position:absolute; right:-35px; top:0; width:30px; display:block;}

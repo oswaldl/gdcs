@@ -29,22 +29,24 @@
             </dl>
         </div>
         <div class="rights">
-        	<div class="page1">
-			<div class="wenzi">
-            	<p class="s_1">good基因数目</p>
-            	<p class="s_2">bad基因数目</p>
-            </div>
-            <div class="tiaozhuang">
-            	<div class="red" style="width:${badNum*100/snps.size() }%;">${badNum }</div>
-            	<div class="green" style="width:${goodNum*100/snps.size() }%;">${goodNum }</div>
-            </div>
-        	</div>
+	    	<!--0821改开始-->
+	    	<ul class="fx">
+	        	<li class="s1">
+	            	<h5><strong>Good SNPs</strong><br />风险降低</h5>
+	                <div class="boxN"><div class="boxR" style=" width:${badNum*100/snps.size() }%;"><p>${badNum }</p></div></div>
+	            </li>
+	            <li>
+	            	<h5><strong>Bad SNPs</strong><br />风险升高</h5>
+	                <div class="boxN"><div class="boxR" style="width:${goodNum*100/snps.size() }%;"><p>${goodNum }</p></div></div>
+	            </li>
+	        </ul>
+	    	<!--0821改结束-->
         </div>
    </div> 
     <div class="contBox2">
-   	  <div class="title">
+   	    <div class="title">
         	疾病介绍
-      </div>
+        </div>
     	<div class="cont">
     		${illnessInstance?.description }
 	        </div>

@@ -5,22 +5,9 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title>基因检测报告</title>
-            <link rel="stylesheet" type="text/css" media="all" href="${resource(dir: 'css', file: 'css.css')}" />
+            <link rel="stylesheet" type="text/css" media="screen" href="${resource(dir: 'css', file: 'css.css')}" />
+			<link rel="stylesheet" type="text/css" media="print" href="${resource(dir: 'css', file: 'print.css')}" />
             <r:external uri="/js/jquery-1.4.2.min.js" />
-            <style type="text/css">
-                body {
-                    font-family: SimSun;
-                }
-                @media print {
-                    body {
-                        page-break-after: always;
-                        background-color: lightblue;
-                    }
-                    .div_hidden {
-                        display: none;
-                    }
-                }
-            </style>
             <script type="text/javascript">
                 $(function() {
                     $(".listBox li").hover(function() {

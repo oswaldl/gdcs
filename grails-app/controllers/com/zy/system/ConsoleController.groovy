@@ -259,6 +259,11 @@ class ConsoleController {
 	def downloadPdf(){
 		User user=User.findByUsername(params.username)
 		
+		if(!user){
+			render "no such user "+params.username
+			return;
+		}
+		
 		try{
 			generateSinglePdfs(user);
 			
@@ -315,10 +320,10 @@ class ConsoleController {
 		File file2
 		
 		//首页
-//		content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
-//		byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-//		File file1 = new File(filePath+"/document.pdf");
-//		file1<<b1
+		content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
+		byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+		File file1 = new File(filePath+"/document.pdf");
+		file1<<b1
 		
 		
 		//病例页面
@@ -344,7 +349,7 @@ class ConsoleController {
 //		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
 //		file2 = new File(filePath+"/document2.pdf");
 //		file2<<b2
-		
+//		
 //		i=3
 //		for(;i<illnesses.size()+3;i++){
 //			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i-3).id,username:user.username,inPDF:true])
@@ -353,12 +358,12 @@ class ConsoleController {
 //			file2<<b2
 //		}
 		
-		for(;i<2;i++){
-			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-			file2 = new File(filePath+"/document"+i+".pdf");
-			file2<<b2
-		}
+//		for(;i<2;i++){
+//			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
+//			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+//			file2 = new File(filePath+"/document"+i+".pdf");
+//			file2<<b2
+//		}
 	}
 	
 	

@@ -3,24 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>基因检测报告</title>
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'css.css')}" />
-<style type="text/css">
-body {
-	font-family: SimSun;
-}
-
-
-@media print {   
-	body{
-		page-break-after:always;
-		background-color: lightblue;
-	}
-	.div_hidden{
-		display:none;
-	}
-} 
-</style>
+<link rel="stylesheet" type="text/css" media="screen" href="${resource(dir: 'css', file: 'css.css')}" />
+<link rel="stylesheet" type="text/css" media="print" href="${resource(dir: 'css', file: 'print.css')}" />
 </head>
 <body>
 	<div class="header">
@@ -46,7 +30,7 @@ body {
 					<th width="172" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">研究数量</th>
 					<th width="140" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">你的风险</th>
 					<%--<th width="140" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">平均风险</th>
-					--%><th width="110" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">Good VS Bad</th>
+					--%><th width="150" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">Good VS Bad</th>
 				</tr>
 
 <g:each in="${illnesses }" var="illness" status="i">

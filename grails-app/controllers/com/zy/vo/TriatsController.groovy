@@ -2,6 +2,8 @@ package com.zy.vo
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import com.zy.auth.User
+
 class TriatsController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -99,4 +101,6 @@ class TriatsController {
             redirect(action: "show", id: id)
         }
     }
+	
+	
 }
