@@ -7,6 +7,7 @@ import com.lowagie.text.pdf.PdfReader
 import com.zy.auth.User
 import com.zy.vo.SNPRelation
 import com.zy.vo.UserDrugRelation
+import com.zy.vo.UserTriats
 
 class ConsoleController {
 	def springSecurityService
@@ -370,6 +371,19 @@ class ConsoleController {
 		for(;i<drugResponses.size()+start;i++){
 			println "in drug..."+i
 			content = g.include(controller:'userDrugRelation', action:'showDetail',params:[drugResponseId:drugResponses.get(i-start).id,username:user.username,status:"0",inPDF:true])
+			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+			file2 = new File(filePath+"/document"+i+".pdf");
+			file2<<b2
+		}
+		
+		
+		start =i;
+		//个性普页面
+		def userTriats=UserTriats.findAllByUsername(user.username).collect{
+			it.triats
+		}.toSet().sort{it.id}
+		for(;i<userTriats.size()+start;i++){
+			content = g.include(controller:'userTriats', action:'showDetail',params:[triatId:userTriats.get(i-start).id,username:user.username,status:"0",inPDF:true])
 			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
 			file2 = new File(filePath+"/document"+i+".pdf");
 			file2<<b2

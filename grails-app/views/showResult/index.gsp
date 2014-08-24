@@ -28,12 +28,12 @@
                 <div class="rights">
                     <p><span>${username }</span>
                         <g:link controller="logout">[注销]</g:link>
-                        <g:if test="${currenUser.isAdmin }">
+                        <g:if test="${currenUser.isAdmin && !inPDF }">
                             <g:link controller="console" action="index">[进入后台]</g:link>
                         </g:if>
                     </p>
                     <p>欢迎进入基因检测报告！</p>
-                    <div class="div_hidden">
+                    <div class="pdf_div_hidden">
                         <p>
                             <g:form url="[action:'searchData',controller:'showResult']">
                                 <input type="hidden" name="username" value="${username }" />
@@ -120,7 +120,7 @@
 	                                        </g:link>
 	                                    </div>
 	                                    <div class="s2">
-	                                    	<div class=" tubiao">
+	                                    	<div class="tubiao">
 		                                    	<g:each in="${(1..drugResponse.magnitude ) }">
 		                                    		<div class="ico"></div>
 		                                            <g:img dir="images" file="ico1.gif" />
@@ -133,6 +133,8 @@
                             </g:if>
 				        </ul>
 				      </div>
+				      <br></br>
+				      <br></br>
 				      <div class="listBox">
 				        <h5 class="titl4 jt02" onclick="$(this).next().toggle()">第四部分<span>遗传性状分析</span></h5>
 				        <ul>
@@ -150,7 +152,7 @@
 	                                        </g:link>
 	                                    </div>
 	                                    <div class="s2">
-	                                    	<div class=" tubiao">
+	                                    	<div class="tubiao">
 		                                    	<g:each in="${(1..triat.magnitude ) }">
 		                                    		<div class="ico"></div>
 		                                            <g:img dir="images" file="ico1.gif" />

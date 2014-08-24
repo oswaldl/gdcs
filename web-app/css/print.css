@@ -273,3 +273,7 @@ ul.fx li h5{ font-weight:normal; line-height:20px; width:110px; display:block; f
 ul.fx li .boxN{ float:left; width:550px; height:43px; font-size:42px; line-height:43px;}
 ul.fx li .boxR{ height:43px; float:left;  position:relative; background:#18b1ae; }
 ul.fx li .boxR p{ position:absolute; right:-35px; top:0; width:30px; display:block;}
+
+
+
+.pdf_div_hidden {display: none;}
