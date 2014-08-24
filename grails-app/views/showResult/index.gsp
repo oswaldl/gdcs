@@ -133,6 +133,37 @@
                             </g:if>
 				        </ul>
 				      </div>
+				      <div class="listBox">
+				        <h5 class="titl4 jt02" onclick="$(this).next().toggle()">第四部分<span>遗传性状分析</span></h5>
+				        <ul>
+				          <g:if test="${userTriats}">
+					          <div class="tit">
+					            <div class="s1">名称</div>
+					            <div class="s2"><span class="paddingT10"></span>信心</div>
+					            <div class="s3">结果</div>
+					          </div>
+					          <g:each in="${triats }" var="triat" status="i">
+	                                <li>
+	                                    <div class="s1">
+	                                        <g:link controller="userTriats" action="showDetail" params='[triatId:"${triat.id }",status:"${i }",username:"${username }"]'>
+	                                            ${triat.chineseName?:triat.name }
+	                                        </g:link>
+	                                    </div>
+	                                    <div class="s2">
+	                                    	<div class=" tubiao">
+		                                    	<g:each in="${(1..triat.magnitude ) }">
+		                                    		<div class="ico"></div>
+		                                            <g:img dir="images" file="ico1.gif" />
+		                                        </g:each>
+	                                    	</div>
+	                                    </div>
+	                                    <div class="s3">${UserTriats.findByTriatsAndUsername(triat, username)?.result }</div>
+	                                </li>
+	                            </g:each>
+                            </g:if>
+				        </ul>
+				      </div>
+				      
 				    </div>
 				  </div>
             </div><!-- end main -->

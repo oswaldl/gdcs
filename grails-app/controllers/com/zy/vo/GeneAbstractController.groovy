@@ -49,6 +49,15 @@ class GeneAbstractController {
         }
         [geneAbstractInstance: geneAbstractInstance,drugResponseId:drugResponse.id]
     }
+	
+	def edit2() {
+		Triats triats=params.triatsInstanceId=="null"?new Triats().save(failOnError:true):Triats.get(params.triatsInstanceId)
+		def geneAbstractInstance = triats.geneAbstract
+		if (!geneAbstractInstance) {
+			geneAbstractInstance=new GeneAbstract().save(failOnError:true)
+		}
+		[geneAbstractInstance: geneAbstractInstance,triatsInstanceId:triats.id]
+	}
 
     def update(Long id, Long version) {
         def geneAbstractInstance = GeneAbstract.get(id)
@@ -74,10 +83,18 @@ class GeneAbstractController {
             render(view: "edit", model: [geneAbstractInstance: geneAbstractInstance])
             return
         }
-		def drugResponse=DrugResponse.get(params.drugResponseId)
-		drugResponse.geneAbstract=geneAbstractInstance
-		drugResponse.save(failOnError:true)
-        redirect(controller:"drugResponse",action: "edit", params: [id:drugResponse.id])
+		if(params.drugResponseId){
+			def drugResponse=DrugResponse.get(params.drugResponseId)
+			drugResponse.geneAbstract=geneAbstractInstance
+			drugResponse.save(failOnError:true)
+        	redirect(controller:"drugResponse",action: "edit", params: [id:drugResponse.id])
+		}
+		if(params.triatsInstanceId){
+			def triatsInstance=Triats.get(params.drugResponseId)
+			triatsInstance.geneAbstract=geneAbstractInstance
+			triatsInstance.save(failOnError:true)
+        	redirect(controller:"triats",action: "edit", params: [id:triatsInstance.id])
+		}
     }
 
     def delete(Long id) {

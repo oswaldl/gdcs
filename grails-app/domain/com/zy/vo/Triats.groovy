@@ -1,43 +1,40 @@
 package com.zy.vo
 
 /**
- * 个性谱
+ * 个性谱公有
  * @author oswaldl
  *
  */
 class Triats {
 	
-	//对应的用户名
-	String username
-	//对应的病症公有信息
-	DrugResponse drugResponse
+	String name
+	String chineseName
 	
-//	//检测状态
-//	String state
+	//研究数量
+	int magnitude
+	//前言
+	String introduction
 	
-	//你的基因数据
-	String geneData
-	//技术报告
-	String oddRatio
+	//结果
+	String result
+	//遗传和环境因素
+	String genetics
+	//生物学作用
+	String biology
+	//主要发现
+	String findings
 	
-	String getState(){
-		String description=this.drugResponse?.geneAbstract?.types
-		String state
-		SNPRelation.findAllByUser(User.findByUsername(this.username)).collect{it.gene}.each {
-			if(it.getName(it.name)==this.drugResponse?.geneAbstract?.marker){
-				description.split(",").each {type->
-					if(type.split(":")[0]==it.getType(it.name).replaceAll(';', '')){
-						state = type.split(":")[2]
-					}
-				}
-			}
-		}
-		return state
-	}
+	//基因摘要
+	static hasMany = [geneAbstract: GeneAbstract]
 	
     static constraints = {
-		geneData nullable:true,maxSize: 3000
-		oddRatio nullable:true,maxSize: 3000
+		introduction nullable:true,maxSize: 3000
+		genetics nullable:true,maxSize: 3000
+		biology nullable:true,maxSize: 3000
+		findings nullable:true,maxSize: 3000
+		chineseName nullable:true
+		name nullable:true
+		result nullable:true
 		
     }
 }

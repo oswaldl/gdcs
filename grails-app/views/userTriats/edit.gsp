@@ -1,9 +1,10 @@
-<%@ page import="com.zy.vo.Triats" %>
+<%@ page import="com.zy.vo.UserTriats" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}" />
-		<g:set var="entityName" value="${message(code: 'triats.label', default: 'Triats')}" />
+		<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'console_style.css')}" />
+		<g:set var="entityName" value="${message(code: 'userTriats.label', default: 'UserTriats')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -12,14 +13,13 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<g:form method="post" >
-				<g:hiddenField name="id" value="${triatsInstance?.id}" />
-				<g:hiddenField name="version" value="${triatsInstance?.version}" />
+				<g:hiddenField name="id" value="${userTriatsInstance?.id}" />
+				<g:hiddenField name="version" value="${userTriatsInstance?.version}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="更新" />
-					<g:actionSubmit class="delete" action="delete" value="删除" formnovalidate="" onclick="return confirm('确定删除？');" />
 				</fieldset>
 			</g:form>
 	</body>

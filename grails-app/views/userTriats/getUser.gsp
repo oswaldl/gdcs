@@ -9,10 +9,10 @@
 <body>
 	<div class="content">
 		<div class="contiter">
-			<h2>药品谱用户列表</h2>
+			<h2>个性谱用户列表</h2>
 		</div>
 		<div class="conmain">
-			<g:form url="[action:'getUser',controller:'userDrugRelation']">
+			<g:form url="[action:'getUser',controller:'userTriats']">
 				<input name="searchString" id="search" />
 				<input type="submit" style="float: right; margin-right: 640px;" value="查询" />
 			</g:form>
@@ -45,7 +45,7 @@
 							${fieldValue(bean: userInstance, field: "chineseName")}
 						</td>
 						<td>
-							<g:link controller="userDrugRelation" action="showAllDrugResponse" id="${userInstance.id }">编辑药品谱</g:link>
+							<g:link controller="userDrugRelation" action="showAllTriats" id="${userInstance.id }">编辑个性谱</g:link>
 						</td>
 					</tr>
 				</g:each>

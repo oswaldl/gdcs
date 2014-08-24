@@ -3,56 +3,56 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}" />
+		<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'console_style.css')}" />
 		<g:set var="entityName" value="${message(code: 'triats.label', default: 'Triats')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#list-triats" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+		<div class="content">
+		<div class="contiter">
+			<h2>药品谱列表</h2>
 		</div>
-		<div id="list-triats" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<table>
-				<thead>
-					<tr>
-					
-						<g:sortableColumn property="magnitude" title="${message(code: 'triats.magnitude.label', default: 'Magnitude')}" />
-					
-						<g:sortableColumn property="name" title="${message(code: 'triats.name.label', default: 'Name')}" />
-					
-						<g:sortableColumn property="result" title="${message(code: 'triats.result.label', default: 'Result')}" />
-					
-						<g:sortableColumn property="username" title="${message(code: 'triats.username.label', default: 'Username')}" />
-					
-					</tr>
-				</thead>
-				<tbody>
+		<div class="conmain">
+			<g:link class="botton" action="create">新增</g:link>
+		</div>
+		<div class="conmain">
+			<strong class="Orange"> <g:if test="${flash.message}">
+					<div class="message" role="status">
+						${flash.message}
+					</div>
+				</g:if>
+			</strong>
+		</div>
+		<div class="conmain">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr class="tbbg">
+						<td width="30%" align="center"><strong>中文名</strong></td>
+					<td width="30%" align="center"><strong>英文名</strong></td>
+					<td width="40%" align="center"><strong>信心</strong></td>
+
+				</tr>
 				<g:each in="${triatsInstanceList}" status="i" var="triatsInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${triatsInstance.id}">${fieldValue(bean: triatsInstance, field: "magnitude")}</g:link></td>
-					
-						<td>${fieldValue(bean: triatsInstance, field: "name")}</td>
-					
-						<td>${fieldValue(bean: triatsInstance, field: "result")}</td>
-					
-						<td>${fieldValue(bean: triatsInstance, field: "username")}</td>
-					
+						<td><g:link action="edit" id="${triatsInstance.id}">
+								${fieldValue(bean: triatsInstance, field: "chineseName")}
+							</g:link></td>
+
+						<td><g:link action="edit" id="${triatsInstance.id}">
+								${fieldValue(bean: triatsInstance, field: "name")}
+							</g:link></td>
+						<td>
+							<g:link action="edit" id="${triatsInstance.id}">
+								${fieldValue(bean: triatsInstance, field: "magnitude")}
+							</g:link>
+						</td>
 					</tr>
 				</g:each>
-				</tbody>
 			</table>
 			<div class="pagination">
 				<g:paginate total="${triatsInstanceTotal}" />
 			</div>
+		</div>
 		</div>
 	</body>
 </html>

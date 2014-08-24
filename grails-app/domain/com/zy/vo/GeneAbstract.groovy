@@ -13,11 +13,15 @@ class GeneAbstract {
 	//基因类型及影响
 	String types
 	
+	//参考文献，对于个性谱才存在
+	String reference
+	
     static constraints = {
 		name nullable:true
 		journal nullable:true
 		marker nullable:true
 		description nullable:true,maxSize: 3000
 		types nullable:true,maxSize: 3000
+		reference nullable:true,maxSize: 3000
     }
 }

@@ -2,8 +2,6 @@ package com.zy.vo
 
 import org.springframework.dao.DataIntegrityViolationException
 
-import com.zy.auth.User
-
 class TriatsController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -27,9 +25,8 @@ class TriatsController {
             render(view: "create", model: [triatsInstance: triatsInstance])
             return
         }
-
-        flash.message = message(code: 'default.created.message', args: [message(code: 'triats.label', default: 'Triats'), triatsInstance.id])
-        redirect(action: "show", id: triatsInstance.id)
+		flash.message = "创建成功！"
+		redirect(action: "list")
     }
 
     def show(Long id) {
@@ -79,8 +76,8 @@ class TriatsController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'triats.label', default: 'Triats'), triatsInstance.id])
-        redirect(action: "show", id: triatsInstance.id)
+        flash.message = "更新成功！"
+        redirect(action: "list")
     }
 
     def delete(Long id) {
@@ -93,7 +90,7 @@ class TriatsController {
 
         try {
             triatsInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'triats.label', default: 'Triats'), id])
+            flash.message = "删除成功！"
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
@@ -101,6 +98,4 @@ class TriatsController {
             redirect(action: "show", id: id)
         }
     }
-	
-	
 }

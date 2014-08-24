@@ -43,9 +43,11 @@ class ShowResultController {
 		def inheritedConditionses=InheritedConditions.findAllByUsername(user.username)
 		
 		//个性谱
+		def userTriats=UserTriats.findAllByUsername(user.username).collect{
+			it.triats
+		}.toSet().sort{it.id}
 		
-		
-		//未知参数
+		//未知参数,生成pdf时使用,将首页全部展开
 		def inPDF=false
 		if(params.inPDF){
 			inPDF=true
