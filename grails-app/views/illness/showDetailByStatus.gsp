@@ -3,7 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>基因检测报告</title>
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'css.css')}" />
+<link rel="stylesheet" type="text/css" media="screen" 
+	href="${resource(dir: 'css', file: 'css.css')}" />
+<link rel="stylesheet" type="text/css" media="print" 
+	href="${resource(dir: 'css', file: 'print.css')}" />
 </head>
 <body>
 	<div class="header">
@@ -13,7 +16,7 @@
         <p>欢迎进入基因检测报告！</p>
     </div>
 </div>
-<div class="main2">
+<div class="main2 A1"><!--在这里改A1\A2\A3\A3分别对应健康普、生命普、药物普、个性普-->
   <div class="tit3">
   		<p class="s1">${illnessInstance?.name }</p>
         <p class="s2">${illnessInstance?.chineseName }</p>
@@ -36,73 +39,59 @@
             	<div class="green" style="width:${goodNum*100/snps.size() }%;">${goodNum }</div>
             </div>
         	</div>
-<%--        	<div class="jdBxo1">--%>
-<%--            	<div class="tit">您的<br/>基因</div>--%>
-<%--                <div class="bfb"><div class="bx" style="width:${risk*100 }%;"><div class="num1">${risk*100 }%</div></div></div><!--这里由百分比控制宽度-->--%>
-<%--               --%>
-<%--            </div>--%>
-<%--        	<div class="jdBxo2">--%>
-<%--            	<div class="tit">平均<br/>风险</div>--%>
-<%--                <div class="bfb"><div class="bx" style=" width:${Double.valueOf(illnessInstance?.averageRisk)*100 }%;"><div class="num1">${Double.valueOf(illnessInstance?.averageRisk)*100 }%</div></div></div><!--这里由百分比控制宽度-->--%>
-<%--            </div>--%>
         </div>
    </div> 
     <div class="contBox2">
-   	  <div class="tit4">
+   	  <div class="title">
         	疾病介绍
       </div>
-    	<div class="cont jieshao">
+    	<div class="cont">
     		${illnessInstance?.description }
-<%--        	<dl>--%>
-<%--            	<dd><img src="../images/img2.jpg" width="190" height="139" /></dd>--%>
-<%--                <dt>${illnessInstance?.description }</dt>--%>
-<%--	           </dl>--%>
 	        </div>
 	    </div>
 	    <div class="contBox2">
-	   	  <div class="tit4">
-	       	遗传vs环境
-	  </div>
+	   	  <div class="title"> 遗传vs环境 </div>
 	    	<div class="cont jieshao">
-	    		${illnessInstance?.geneticEnvironment }
-<%--	        	<dl>--%>
-<%--	            	<dd><img src="../images/img3.jpg" width="190" height="139" /></dd>--%>
-<%--	                <dt>${illnessInstance?.geneticEnvironment }</dt>--%>
-<%--	            </dl>--%>
+		      <dl>
+		        <dd><g:img dir="images" file="img3.jpg" width="190" height="139" /></dd>
+		        <dt>
+					${illnessInstance?.geneticEnvironment }
+				</dt>
+		      </dl>
+
 	        </div>
 	    </div>
-	    <div class="contBox2">
-	   	  <div class="tit4">你可以做什么？</div>
-	        <div class="cont">
-	        	<div class="content">
-		          ${illnessInstance?.canDo }
-	       		</div>
-	        </div>
+	    <div class="contBox2 only1">
+		    <h3 style="font-weight:normal;">你可以做什么？</h3>
+		    <div class="cont jieshao2">
+		      <p>
+			  	${illnessInstance?.canDo }
+			  </p>
+		    </div>
+	   	  
 	  </div>
 	    <div class="contBox2">
-	   	  <div class="tit4">
-	       技术报告
-	  </div>
+	   	  <div class="title"> 技术报告 </div>
 	    	<div class="cont baokao">
 	        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	  <tr style="color:#fff;">
-	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">SPN</th>
-	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Magnitude</th>
-	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">References</th>
-	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Frequency</th>
-	    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Repute</th>
+	  <tr style="color:#000;">
+	    <th height="36" align="center" valign="middle" class="backgrounds">SPN</th>
+	    <th height="36" align="center" valign="middle" class="backgrounds">Magnitude</th>
+	    <th height="36" align="center" valign="middle" class="backgrounds">References</th>
+	    <th height="36" align="center" valign="middle" class="backgrounds">Frequency</th>
+	    <th height="36" align="center" valign="middle" class="backgrounds">Repute</th>
 	  </tr>
-	  <g:each in="${genes }" var="gene">
+	  <g:each in="${genes }" var="gene" status="i">
 	  <tr>
-	    <td height="36" align="center" valign="middle">
+	    <td height="36" align="center" valign="middle" bgcolor="${(i % 2) == 0 ? '#e9e9ea' : ''}">
 			${gene.description1!=null?'<a href="'+createLink(controller:"gene",action:"show")+'?id='+gene.id+'&username='+username+'&illnessId='+illnessInstance.id+'&status='+status+'">':'' }
 	    	${gene.name }
 	    	${gene.description1!=null?'</a>':'' }
 	    </td>
-	    <td height="36" align="center" valign="middle">${gene.magnitude }</td>
-	    <td height="36" align="center" valign="middle">${gene.references }<br /></td>
-	    <td height="36" align="center" valign="middle">${gene.frequency }</td>
-	    <td height="36" align="center" valign="middle">${gene.repute }</td>
+	    <td height="36" align="center" valign="middle" bgcolor="${(i % 2) == 0 ? '#e9e9ea' : ''}">${gene.magnitude }</td>
+	    <td height="36" align="center" valign="middle" bgcolor="${(i % 2) == 0 ? '#e9e9ea' : ''}">${gene.references }<br /></td>
+	    <td height="36" align="center" valign="middle" bgcolor="${(i % 2) == 0 ? '#e9e9ea' : ''}">${gene.frequency }</td>
+	    <td height="36" align="center" valign="middle" bgcolor="${(i % 2) == 0 ? '#e9e9ea' : ''}">${gene.repute }</td>
 	  </tr>
 	  </g:each>
 	</table>

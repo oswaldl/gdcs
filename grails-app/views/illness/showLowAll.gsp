@@ -3,9 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>基因检测报告</title>
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css" media="screen" 
 	href="${resource(dir: 'css', file: 'css.css')}" />
-	
+<link rel="stylesheet" type="text/css" media="print" 
+	href="${resource(dir: 'css', file: 'print.css')}" />
 </head>
 <body>
 	<div class="header">
@@ -20,22 +21,23 @@
 		</div>
 	</div>
 	<div class="main A1">
+
 		<div class="tit2">
 			<h3>较低风险</h3>
 		</div>
 		<div class="content">
 			<table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#f4f4f4" style="font-size:22px;" >
 				<tr>
-					<th width="432" height="50" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">名称</th>
+					<th width="332" height="50" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">名称</th>
 					<th width="172" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">研究数量</th>
 					<th width="140" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">你的风险</th>
-					<th width="140" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">平均风险</th>
-					<th width="110" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">与平均对比</th>
+					<%--<th width="140" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">平均风险</th>
+					--%><th width="150" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">Good VS Bad</th>
 				</tr>
 
 <g:each in="${illnesses }" var="illness" status="i">
         <tr>
-          <td align="left" valign="middle" bgcolor="#eeefef" class="paddingT102 ">
+          <td align="left" valign="middle" bgcolor="#eeefef" class="paddingT102">
 			  <g:link controller="illness" action="showIllness" params='[illnessId:"${illness.id }",username:"${username }"]'>
 			  		<g:if test="${illness.chineseName}">
 			  			${illness.chineseName }
@@ -50,9 +52,10 @@
           <td align="center" valign="middle" bgcolor="#dcdddd" class="paddingT10">
 			<div class="tubiao">
 				<g:if test="${illness.getMagnitude()==0}">
-					<g:each in="${(0..4 ) }">
+					<%--<g:each in="${(0..4 ) }">
 						<div class="ico"></div>
 			  		</g:each>
+			  		--%>
 				</g:if>
 				<g:else>
 					<g:each in="${(0..illness.getMagnitude() ) }">
@@ -69,10 +72,12 @@
 				  <tr>
 					<td align="center" valign="middle" class="tubiao">
 						<div class="tubiao">
-							<g:if test="${map.get(illness)<1||map.get(illness)>4}">
+							<g:if test="${((int)Math.ceil(map.get(illness)*100/20)) ==0}">
+							<%--
 								<g:each in="${0..4 }">
 									<div class="ico1b"></div>
 								</g:each>
+								--%>
 		                	</g:if>
 		                	<g:else>
 								<g:each in="${0..((int)Math.ceil(map.get(illness)*100/20))}">
@@ -83,40 +88,51 @@
 								</g:each>
 							</g:else>
 						</div>
-						
+					</td>
 				  </tr>
+				  <%--
 				  <tr>
 					<td align="center" valign="middle">${map.get(illness)*100 }%</td>
 				  </tr>
+            	--%>
             </table>
 		  </td>
 		  
 		  <!-- 平均风险 -->
-          <td align="center" valign="middle" bgcolor="#eeefef" class="paddingT10">
+          <%--<td align="center" valign="middle" bgcolor="#eeefef" class="paddingT10">
 		     <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <div class="tubiao">
-                	<g:if test="${illness.getRisk()<1||illness.getRisk()>4}">
-						<g:each in="${0..4 }">
-							<div class="ico1b"></div>
-						</g:each>
-                	</g:if>
-                	<g:else>
-	                	<g:each in="${(0..(int)Math.ceil(illness.getRisk()*100/20) ) }">
-							<div class="ico1a"></div>
-						</g:each>
-						<g:each in="${(((int)Math.ceil(illness.getRisk()*100/20))..4 ) }">
-							<div class="ico1b"></div>
-						</g:each>
-                	</g:else>
-                </div>
+              	<td>
+	                <div class="tubiao">
+	                	<g:if test="${((int)Math.ceil(illness.getRisk()*100/20)) ==0}">
+	                	
+							<g:each in="${0..4 }">
+								<div class="ico1b"></div>
+							</g:each>
+							
+	                	</g:if>
+	                	<g:else>
+		                	<g:each in="${(0..(int)Math.ceil(illness.getRisk()*100/20) ) }">
+								<div class="ico1a"></div>
+							</g:each>
+							<g:each in="${(((int)Math.ceil(illness.getRisk()*100/20))..4 ) }">
+								<div class="ico1b"></div>
+							</g:each>
+	                	</g:else>
+	                </div>
+                </td>
               </tr>
               <tr>
                 <td align="center" valign="middle">${illness.getRisk()*100 }%</td>
               </tr>
             </table>
 		  </td>
-          <td align="center" valign="middle" bgcolor="#dcdddd" class="paddingT10">${(double)Math.round(map.get(illness)/illness.getRisk()*100)/100 }倍</td>
+		  
+          --%>
+          <td align="center" valign="middle" bgcolor="#dcdddd" class="paddingT10">
+          ${illness.getGoodGenesCount(username)}/${illness.getBadGenesCount(username)}
+          </td>
+        
         </tr>
 </g:each>
 

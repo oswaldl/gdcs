@@ -24,7 +24,7 @@
 			<p>欢迎进入基因检测报告！</p>
 		</div>
 	</div>
-	<div class="main2 A3">
+	<div class="main2 A1">
 		<div class="tit3">
 			<p class="s1">
 				${userDrugRelationInstance?.drugResponse.name }

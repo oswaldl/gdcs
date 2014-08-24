@@ -55,10 +55,13 @@
                 	<a href="${createLink(controller:'drugResponse',action:'index')}" target="main_frame">药品谱公有配置</a>
                 </li>
                 <li>
+                	<a href="${createLink(controller:'inheritedConditions',action:'index')}" target="main_frame">人员生命谱配置</a>
+                </li>
+                <li>
                 	<a href="${createLink(controller:'userDrugRelation',action:'index')}" target="main_frame">人员药品谱配置</a>
                 </li>
                 <li>
-                	<a href="${createLink(controller:'inheritedConditions',action:'index')}" target="main_frame">人员生命谱配置</a>
+                	<a href="${createLink(controller:'triats',action:'index')}" target="main_frame">人员个性谱配置</a>
                 </li>
            	</ul>
         </div>

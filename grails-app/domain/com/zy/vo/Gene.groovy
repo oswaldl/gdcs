@@ -22,6 +22,8 @@ class Gene {
 	
 	String getName(String string){
 		int index=string.indexOf("(")
+		if(index==-1)
+			return string
 		return string.substring(0, index)
 	}
 	
@@ -47,4 +49,17 @@ class Gene {
 		description1 nullable:true,maxSize: 3000
 		description2 nullable:true,maxSize: 3000
     }
+	
+	//获取References大于10的集合,研究数量要够大才有意义
+	def static getGenes(def snps){
+		def lists=new ArrayList<Gene>()
+		snps.collect{it.gene}.each {
+			if(it.references){
+				if(Integer.parseInt(it.references)>9){
+					lists.add(it)
+				}
+			}
+		}
+		return lists.sort{it.getMagnitude()}.reverse()
+	}
 }

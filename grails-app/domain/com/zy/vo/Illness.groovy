@@ -1,4 +1,7 @@
 package com.zy.vo
+
+import com.zy.auth.User
+
 /**
  * 记录病例和相关的公有信息
  * @author ACER
@@ -20,6 +23,8 @@ class Illness {
 	String reference
 	//平均人群风险值
 	String averageRisk
+	//是否显示
+	boolean isShow = true
 	
 	double getRisk(){
 		if(!this.averageRisk){
@@ -39,6 +44,66 @@ class Illness {
 			magnitude=(int)Math.ceil(mag)
 		}
 		return magnitude
+	}
+	
+	int getGoodGenesCount(User user){
+		def snps=SNPRelation.findAllByIllnessAndUser(this, user)
+		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
+		if(genes.size()>10){
+			genes=Gene.getGenes(snps)
+		}
+		int goodNum=0
+		genes.each {
+			if(it.repute=="good"){
+				goodNum=goodNum+1
+			}
+		}
+		return goodNum
+	}
+	
+	int getGoodGenesCount(String username){
+		def snps=SNPRelation.findAllByIllnessAndUser(this, User.findByUsername(username))
+		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
+		if(genes.size()>10){
+			genes=Gene.getGenes(snps)
+		}
+		int goodNum=0
+		genes.each {
+			if(it.repute=="good"){
+				goodNum=goodNum+1
+			}
+		}
+		return goodNum
+	}
+	
+	int getBadGenesCount(User user){
+		def snps=SNPRelation.findAllByIllnessAndUser(this, user)
+		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
+		if(genes.size()>10){
+			genes=Gene.getGenes(snps)
+		}
+		int badNum=0
+		genes.each {
+			if(it.repute=="bad"){
+				badNum=badNum+1
+			}
+		}
+		return badNum
+	}
+	
+	int getBadGenesCount(String username){
+		def snps=SNPRelation.findAllByIllnessAndUser(this, User.findByUsername(username))
+		def genes=snps.collect{it.gene}.sort{it.getMagnitude()}.reverse()
+		if(genes.size()>10){
+			genes=Gene.getGenes(snps)
+		}
+		int badNum=0
+		genes.each {
+			if(it.repute=="bad"){
+				badNum=badNum+1
+			}
+		}
+		return badNum
 	}
 	
 	static belongsTo = [illnessCat: IllnessCat]
