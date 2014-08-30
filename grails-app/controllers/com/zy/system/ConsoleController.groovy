@@ -292,7 +292,7 @@ class ConsoleController {
 		//show pic
 		content = g.include(controller:'userDrugRelation', action:'showPic')
 		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		file2 = new File(filePath+"/documentc0.pdf");
+		file2 = new File(filePath+"/documentB"+i+".pdf");
 		file2<<b2
 		
 		//药物页面
@@ -310,7 +310,7 @@ class ConsoleController {
 		//show pic
 		content = g.include(controller:'userTriats', action:'showPic')
 		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		file2 = new File(filePath+"/documentd0.pdf");
+		file2 = new File(filePath+"/documentC"+i+".pdf");
 		file2<<b2
 		
 		//个性普页面
