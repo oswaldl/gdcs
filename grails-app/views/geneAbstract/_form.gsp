@@ -15,7 +15,7 @@
   </tr>
   <tr>
     <td class="fieldcontain ${hasErrors(bean: geneAbstractInstance, field: 'studySize', 'error')} required">研究规模</td>
-    <td><g:field name="studySize" type="number" value="${geneAbstractInstance.studySize}" required=""/></td>
+    <td><g:field name="studySize" type="number" value="${geneAbstractInstance?.studySize}" required=""/></td>
   </tr>
   <tr>
     <td class="fieldcontain ${hasErrors(bean: geneAbstractInstance, field: 'description', 'error')} ">描述</td>

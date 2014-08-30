@@ -26,6 +26,13 @@ class GeneAbstractController {
             return
         }
 
+		
+		Triats triats=params.triatsInstanceId=="null"?new Triats().save(failOnError:true):Triats.get(params.triatsInstanceId)
+		if(triats){
+			triats.addToGeneAbstract(geneAbstractInstance)
+			triats.save();
+		}
+		
         flash.message = message(code: 'default.created.message', args: [message(code: 'geneAbstract.label', default: 'GeneAbstract'), geneAbstractInstance.id])
         redirect(action: "show", id: geneAbstractInstance.id)
     }
@@ -50,12 +57,17 @@ class GeneAbstractController {
         [geneAbstractInstance: geneAbstractInstance,drugResponseId:drugResponse.id]
     }
 	
+	//re show
 	def edit2() {
 		Triats triats=params.triatsInstanceId=="null"?new Triats().save(failOnError:true):Triats.get(params.triatsInstanceId)
-		def geneAbstractInstance = triats.geneAbstract
-		if (!geneAbstractInstance) {
-			geneAbstractInstance=new GeneAbstract().save(failOnError:true)
-		}
+		def geneAbstractInstance = GeneAbstract.get(params.geneAbstractInstanceId)
+		[geneAbstractInstance: geneAbstractInstance,triatsInstanceId:triats.id]
+	}
+	
+	//empty create
+	def edit3() {
+		Triats triats=params.triatsInstanceId=="null"?new Triats().save(failOnError:true):Triats.get(params.triatsInstanceId)
+		def geneAbstractInstance = new GeneAbstract()
 		[geneAbstractInstance: geneAbstractInstance,triatsInstanceId:triats.id]
 	}
 
@@ -90,8 +102,8 @@ class GeneAbstractController {
         	redirect(controller:"drugResponse",action: "edit", params: [id:drugResponse.id])
 		}
 		if(params.triatsInstanceId){
-			def triatsInstance=Triats.get(params.drugResponseId)
-			triatsInstance.geneAbstract=geneAbstractInstance
+			def triatsInstance=Triats.get(params.triatsInstanceId)
+			triatsInstance.addToGeneAbstract(geneAbstractInstance)
 			triatsInstance.save(failOnError:true)
         	redirect(controller:"triats",action: "edit", params: [id:triatsInstance.id])
 		}

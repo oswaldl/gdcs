@@ -39,7 +39,7 @@
 <g:each in="${illnesses }" var="illness" status="i">
         <tr>
           <td align="left" valign="middle" bgcolor="#eeefef" class="paddingT102">
-			  <g:link controller="illness" action="showIllness" params='[illnessId:"${illness.id }",username:"${username }"]'>
+			  <g:link controller="illness" action="showDetail" params='[illnessId:"${illness.id }",username:"${username }"]'>
 			  		<g:if test="${illness.chineseName}">
 			  			${illness.chineseName }
 			  		</g:if>

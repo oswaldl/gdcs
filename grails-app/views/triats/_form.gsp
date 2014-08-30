@@ -35,6 +35,15 @@
   </tr>
   <tr>
   	<td class="fieldcontain ${hasErrors(bean: triatsInstance, field: 'geneAbstract', 'error')} ">基因摘要</td>
-  	<td><g:link controller="geneAbstract" action="edit2" params='[triatsInstanceId:"${triatsInstance?.id }"]'>编辑</g:link></td>
+  	<td>
+  	
+  	<g:link controller="geneAbstract" action="edit3" params='[triatsInstanceId:"${triatsInstance?.id }"]'>添加</g:link>
+  	<br>
+  	<g:each in="${triatsInstance.geneAbstract}" status="i" var="geneAbstractInstance">
+  		${geneAbstractInstance?.name }<g:link controller="geneAbstract" action="edit2" params='[triatsInstanceId:"${triatsInstance?.id }",geneAbstractInstanceId:"${geneAbstractInstance?.id }"]'>编辑</g:link>
+  	</g:each>
+  	
+  	
+  	</td>
   </tr>
 </table>
