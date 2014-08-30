@@ -37,4 +37,12 @@ class Triats {
 		result nullable:true
 		
     }
+	
+	public int getAllStudySize(){ 
+		int rtn = 0;
+		geneAbstract?.each{
+			rtn += it.studySize
+		}
+		return rtn;
+	}
 }

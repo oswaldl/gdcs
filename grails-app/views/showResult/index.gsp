@@ -1,4 +1,6 @@
 <%@page import="com.zy.vo.UserDrugRelation" %>
+<%@page import="com.zy.vo.UserTriats" %>
+
     <%@ page contentType="text/html;charset=UTF-8" %>
         <html> 
 
@@ -144,7 +146,7 @@
 					            <div class="s2"><span class="paddingT10"></span>信心</div>
 					            <div class="s3">结果</div>
 					          </div>
-					          <g:each in="${triats }" var="triat" status="i">
+					          <g:each in="${userTriats }" var="triat" status="i">
 	                                <li>
 	                                    <div class="s1">
 	                                        <g:link controller="userTriats" action="showDetail" params='[triatId:"${triat.id }",status:"${i }",username:"${username }"]'>

@@ -80,26 +80,26 @@
 			<div class="cont">
 				<div class="content">
 					<div class="cont jieshao">
-			       	  <h5 class="tit">${userTriatsInstance.triats.geneAbstract.name }</h5>
+			       	  <h5 class="tit">${geneAbstract.name }</h5>
 			          <table width="100%" border="0" cellspacing="0" cellpadding="0">
 						  <tr>
 						    <td width="15%" height="40" bgcolor="#f4f4f4" class="paddingLR">杂志</td>
-						    <td width="85%" bgcolor="#f4f4f4" class="paddingLR">${userTriatsInstance.triats.geneAbstract.journal }</td>
+						    <td width="85%" bgcolor="#f4f4f4" class="paddingLR">${geneAbstract.journal }</td>
 						  </tr>
 						  <tr>
 						    <td height="40" class="paddingLR">研究规模</td>
 						    <td class="paddingLR">
-						    	<g:each in="${(1..userTriatsInstance.triats.geneAbstract.studySize ) }">
+						    	<g:each in="${(1..geneAbstract.studySize) }">
 								<g:img dir="images" file="ico1.gif"/>
 								</g:each>
 						    </td>
 						  </tr>
 						  <tr>
 						    <td height="40" bgcolor="#f4f4f4" class="paddingLR">标记</td>
-						    <td bgcolor="#f4f4f4" class="paddingLR">${userTriatsInstance.triats.geneAbstract.marker }</td>
+						    <td bgcolor="#f4f4f4" class="paddingLR">${geneAbstract.marker }</td>
 						  </tr>
 						</table>
-						<p class="wzCont" style="padding-bottom:20px;">${userTriatsInstance.triats.geneAbstract.description }</p>
+						<p class="wzCont" style="padding-bottom:20px;">${geneAbstract.description }</p>
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					  <tr style="color:#fff;">
 					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Who</th>
@@ -117,7 +117,7 @@
 <%--					   </g:if>--%>
 <%--					  </g:each>--%>
 					  </table>
-					  <p class="wzCont" style="padding-bottom:20px;">${userTriatsInstance.triats.geneAbstract.reference }</p>
+					  <p class="wzCont" style="padding-bottom:20px;">${geneAbstract.reference }</p>
 			      </div>
 				</div>
 			</div>

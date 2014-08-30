@@ -59,7 +59,8 @@ class ShowResultController {
 			illnesses:illnesses,
 			username:user.username,
 			drugResponses:drugResponses,
-			inheritedConditionses:inheritedConditionses]
+			inheritedConditionses:inheritedConditionses,
+			userTriats:userTriats]
 	}
 
 	def show(){
