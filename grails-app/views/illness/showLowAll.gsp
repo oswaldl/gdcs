@@ -28,12 +28,12 @@
 		<div class="content">
 			<table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#f4f4f4" style="font-size:22px;" >
 				<tr>
-					<th width="222" height="50" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">名称</th>
-					<th width="142" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">研究数量</th>
-					<th width="110" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">你的风险</th>
+					<th width="40%" height="50" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">名称</th>
+					<th width="20%" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">研究数量</th>
+					<th width="20%" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">你的风险</th>
 					<%--<th width="140" align="center" valign="middle" bgcolor="#eeefef" style="font-weight:normal;">平均风险</th>
 					--%>
-					<th width="90" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">Good VS Bad</th>
+					<th width="20%" align="center" valign="middle" bgcolor="#dcdddd" style="font-weight:normal;">Good VS Bad</th>
 				</tr>
 
 <g:each in="${illnesses }" var="illness" status="i">

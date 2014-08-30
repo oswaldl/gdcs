@@ -129,6 +129,8 @@ class ConsoleController {
 		List<String> lis=new ArrayList<String>()
 		File root = new File(filePath);
 		File[] files = root.listFiles();
+		
+		
 		for (File file : files) {
 			if (!file.isDirectory()) {
 				//file为pdf文件
@@ -137,21 +139,29 @@ class ConsoleController {
 			}
 		}
 		
-		boolean b=mergePdfFiles(lis.toArray(new String[lis.size()]))
+		List<String> list3 = lis.toArray(new String[lis.size()])
+		Collections.sort(list3, new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				return o1.compareTo(o2);
+			}
+		});
+		
+		boolean b=mergePdfFiles(list3)
 		return b
 		
 	}
 	
-	//合并pdf
-	private boolean mergePdfFiles(String[] files) {
+	//合并pdf，根据文件路径合并
+	private boolean mergePdfFiles(List<String> files) {
 		boolean retValue = false;
 		Document document = null;
 		try {
-			document = new Document(new PdfReader(files[0]).getPageSize(1));
+			document = new Document(new PdfReader(files.get(0)).getPageSize(1));
 			PdfCopy copy = new PdfCopy(document, new FileOutputStream(resultPDF));
 			document.open();
-			for (int i = 0; i < files.length; i++) {
-				PdfReader reader = new PdfReader(files[i]);
+			for (int i = 0; i < files.size(); i++) {
+				PdfReader reader = new PdfReader(files.get(i));
 				int n = reader.getNumberOfPages();
 				for (int j = 1; j <= n; j++) {
 					document.newPage();
@@ -169,92 +179,6 @@ class ConsoleController {
 	}
 	
 	
-	def downloadPdf_AllInOne(){
-		User user=User.findByUsername(params.username)
-		
-		try{
-			generateSinglePdfs_AllInOne(user);
-			
-			println "trying to merge pdf..."
-			//合并pdf
-			boolean b=mergePDF()
-			
-			//删除生成的单个pdf
-			delPDF(filePath)
-			
-			//合并成功就下载
-			if(b){
-				response.setHeader("Content-disposition", "attachment; filename=gdcs.pdf")
-				response.contentType = "application/x-rarx-rar-compressed"
-				
-				def out = response.outputStream
-				InputStream inputStream = new FileInputStream(resultPDF)
-				byte[] buffer = new byte[1024]
-				int j = -1
-				while ((j = inputStream.read(buffer)) != -1) {
-				out.write(buffer, 0, j)
-				}
-				out.flush()
-				out.close()
-				inputStream.close()
-				
-			}else{
-				render "失败"
-			}
-		}catch (Throwable e) {
-			e.printStackTrace()
-			if(params.pdfController) {
-				println "error:"+params.pdfController
-				redirect(controller:params.pdfController, action:params.pdfAction, params:params)
-			}else if(params.url) {
-				println "url:"+params.url
-				redirect(uri:params.url + '?' + request.getQueryString())
-			}
-			else {
-				render "there was a problem with PDF generation ${e}"
-			}
-		}
-	}
-	
-	private void generateSinglePdfs_AllInOne(def user){
-		//先生成多个单个的pdf，然后在合并，合并完成后将单个的全部删除
-		def baseUri = request.scheme + "://" + request.serverName + ":" + request.serverPort + grailsAttributes.getApplicationUri(request)
-		//首页
-		def content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
-		byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		File file1 = new File(filePath+"/document.pdf");
-		file1<<b1
-		//病例页面
-		def illnesses=SNPRelation.findAllByUser(user).collect {
-			it.illness
-		}.toSet().sort{it.id}
-		int i=0
-		
-		//加入高低的风险
-		//高风险
-		content = g.include(controller:'illness', action:'showHighAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-		byte[] b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		File file2 = new File(filePath+"/document"+i+".pdf");
-		file2<<b2
-		
-		//低风险
-		content = g.include(controller:'illness', action:'showLowAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		file2 = new File(filePath+"/document"+i+".pdf");
-		file2<<b2
-		
-		//一般风险
-		content = g.include(controller:'illness', action:'showNormalAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		file2 = new File(filePath+"/document"+i+".pdf");
-		file2<<b2
-		for(;i<illnesses.size();i++){
-			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
-			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-			file2 = new File(filePath+"/document"+i+".pdf");
-			file2<<b2
-		}
-	}
 	
 	
 	//下载完整的PDF,参数username要下载的用户名
@@ -311,7 +235,10 @@ class ConsoleController {
 		
 	}
 	
-	
+	/**
+	 * 生成许多单个pdf文件
+	 * @param user
+	 */
 	private void generateSinglePdfs(def user){
 		//先生成多个单个的pdf，然后在合并，合并完成后将单个的全部删除
 		def baseUri = request.scheme + "://" + request.serverName + ":" + request.serverPort + grailsAttributes.getApplicationUri(request)
@@ -324,7 +251,7 @@ class ConsoleController {
 		//首页
 		content = g.include(controller:'showResult', action:'index',params:[username:user.username,inPDF:true])
 		byte[] b1 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		File file1 = new File(filePath+"/document.pdf");
+		File file1 = new File(filePath+"/documentA0.pdf");
 		file1<<b1
 		
 		
@@ -337,58 +264,68 @@ class ConsoleController {
 		//高风险
 		content = g.include(controller:'illness', action:'showHighAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
 		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		file2 = new File(filePath+"/document0.pdf");
+		file2 = new File(filePath+"/documentA1.pdf");
 		file2<<b2
 		
 		//低风险
 		content = g.include(controller:'illness', action:'showLowAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
 		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		file2 = new File(filePath+"/document1.pdf");
+		file2 = new File(filePath+"/documentA2.pdf");
 		file2<<b2
 		
 		//一般风险
 		content = g.include(controller:'illness', action:'showNormalAll',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
 		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-		file2 = new File(filePath+"/document2.pdf");
+		file2 = new File(filePath+"/documentA3.pdf");
 		file2<<b2
 		
 		
 		
-		i=3
-		for(;i<illnesses.size()+3;i++){
-			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i-3).id,username:user.username,inPDF:true])
+		//病例
+		for(i=0;i<illnesses.size();i++){
+			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
 			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-			file2 = new File(filePath+"/document"+i+".pdf");
+			file2 = new File(filePath+"/documentB"+i+".pdf");
 			file2<<b2
 		}
 		
+		//show pic
+		content = g.include(controller:'userDrugRelation', action:'showPic')
+		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+		file2 = new File(filePath+"/documentc0.pdf");
+		file2<<b2
 		
-		int start =i;
 		//药物页面
 		def drugResponses=UserDrugRelation.findAllByUsername(user.username).collect{
 			it.drugResponse
 		}.toSet().sort{it.id}
-		for(;i<drugResponses.size()+start;i++){
+		for(i=0;i<drugResponses.size();i++){
 			println "in drug..."+i
-			content = g.include(controller:'userDrugRelation', action:'showDetail',params:[drugResponseId:drugResponses.get(i-start).id,username:user.username,status:"0",inPDF:true])
+			content = g.include(controller:'userDrugRelation', action:'showDetail',params:[drugResponseId:drugResponses.get(i).id,username:user.username,status:"0",inPDF:true])
 			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-			file2 = new File(filePath+"/document"+i+".pdf");
+			file2 = new File(filePath+"/documentC"+i+".pdf");
 			file2<<b2
 		}
 		
+		//show pic
+		content = g.include(controller:'userTriats', action:'showPic')
+		b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
+		file2 = new File(filePath+"/documentd0.pdf");
+		file2<<b2
 		
-		start =i;
 		//个性普页面
 		def userTriats=UserTriats.findAllByUsername(user.username).collect{
 			it.triats
 		}.toSet().sort{it.id}
-		for(;i<userTriats.size()+start;i++){
-			content = g.include(controller:'userTriats', action:'showDetail',params:[triatId:userTriats.get(i-start).id,username:user.username,status:"0",inPDF:true])
+		for(i = 0;i<userTriats.size();i++){
+			println "in userTriats..."+i
+			content = g.include(controller:'userTriats', action:'showDetail',params:[triatId:userTriats.get(i).id,username:user.username,status:"0",inPDF:true])
 			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))
-			file2 = new File(filePath+"/document"+i+".pdf");
+			file2 = new File(filePath+"/documentD"+i+".pdf");
 			file2<<b2
 		}
 		
+		//测试使用
 //		for(;i<2;i++){
 //			content = g.include(controller:'illness', action:'showIllness',params:[illnessId:illnesses.get(i).id,username:user.username,inPDF:true])
 //			b2 = myPdfService.buildPdfFromString(content.readAsString(), baseUri + (params.url ?: ""))

@@ -30,11 +30,10 @@
 			<div class="conmain">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr class="tbbg">
-						
 						<td width="20%" align="center"><strong>用户名</strong></td>
    						<td width="20%" align="center"><strong>中文名</strong></td>
 						<td width="30%" align="center"><strong>查看报告</strong></td>
-						<td width="30%" align="center"><strong>下载报告</strong></td>
+						<td width="30%" align="center"><strong>下载报告(一次只能下载一个用户报告)</strong></td>
 					</tr>
 				<g:each in="${userInstanceList}" status="i" var="userInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">

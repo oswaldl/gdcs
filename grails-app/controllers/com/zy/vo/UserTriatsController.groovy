@@ -141,4 +141,8 @@ class UserTriatsController {
 		[userTriatsInstance: userTriatsInstance,status:status,total:userTriats.size(),username:user.username]
 	}
 	
+	def showPic(){
+		
+	}
+	
 }

@@ -135,8 +135,6 @@
                             </g:if>
 				        </ul>
 				      </div>
-				      <br></br>
-				      <br></br>
 				      <div class="listBox">
 				        <h5 class="titl4 jt02" onclick="$(this).next().toggle()">第四部分<span>遗传性状分析</span></h5>
 				        <ul>

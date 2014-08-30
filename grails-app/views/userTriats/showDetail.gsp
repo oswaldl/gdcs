@@ -125,7 +125,7 @@
 		</g:each>
 		</g:if>
 		
-		<div class="pageContent">
+		<div class="pageContent pdf_div_hidden">
 			<div class="page2">
 				<g:if test="${total!=1&&status==0 }">
 					<div class="pageBox2">

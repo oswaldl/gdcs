@@ -198,4 +198,8 @@ class UserDrugRelationController {
 		}
 		[maps:maps,lists:lists,type:type,userDrugRelationInstance: userDrugRelationInstance,status:status,total:drugResponses.size(),username:user.username]
 	}
+	
+	def showPic(){
+		
+	}
 }
