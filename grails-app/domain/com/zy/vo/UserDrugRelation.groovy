@@ -28,8 +28,12 @@ class UserDrugRelation {
 		SNPRelation.findAllByUser(User.findByUsername(this.username)).collect{it.gene}.each {
 			if(it.getName(it.name)==this.drugResponse?.geneAbstract?.marker){
 				description.split(",").each {type->
-					if(type.split(":")[0]==it.getType(it.name).replaceAll(';', '')){
-						state = type.split(":")[2]
+					try{
+						if(type.split(":")[0]==it.getType(it.name).replaceAll(';', '')){
+							state = type.split(":")[2]
+						}
+					}catch(e){
+						println "invalid type :"+type+",  the length should be 3."
 					}
 				}
 			}

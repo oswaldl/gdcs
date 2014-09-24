@@ -8,10 +8,12 @@ import com.zy.auth.User
 import com.zy.vo.SNPRelation
 import com.zy.vo.UserDrugRelation
 import com.zy.vo.UserTriats
+import org.apache.log4j.Logger;
 
 class ConsoleController {
 	def springSecurityService
 	def myPdfService
+	Logger logger = Logger.getLogger(getClass());
 	
 	/**
 	 * 既然要写死，就不要放在方法里面
@@ -73,7 +75,7 @@ class ConsoleController {
 			response.getOutputStream().write(b)
 		}
 		catch (Throwable e) {
-			e.printStackTrace()
+			logger.error("error!", e)
 			//if(params.template) render(template:params.template)
 			if(params.pdfController) redirect(controller:params.pdfController, action:params.pdfAction, params:params)
 			else redirect(uri:params.url + '?' + request.getQueryString())
@@ -105,7 +107,7 @@ class ConsoleController {
 			//合并下载文件
 			mergePDF()
 		}catch (Throwable e) {
-			e.printStackTrace()
+			logger.error("error!", e)
 			//if(params.template) render(template:params.template)
 			if(params.pdfController) redirect(controller:params.pdfController, action:params.pdfAction, params:params)
 			else redirect(uri:params.url + '?' + request.getQueryString())
@@ -171,9 +173,12 @@ class ConsoleController {
 			}
 			retValue = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error!", e)
 		} finally {
-			document.close();
+			if(document!=null){
+				document.close();
+			}
+			
 		}
 		return retValue;
 	}
@@ -220,7 +225,7 @@ class ConsoleController {
 				render "失败"
 			}
 		}catch (Throwable e) {
-			e.printStackTrace()
+			logger.error("error!", e)
 			if(params.pdfController) {
 				println "error:"+params.pdfController
 				redirect(controller:params.pdfController, action:params.pdfAction, params:params)
