@@ -34,8 +34,26 @@ class GeneAbstractController {
 		}
 		
         flash.message = message(code: 'default.created.message', args: [message(code: 'geneAbstract.label', default: 'GeneAbstract'), geneAbstractInstance.id])
-        redirect(action: "show", id: geneAbstractInstance.id)
+        redirect(controller:"triats",action: "edit", id: triats.id)
     }
+	//药品谱save
+	def save1() {
+		def geneAbstractInstance = new GeneAbstract(params)
+		if (!geneAbstractInstance.save(flush: true)) {
+			render(view: "create", model: [geneAbstractInstance: geneAbstractInstance])
+			return
+		}
+
+		
+		DrugResponse triats=params.drugResponseInstanceId=="null"?new DrugResponse().save(failOnError:true):DrugResponse.get(params.drugResponseInstanceId)
+		if(triats){
+			triats.addToGeneAbstract(geneAbstractInstance)
+			triats.save();
+		}
+		
+		flash.message = message(code: 'default.created.message', args: [message(code: 'geneAbstract.label', default: 'GeneAbstract'), geneAbstractInstance.id])
+		redirect(controller:"drugResponse",action: "edit", id: triats.id)
+	}
 
     def show(Long id) {
         def geneAbstractInstance = GeneAbstract.get(id)
@@ -70,6 +88,20 @@ class GeneAbstractController {
 		def geneAbstractInstance = new GeneAbstract()
 		[geneAbstractInstance: geneAbstractInstance,triatsInstanceId:triats.id]
 	}
+	
+	//药品谱edit
+	def edit5() {
+		DrugResponse triats=params.drugResponseInstanceId=="null"?new DrugResponse().save(failOnError:true):DrugResponse.get(params.drugResponseInstanceId)
+		def geneAbstractInstance = GeneAbstract.get(params.geneAbstractInstanceId)
+		[geneAbstractInstance: geneAbstractInstance,drugResponseInstanceId:triats.id]
+	}
+	
+	//药品谱empty
+	def edit4() {
+		DrugResponse triats=params.drugResponseInstanceId=="null"?new DrugResponse().save(failOnError:true):DrugResponse.get(params.drugResponseInstanceId)
+		def geneAbstractInstance = new GeneAbstract()
+		[geneAbstractInstance: geneAbstractInstance,drugResponseInstanceId:triats.id]
+	}
 
     def update(Long id, Long version) {
         def geneAbstractInstance = GeneAbstract.get(id)
@@ -95,17 +127,19 @@ class GeneAbstractController {
             render(view: "edit", model: [geneAbstractInstance: geneAbstractInstance])
             return
         }
-		if(params.drugResponseId){
-			def drugResponse=DrugResponse.get(params.drugResponseId)
-			drugResponse.geneAbstract=geneAbstractInstance
+		if(params.drugResponseInstanceId){
+			def drugResponse=DrugResponse.get(params.drugResponseInstanceId)
+			drugResponse.addToGeneAbstract(geneAbstractInstance)
 			drugResponse.save(failOnError:true)
         	redirect(controller:"drugResponse",action: "edit", params: [id:drugResponse.id])
+			return
 		}
 		if(params.triatsInstanceId){
 			def triatsInstance=Triats.get(params.triatsInstanceId)
 			triatsInstance.addToGeneAbstract(geneAbstractInstance)
 			triatsInstance.save(failOnError:true)
         	redirect(controller:"triats",action: "edit", params: [id:triatsInstance.id])
+			return
 		}
     }
 

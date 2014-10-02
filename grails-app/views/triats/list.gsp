@@ -11,7 +11,7 @@
 	<body>
 		<div class="content">
 		<div class="contiter">
-			<h2>药品谱列表</h2>
+			<h2>个性谱列表</h2>
 		</div>
 		<div class="conmain">
 			<g:link class="botton" action="create">新增</g:link>

@@ -22,7 +22,7 @@ class DrugResponse {
 	//引言
 	String introduction
 	//基因摘要
-	GeneAbstract geneAbstract
+	static hasMany = [geneAbstract: GeneAbstract]
 
     static constraints = {
 		name nullable:true

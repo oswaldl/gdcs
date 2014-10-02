@@ -92,9 +92,11 @@
 	                                    <div class="s1">${inheritedConditions.name }</div>
 	                                    <div class="s2">
 	                                    	<div class="tubiao">
-	                                    		<div class="ico"></div>
+	                                    		
 		                                        <g:each in="${(1..inheritedConditions.magnitude ) }">
+		                                        	<div class="ico">
 		                                            <g:img dir="images" file="ico1.gif" />
+		                                            </div>
 		                                        </g:each>
 	                                        </div>
 	                                    </div>
@@ -124,8 +126,9 @@
 	                                    <div class="s2">
 	                                    	<div class="tubiao">
 		                                    	<g:each in="${(1..drugResponse.magnitude ) }">
-		                                    		<div class="ico"></div>
+		                                    		<div class="ico">
 		                                            <g:img dir="images" file="ico1.gif" />
+		                                            </div>
 		                                        </g:each>
 	                                    	</div>
 	                                    </div>
@@ -154,8 +157,9 @@
 	                                    <div class="s2">
 	                                    	<div class="tubiao">
 		                                    	<g:each in="${(1..triat.magnitude ) }">
-		                                    		<div class="ico"></div>
+		                                    		<div class="ico">
 		                                            <g:img dir="images" file="ico1.gif" />
+		                                            </div>
 		                                        </g:each>
 	                                    	</div>
 	                                    </div>

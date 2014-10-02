@@ -109,7 +109,7 @@
 		</g:if>
 		<g:if test="${userDrugRelationInstance.drugResponse.genetics!=null&&userDrugRelationInstance.drugResponse.genetics!='' }">
 		<div class="contBox2">
-			<div class="title">${userDrugRelationInstance.drugResponse.chineseName?:userDrugRelationInstance.drugResponse.name }的遗传学研究</div>
+			<div class="title">遗传学研究</div>
 			<div class="cont">
 				<div class="content">
 					${userDrugRelationInstance.drugResponse.genetics }
