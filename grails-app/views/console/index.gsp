@@ -51,8 +51,11 @@
                 <li>
                 	<a href="${createLink(controller:'riskRank',action:'index')}" target="main_frame">风险划分</a>
                 </li>
+<%--                <li>--%>
+<%--                	<a href="${createLink(controller:'inheritedConditions',action:'index')}" target="main_frame">人员生命谱配置</a>--%>
+<%--                </li>--%>
                 <li>
-                	<a href="${createLink(controller:'inheritedConditions',action:'index')}" target="main_frame">人员生命谱配置</a>
+                	<a href="${createLink(controller:'inherited',action:'index')}" target="main_frame">人员生命谱配置</a>
                 </li>
                 <li>
                 	<a href="${createLink(controller:'drugResponse',action:'index')}" target="main_frame">药品谱公有配置</a>

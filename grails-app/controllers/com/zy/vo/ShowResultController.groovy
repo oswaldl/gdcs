@@ -44,7 +44,13 @@ class ShowResultController {
 		}.toSet().sort{it.id}
 		
 		//先天性遗传
-		def inheritedConditionses=InheritedConditions.findAllByUsername(user.username)
+//		def inheritedConditionses=InheritedConditions.findAllByUsername(user.username)
+		Inherited.findAll().each{
+			new UserInherited(inherited:it,username:user.username).save(failOnError: true)
+		}
+		def inheriteds=UserInherited.findAllByUsername(user.username).collect{
+			it.inherited
+		}.toSet().sort{it.id}
 		
 		//个性谱
 		Triats.findAll().each{
@@ -66,7 +72,7 @@ class ShowResultController {
 			illnesses:illnesses,
 			username:user.username,
 			drugResponses:drugResponses,
-			inheritedConditionses:inheritedConditionses,
+			inheriteds:inheriteds,
 			userTriats:userTriats]
 	}
 

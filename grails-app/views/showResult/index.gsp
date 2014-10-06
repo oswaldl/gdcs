@@ -1,3 +1,4 @@
+<%@page import="com.zy.vo.UserInherited"%>
 <%@page import="com.zy.vo.UserDrugRelation" %>
 <%@page import="com.zy.vo.UserTriats" %>
 
@@ -79,7 +80,7 @@
 				        <h5 class="titl2 jt02" onclick="$(this).next().toggle()">第二部分<span>先天性遗传疾病</span></h5>
 				        <ul style="display:block;">
 				          <!--默认需隐藏display:block;-->
-				          <g:if test="${inheritedConditionses}">
+				          <g:if test="${inheriteds}">
 					          <div class="tit">
 					            <div class="s1">名称</div>
 					            <div class="s2"><span class="paddingT10"></span>研究数量</div>
@@ -87,20 +88,23 @@
 					          </div>
 				          
 				          
-					          <g:each in="${inheritedConditionses }" var="inheritedConditions">
+					          <g:each in="${inheriteds }" var="inherited">
 	                                <li>
-	                                    <div class="s1">${inheritedConditions.name }</div>
+	                                    <div class="s1">
+	                                    	<g:link controller="userInherited" action="showDetail" params='[inheritedId:"${inherited.id }",status:"${i }",username:"${username }"]'>
+	                                            ${inherited.chineseName?:inherited.name }
+	                                        </g:link>
+	                                    </div>
 	                                    <div class="s2">
 	                                    	<div class="tubiao">
-	                                    		
-		                                        <g:each in="${(1..inheritedConditions.magnitude ) }">
-		                                        	<div class="ico">
+		                                        <g:each in="${(1..inherited.magnitude ) }">
+		                                    		<div class="ico">
 		                                            <g:img dir="images" file="ico1.gif" />
 		                                            </div>
 		                                        </g:each>
 	                                        </div>
 	                                    </div>
-	                                    <div class="s3">${inheritedConditions.result }</div>
+	                                    <div class="s3">${UserInherited.findByInheritedAndUsername(inherited, username).getState() }</div>
 	                                </li>
 	                            </g:each>
                             </g:if>

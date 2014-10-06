@@ -16,17 +16,20 @@ class UserDrugRelation {
 	
 	
 	String getState(){
-		String description=this.drugResponse?.geneAbstract?.types
-		String state
-		SNPRelation.findAllByUser(User.findByUsername(this.username)).collect{it.gene}.each {
-			if(it.getName(it.name)==this.drugResponse?.geneAbstract?.marker){
-				description.split(",").each {type->
-					try{
-						if(type.split(":")[0]==it.getType(it.name).replaceAll(';', '')){
-							state = type.split(":")[2]
+		String state="见报告"
+		if(this.drugResponse?.geneAbstract.size()==1){
+			def geneAbstract=this.drugResponse?.geneAbstract.toList().get(0)
+			String description=geneAbstract?.types
+			SNPRelation.findAllByUser(User.findByUsername(this.username)).collect{it.gene}.each {
+				if(it.getName(it.name)==geneAbstract?.marker){
+					description.split(",").each {type->
+						try{
+							if(type.split(":")[0]==it.getType(it.name).replaceAll(';', '')){
+								state = type.split(":")[2]
+							}
+						}catch(e){
+							println "invalid type :"+type+",  the length should be 3."
 						}
-					}catch(e){
-						println "invalid type :"+type+",  the length should be 3."
 					}
 				}
 			}

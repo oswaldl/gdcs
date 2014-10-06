@@ -1,12 +1,6 @@
 package com.zy.vo
 
-/**
- * 药品谱的共有信息
- * @author ACER
- *
- */
-
-class DrugResponse {
+class Inherited {
 	
 	String name
 	String chineseName
