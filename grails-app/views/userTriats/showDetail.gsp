@@ -41,6 +41,25 @@
 				</div>
 			</div>
 		</g:if>
+		<g:if test="${userTriatsInstance.triats.result!=null&&userTriatsInstance.triats.result!='' }">
+			<div class="contBox2">
+				<div class="tit4">结果</div>
+				<div class="cont jieshao">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					  <tr>
+					    <th height="36" align="center" valign="middle" class="backgrounds">SPN</th>
+					    <th height="36" align="center" valign="middle" class="backgrounds">Genotype</th>
+					    <th height="36" align="center" valign="middle" class="backgrounds">Result</th>
+					  </tr>
+					  <tr>
+					    <td height="36" align="center" valign="middle" bgcolor="#e9e9ea">${userTriatsInstance?.triats?.result.substring(0, userTriatsInstance.triats.result.indexOf('(')) }</td>
+					    <td height="36" align="center" valign="middle" bgcolor="#e9e9ea">${userTriatsInstance.getResult().split(':')[0] }</td>
+					    <td height="36" align="center" valign="middle" bgcolor="#e9e9ea">${userTriatsInstance.getResult().split(':')[1] }</td>
+					  </tr>
+					</table>
+				</div>
+			</div>
+		</g:if>
 		<g:if test="${userTriatsInstance.triats.genetics!=null&&userTriatsInstance.triats.genetics!='' }">
 		<div class="contBox2">
 			<div class="tit4">遗传和环境因素</div>

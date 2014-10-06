@@ -163,7 +163,7 @@
 		                                        </g:each>
 	                                    	</div>
 	                                    </div>
-	                                    <div class="s3">${UserTriats.findByTriatsAndUsername(triat, username)?.result }</div>
+	                                    <div class="s3">${UserTriats.findByTriatsAndUsername(triat, username)?.getResult().split(':')[1] }</div>
 	                                </li>
 	                            </g:each>
                             </g:if>

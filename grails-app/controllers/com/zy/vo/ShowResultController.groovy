@@ -47,6 +47,9 @@ class ShowResultController {
 		def inheritedConditionses=InheritedConditions.findAllByUsername(user.username)
 		
 		//个性谱
+		Triats.findAll().each{
+			new UserTriats(triats:it,username:user.username).save(failOnError: true)
+		}
 		def userTriats=UserTriats.findAllByUsername(user.username).collect{
 			it.triats
 		}.toSet().sort{it.id}

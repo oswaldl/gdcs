@@ -14,7 +14,7 @@
   	<td><g:field name="magnitude" type="number" value="${triatsInstance.magnitude}" required=""/></td>
   </tr>
   <tr>
-  	<td class="fieldcontain ${hasErrors(bean: triatsInstance, field: 'result', 'error')} ">结果（应该是根据某一基因自动生成）</td>
+  	<td class="fieldcontain ${hasErrors(bean: triatsInstance, field: 'result', 'error')} ">结果（rs10757278(GG:风险高,AA:风险低)）</td>
   	<td><g:textField name="result" value="${triatsInstance?.result}"/></td>
   </tr>
   <tr>

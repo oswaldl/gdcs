@@ -18,7 +18,7 @@
     <td><g:field name="magnitude" type="number" value="${drugResponseInstance.magnitude}" required=""/></td>
   </tr>
   <tr>
-  	<td class="fieldcontain ${hasErrors(bean: drugResponseInstance, field: 'geneData', 'error')} required">基因数据（-:结果1;--结果2）</td>
+  	<td class="fieldcontain ${hasErrors(bean: drugResponseInstance, field: 'geneData', 'error')} required">基因数据（-:结果1;--:结果2;+:结果3）</td>
   	<td><g:textField name="geneData" required="" value="${drugResponseInstance?.geneData}"/></td>
   </tr>
   <tr>
