@@ -14,7 +14,7 @@ class ShowResultController {
 	def springSecurityService
 	
     def index() {
-		def user
+		User user
 		if(params.username){
 			user=User.findByUsername(params.username)
 		}else{
@@ -35,6 +35,10 @@ class ShowResultController {
 		}.toSet().sort{it.id}
 		
 		//非公用-用药指导
+		//修改后没有了私有个人配置，对应个人的的配置全部移到公有里面，结果不变所以要在这里生成个人的UserDrugRelation
+		DrugResponse.findAll().each{
+			new UserDrugRelation(drugResponse:it,username:user.username).save(failOnError: true)
+		}
 		def drugResponses=UserDrugRelation.findAllByUsername(user.username).collect{
 			it.drugResponse
 		}.toSet().sort{it.id}

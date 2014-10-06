@@ -90,24 +90,38 @@
 		</g:each>
 		</g:if>
 		
-		<g:if test="${userDrugRelationInstance.geneData!=null&&userDrugRelationInstance.geneData!='' }">
+		<g:if test="${userDrugRelationInstance.drugResponse.geneData!=null&&userDrugRelationInstance.drugResponse.geneData!='' }">
 		<div class="contBox2">
-			<div class="tit4">你的基因组数据</div>
+			<div class="title">你的基因组数据</div>
 			<div class="cont jieshao">
-				${userDrugRelationInstance.geneData }
+				${userDrugRelationInstance.getGeneData() }
 			</div>
 		</div>
 		</g:if>
-		<g:if test="${userDrugRelationInstance.oddRatio!=null&&userDrugRelationInstance.oddRatio!='' }">
+		<g:if test="${userDrugRelationInstance.getOddRatio()!=null&&userDrugRelationInstance.drugResponse.oddRatio!='' }">
 		<div class="contBox2">
-			<div class="tit4">技术报告</div>
+			<div class="title">技术报告</div>
 			<div class="cont">
 				<div class="content">
-					${userDrugRelationInstance?.oddRatio }
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					  <tr style="color:#000;">
+					    <th height="36" align="center" valign="middle" class="backgrounds">SPN</th>
+					    <th height="36" align="center" valign="middle" class="backgrounds">Genotype</th>
+					    <th height="36" align="center" valign="middle" class="backgrounds">Result</th>
+					  </tr>
+					  <g:each in="${lis }" var="gene" status="i">
+					  <tr>
+					    <td height="36" align="center" valign="middle" bgcolor="${(i % 2) == 0 ? '#e9e9ea' : ''}">${gene.split(',')[0] }</td>
+					    <td height="36" align="center" valign="middle" bgcolor="${(i % 2) == 0 ? '#e9e9ea' : ''}">${gene.split(',')[1] }</td>
+					    <td height="36" align="center" valign="middle" bgcolor="${(i % 2) == 0 ? '#e9e9ea' : ''}">${gene.split(',')[2] }</td>
+					  </tr>
+					  </g:each>
+					</table>
 				</div>
 			</div>
 		</div>
 		</g:if>
+		
 		<g:if test="${userDrugRelationInstance.drugResponse.genetics!=null&&userDrugRelationInstance.drugResponse.genetics!='' }">
 		<div class="contBox2">
 			<div class="tit4">遗传学研究</div>
