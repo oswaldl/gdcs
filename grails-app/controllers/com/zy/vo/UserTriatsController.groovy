@@ -126,7 +126,32 @@ class UserTriatsController {
 			it.triats
 		}.toSet().size()
 		
-		[userTriatsInstance: userTriats,status:status,total:total,username:user.username]
+		def map1=new HashMap<String, Map>()
+		def map2=new HashMap<String, List>()
+		userTriats?.triats?.geneAbstract?.each {
+			def maps=new HashMap<String, String>()
+			List lists=new ArrayList<String>()
+			it?.types?.split(",").each {type0->
+				String key=type0.split(":")[0]
+				String value=type0.split(":")[1]
+				maps.put(key, value)
+				lists.add(key)
+			}
+			map1.put(it.name, maps)
+			map2.put(it.name, lists)
+		}
+		def map3=new HashMap<String, String>()
+		userTriats?.triats?.geneAbstract?.each {
+			String type=""
+			SNPRelation.findAllByUser(user).collect{it.gene}.each {gene->
+				if(gene.getName(gene.name)==it?.marker){
+					type=gene.getType(gene.name).replaceAll(';', '')
+				}
+			}
+			map3.put(it.name, type)
+		}
+		
+		[map1:map1,map2:map2,map3:map3,userTriatsInstance: userTriats,status:status,total:total,username:user.username]
 	}
 	
 	def showDetailByStatus(){
@@ -138,7 +163,32 @@ class UserTriatsController {
 		def triatsInstance=userTriats.get(status)
 		def userTriatsInstance=UserTriats.findByTriatsAndUsername(triatsInstance, user.username)
 		
-		[userTriatsInstance: userTriatsInstance,status:status,total:userTriats.size(),username:user.username]
+		def map1=new HashMap<String, Map>()
+		def map2=new HashMap<String, List>()
+		userTriatsInstance?.triats?.geneAbstract?.each {
+			def maps=new HashMap<String, String>()
+			List lists=new ArrayList<String>()
+			it?.types?.split(",").each {type0->
+				String key=type0.split(":")[0]
+				String value=type0.split(":")[1]
+				maps.put(key, value)
+				lists.add(key)
+			}
+			map1.put(it.name, maps)
+			map2.put(it.name, lists)
+		}
+		def map3=new HashMap<String, String>()
+		userTriatsInstance?.triats?.geneAbstract?.each {
+			String type=""
+			SNPRelation.findAllByUser(user).collect{it.gene}.each {gene->
+				if(gene.getName(gene.name)==it?.marker){
+					type=gene.getType(gene.name).replaceAll(';', '')
+				}
+			}
+			map3.put(it.name, type)
+		}
+		
+		[map1:map1,map2:map2,map3:map3,userTriatsInstance: userTriatsInstance,status:status,total:userTriats.size(),username:user.username]
 	}
 	
 	def showPic(){

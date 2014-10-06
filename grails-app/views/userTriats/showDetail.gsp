@@ -106,16 +106,15 @@
 					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">基因型</th>
 					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">意义</th>
 					  </tr>
-<%--	这块由于包含多个基因摘要，不能这样写了，取值会比较复杂				  --%>
-<%--					  <g:each in="${lists }" var="key">--%>
-<%--					   <g:if test="${key==type }">--%>
-<%--					   <tr>--%>
-<%--					    <td height="36" align="center" valign="middle">${username }</td>--%>
-<%--					    <td height="36" align="center" valign="middle">${key }</td>--%>
-<%--					    <td height="36" align="center" valign="middle">${maps.get(key) }</td>--%>
-<%--					   </tr>--%>
-<%--					   </g:if>--%>
-<%--					  </g:each>--%>
+					  <g:each in="${map2.get(geneAbstract.name) }" var="key">
+					   <g:if test="${key==map3.get(geneAbstract.name) }">
+					   <tr>
+					    <td height="36" align="center" valign="middle">${username }</td>
+					    <td height="36" align="center" valign="middle">${key }</td>
+					    <td height="36" align="center" valign="middle">${map1.get(geneAbstract.name).get(key) }</td>
+					   </tr>
+					   </g:if>
+					  </g:each>
 					  </table>
 					  <p class="wzCont" style="padding-bottom:20px;">${geneAbstract.reference }</p>
 			      </div>

@@ -14,13 +14,6 @@ class UserDrugRelation {
 	//对应的病症公有信息
 	DrugResponse drugResponse
 	
-//	//检测状态
-//	String state
-	
-	//你的基因数据
-	String geneData
-	//技术报告
-	String oddRatio
 	
 	String getState(){
 		String description=this.drugResponse?.geneAbstract?.types
@@ -41,9 +34,19 @@ class UserDrugRelation {
 		return state
 	}
 	
-    static constraints = {
-		geneData nullable:true,maxSize: 3000
-		oddRatio nullable:true,maxSize: 3000
+	//基因数据
+	String getGeneData(){
+		User user=User.findByUsername(this.username)
+		String geneData=this.drugResponse.geneData
+	}
+	
+	//技术报告
+	String getOddRatio(){
+		User user=User.findByUsername(this.username)
+		String oddRatio=this.drugResponse.oddRatio
 		
+	}
+	
+    static constraints = {
     }
 }

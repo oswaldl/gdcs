@@ -157,21 +157,33 @@ class UserDrugRelationController {
 		int total=UserDrugRelation.findAllByUsername(user.username).collect {
 			it.drugResponse
 		}.toSet().size()
-		def maps=new HashMap<String, String>()
-		List lists=new ArrayList<String>()
-		userDrugRelation?.drugResponse?.geneAbstract?.types?.split(',').each {
-			String key=it.split(":")[0]
-			String value=it.split(":")[1]
-			maps.put(key, value)
-			lists.add(key)
-		}
-		String type=""
-		SNPRelation.findAllByUser(user).collect{it.gene}.each {
-			if(it.getName(it.name)==userDrugRelation?.drugResponse?.geneAbstract?.marker){
-				type=it.getType(it.name).replaceAll(';', '')
+		
+		def map1=new HashMap<String, Map>()
+		def map2=new HashMap<String, List>()
+		userDrugRelation?.drugResponse?.geneAbstract?.each {
+			def maps=new HashMap<String, String>()
+			List lists=new ArrayList<String>()
+			it?.types?.split(",").each {type0->
+				String key=type0.split(":")[0]
+				String value=type0.split(":")[1]
+				maps.put(key, value)
+				lists.add(key)
 			}
+			map1.put(it.name, maps)
+			map2.put(it.name, lists)
 		}
-		[maps:maps,lists:lists,type:type,userDrugRelationInstance: userDrugRelation,status:status,total:total,username:user.username]
+		
+		def map3=new HashMap<String, String>()
+		userDrugRelation?.drugResponse?.geneAbstract?.each {
+			String type=""
+			SNPRelation.findAllByUser(user).collect{it.gene}.each {gene->
+				if(gene.getName(gene.name)==it?.marker){
+					type=gene.getType(gene.name).replaceAll(';', '')
+				}
+			}
+			map3.put(it.name, type)
+		}
+		[map1:map1,map2:map2,map3:map3,userDrugRelationInstance: userDrugRelation,status:status,total:total,username:user.username]
 	}
 	
 	def showDetailByStatus(){
@@ -182,21 +194,33 @@ class UserDrugRelationController {
 		int status=Integer.parseInt(params.status)
 		def drugResponseInstance=drugResponses.get(status)
 		def userDrugRelationInstance=UserDrugRelation.findByDrugResponseAndUsername(drugResponseInstance, user.username)
-		def maps=new HashMap<String, String>()
-		List lists=new ArrayList<String>()
-		userDrugRelationInstance?.drugResponse.geneAbstract.types.split(',').each {
-			String key=it.split(":")[0]
-			String value=it.split(":")[1]
-			maps.put(key, value)
-			lists.add(key)
-		}
-		String type=""
-		SNPRelation.findAllByUser(user).collect{it.gene}.each {
-			if(it.getName(it.name)==userDrugRelationInstance?.drugResponse.geneAbstract.marker){
-				type=it.getType(it.name).replaceAll(';', '')
+		
+		def map1=new HashMap<String, Map>()
+		def map2=new HashMap<String, List>()
+		userDrugRelationInstance?.drugResponse?.geneAbstract?.each {
+			def maps=new HashMap<String, String>()
+			List lists=new ArrayList<String>()
+			it?.types?.split(",").each {type0->
+				String key=type0.split(":")[0]
+				String value=type0.split(":")[1]
+				maps.put(key, value)
+				lists.add(key)
 			}
+			map1.put(it.name, maps)
+			map2.put(it.name, lists)
 		}
-		[maps:maps,lists:lists,type:type,userDrugRelationInstance: userDrugRelationInstance,status:status,total:drugResponses.size(),username:user.username]
+		def map3=new HashMap<String, String>()
+		userDrugRelationInstance?.drugResponse?.geneAbstract?.each {
+			String type=""
+			SNPRelation.findAllByUser(user).collect{it.gene}.each {gene->
+				if(gene.getName(gene.name)==it?.marker){
+					type=gene.getType(gene.name).replaceAll(';', '')
+				}
+			}
+			map3.put(it.name, type)
+		}
+		
+		[map1:map1,map2:map2,map3:map3,userDrugRelationInstance: userDrugRelationInstance,status:status,total:drugResponses.size(),username:user.username]
 	}
 	
 	def showPic(){

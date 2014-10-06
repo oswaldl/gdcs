@@ -80,44 +80,43 @@
 			<div class="cont">
 				<div class="content">
 					<div class="cont jieshao">
-			       	  <h5 class="tit">${userTriatsInstance.triats.geneAbstract.name }</h5>
+			       	  <h5 class="tit">${geneAbstract.name }</h5>
 			          <table width="100%" border="0" cellspacing="0" cellpadding="0">
 						  <tr>
 						    <td width="15%" height="40" bgcolor="#f4f4f4" class="paddingLR">杂志</td>
-						    <td width="85%" bgcolor="#f4f4f4" class="paddingLR">${userTriatsInstance.triats.geneAbstract.journal }</td>
+						    <td width="85%" bgcolor="#f4f4f4" class="paddingLR">${geneAbstract.journal }</td>
 						  </tr>
 						  <tr>
 						    <td height="40" class="paddingLR">研究规模</td>
 						    <td class="paddingLR">
-						    	<g:each in="${(1..userTriatsInstance.triats.geneAbstract.studySize ) }">
+						    	<g:each in="${(1..geneAbstract.studySize ) }">
 								<g:img dir="images" file="ico1.gif"/>
 								</g:each>
 						    </td>
 						  </tr>
 						  <tr>
 						    <td height="40" bgcolor="#f4f4f4" class="paddingLR">标记</td>
-						    <td bgcolor="#f4f4f4" class="paddingLR">${userTriatsInstance.triats.geneAbstract.marker }</td>
+						    <td bgcolor="#f4f4f4" class="paddingLR">${geneAbstract.marker }</td>
 						  </tr>
 						</table>
-						<p class="wzCont" style="padding-bottom:20px;">${userTriatsInstance.triats.geneAbstract.description }</p>
+						<p class="wzCont" style="padding-bottom:20px;">${geneAbstract.description }</p>
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					  <tr style="color:#fff;">
 					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">Who</th>
 					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">基因型</th>
 					    <th height="36" align="center" valign="middle" bgcolor="#ff8470">意义</th>
 					  </tr>
-<%--	这块由于包含多个基因摘要，不能这样写了，取值会比较复杂				  --%>
-<%--					  <g:each in="${lists }" var="key">--%>
-<%--					   <g:if test="${key==type }">--%>
-<%--					   <tr>--%>
-<%--					    <td height="36" align="center" valign="middle">${username }</td>--%>
-<%--					    <td height="36" align="center" valign="middle">${key }</td>--%>
-<%--					    <td height="36" align="center" valign="middle">${maps.get(key) }</td>--%>
-<%--					   </tr>--%>
-<%--					   </g:if>--%>
-<%--					  </g:each>--%>
+					  <g:each in="${map2.get(geneAbstract.name) }" var="key">
+					   <g:if test="${key==map3.get(geneAbstract.name) }">
+					   <tr>
+					    <td height="36" align="center" valign="middle">${username }</td>
+					    <td height="36" align="center" valign="middle">${key }</td>
+					    <td height="36" align="center" valign="middle">${map1.get(geneAbstract.name).get(key) }</td>
+					   </tr>
+					   </g:if>
+					  </g:each>
 					  </table>
-					  <p class="wzCont" style="padding-bottom:20px;">${userTriatsInstance.triats.geneAbstract.reference }</p>
+					  <p class="wzCont" style="padding-bottom:20px;">${geneAbstract.reference }</p>
 			      </div>
 				</div>
 			</div>

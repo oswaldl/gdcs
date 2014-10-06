@@ -18,6 +18,14 @@
     <td><g:field name="magnitude" type="number" value="${drugResponseInstance.magnitude}" required=""/></td>
   </tr>
   <tr>
+  	<td class="fieldcontain ${hasErrors(bean: drugResponseInstance, field: 'geneData', 'error')} required">基因数据（-:结果1;--结果2）</td>
+  	<td><g:textField name="geneData" required="" value="${drugResponseInstance?.geneData}"/></td>
+  </tr>
+  <tr>
+  	<td class="fieldcontain ${hasErrors(bean: drugResponseInstance, field: 'oddRatio', 'error')} required">技术报告（rs10757278(GG:-,AA:--);）</td>
+  	<td><g:textField name="oddRatio" required="" value="${drugResponseInstance?.oddRatio}"/></td>
+  </tr>
+  <tr>
     <td class="fieldcontain ${hasErrors(bean: drugResponseInstance, field: 'genetics', 'error')} ">
     	遗传学研究&nbsp;&nbsp;<g:link controller="drugResponse" action="editDesc" params='[drugResponseId:"${drugResponseInstance?.id }",type:"genetics"]'>编辑</g:link>
     </td>

@@ -11,6 +11,11 @@ class DrugResponse {
 	String name
 	String chineseName
 	
+	//你的基因数据
+	String geneData
+	//技术报告
+	String oddRatio
+	
 	//研究数量
 	int magnitude
 	
@@ -30,6 +35,5 @@ class DrugResponse {
 		genetics nullable:true,maxSize: 3000
 		reference nullable:true,maxSize: 3000
 		introduction nullable:true,maxSize: 3000
-		geneAbstract nullable:true
     }
 }
