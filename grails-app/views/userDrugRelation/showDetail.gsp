@@ -92,7 +92,7 @@
 		</g:each>
 		</g:if>
 		
-		<g:if test="${userDrugRelationInstance.drugResponse.geneData!=null&&userDrugRelationInstance.drugResponse.geneData!='' }">
+		<g:if test="${userDrugRelationInstance.drugResponse.oddRatio!=''&&userDrugRelationInstance.drugResponse.geneData!=null&&userDrugRelationInstance.drugResponse.geneData!='' }">
 		<div class="contBox2">
 			<div class="title">你的基因组数据</div>
 			<div class="cont jieshao">
@@ -100,7 +100,7 @@
 			</div>
 		</div>
 		</g:if>
-		<g:if test="${userDrugRelationInstance.getOddRatio()!=null&&userDrugRelationInstance.drugResponse.oddRatio!='' }">
+		<g:if test="${userDrugRelationInstance.drugResponse.oddRatio!=''&&userDrugRelationInstance.getOddRatio()!=null }">
 		<div class="contBox2">
 			<div class="title">技术报告</div>
 			<div class="cont">

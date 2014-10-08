@@ -3,8 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>基因检测报告</title>
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css" media="screen" 
 	href="${resource(dir: 'css', file: 'css.css')}" />
+<link rel="stylesheet" type="text/css" media="print" 
+	href="${resource(dir: 'css', file: 'print.css')}" />
 </head>
 <body>
 
@@ -22,26 +24,26 @@
 			<p>欢迎进入基因检测报告！</p>
 		</div>
 	</div>
-	<div class="main2">
+	<div class="main2 A3">
 		<div class="tit3">
 			<p class="s1">
-				${userDrugRelationInstance?.drugResponse.name }
+				${userInheritedInstance?.inherited.name }
 			</p>
 			<p class="s2">
-				${userDrugRelationInstance?.drugResponse.chineseName }
+				${userInheritedInstance?.inherited.chineseName }
 			</p>
 		</div>
-		<g:if test="${userDrugRelationInstance.drugResponse.introduction!=null&&userDrugRelationInstance.drugResponse.introduction!='' }">
+		<g:if test="${userInheritedInstance?.inherited.introduction!=null&&userInheritedInstance?.inherited.introduction!='' }">
 			<div class="contBox2">
 				<div class="tit4">引言</div>
 				<div class="cont jieshao">
-					${userDrugRelationInstance.drugResponse.introduction }
+					${userInheritedInstance?.inherited.introduction }
 				</div>
 			</div>
 		</g:if>
 		
-		<g:if test="${userDrugRelationInstance.drugResponse.geneAbstract!=null&&userDrugRelationInstance.drugResponse.geneAbstract!='' }">
-		<g:each in="${userDrugRelationInstance.drugResponse.geneAbstract }" var="geneAbstract">
+		<g:if test="${userInheritedInstance?.inherited.geneAbstract!=null&&userInheritedInstance?.inherited.geneAbstract!='' }">
+		<g:each in="${userInheritedInstance?.inherited.geneAbstract }" var="geneAbstract">
 		<div class="contBox2">
 			<div class="tit4">基因/SNP摘要</div>
 			<div class="cont">
@@ -90,15 +92,15 @@
 		</g:each>
 		</g:if>
 		
-		<g:if test="${userDrugRelationInstance.drugResponse.oddRatio!=''&&userDrugRelationInstance.drugResponse.geneData!=null&&userDrugRelationInstance.drugResponse.geneData!='' }">
+		<g:if test="${userInheritedInstance?.inherited.oddRatio!=null&&userInheritedInstance?.inherited.oddRatio!=''&&userInheritedInstance?.inherited.geneData!=null&&userInheritedInstance?.inherited.geneData!='' }">
 		<div class="contBox2">
 			<div class="title">你的基因组数据</div>
 			<div class="cont jieshao">
-				${userDrugRelationInstance.getGeneData() }
+				${userInheritedInstance.getGeneData() }
 			</div>
 		</div>
 		</g:if>
-		<g:if test="${userDrugRelationInstance.drugResponse.oddRatio!=''&&userDrugRelationInstance.getOddRatio()!=null }">
+		<g:if test="${userInheritedInstance?.inherited.oddRatio!=null&&userInheritedInstance?.inherited.oddRatio!=''&&userInheritedInstance.getOddRatio()!=null }">
 		<div class="contBox2">
 			<div class="title">技术报告</div>
 			<div class="cont">
@@ -121,23 +123,22 @@
 			</div>
 		</div>
 		</g:if>
-		
-		<g:if test="${userDrugRelationInstance.drugResponse.genetics!=null&&userDrugRelationInstance.drugResponse.genetics!='' }">
+		<g:if test="${userInheritedInstance?.inherited.genetics!=null&&userInheritedInstance?.inherited.genetics!='' }">
 		<div class="contBox2">
-			<div class="tit4">遗传学研究</div>
+			<div class="title">遗传学研究</div>
 			<div class="cont">
 				<div class="content">
-					${userDrugRelationInstance.drugResponse.genetics }
+					${userInheritedInstance?.inherited.genetics }
 				</div>
 			</div>
 		</div>
 		</g:if>
-		<g:if test="${userDrugRelationInstance.drugResponse.reference!=null&&userDrugRelationInstance.drugResponse.reference!='' }">
+		<g:if test="${userInheritedInstance?.inherited.reference!=null&&userInheritedInstance?.inherited.reference!='' }">
 		<div class="contBox2">
-			<div class="tit4">参考文献</div>
+			<div class="title">参考文献</div>
 			<div class="cont">
 				<div class="content">
-					${userDrugRelationInstance.drugResponse.reference }
+					${userInheritedInstance?.inherited.reference }
 				</div>
 			</div>
 		</div>

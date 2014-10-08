@@ -73,7 +73,13 @@ class UserDrugRelation {
 		oddRatioStr.split(";").each {
 			int index1=it.indexOf("(")
 			String geneName=it.substring(0, index1)
+			//这个地方其实不严谨的，如果不存在就取一个，设置的基因对于该用户可能不存在
 			Gene gene=Gene.findByNameLike(geneName+"(%")
+			SNPRelation.findAllByUser(User.findByUsername(this.username)).collect{it.gene}.each {
+				if(it.getName(it.name)==geneName){
+					gene=it
+				}
+			}
 			String types=it.substring(index1+1, it.indexOf(")"))
 			String type=""
 			types.split(",").each {typeCon->

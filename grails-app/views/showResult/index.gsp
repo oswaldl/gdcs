@@ -88,7 +88,7 @@
 					          </div>
 				          
 				          
-					          <g:each in="${inheriteds }" var="inherited">
+					          <g:each in="${inheriteds }" var="inherited" status="i">
 	                                <li>
 	                                    <div class="s1">
 	                                    	<g:link controller="userInherited" action="showDetail" params='[inheritedId:"${inherited.id }",status:"${i }",username:"${username }"]'>

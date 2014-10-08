@@ -186,19 +186,21 @@ class UserDrugRelationController {
 		
 		//技术报告
 		List lis=new ArrayList<String>()
-		userDrugRelation?.drugResponse.oddRatio.split(";").each {
-			int index1=it.indexOf("(")
-			String geneName=it.substring(0, index1)
-			Gene gene=Gene.findByNameLike(geneName+"(%")
-			String types=it.substring(index1+1, it.indexOf(")"))
-			String type=""
-			types.split(",").each {typeCon->
-				if(typeCon.split(":")[0]==gene.getType(gene.name).replace(";", "")){
-					type=typeCon.split(":")[1]
+		if(userDrugRelation?.drugResponse.oddRatio!=''&&userDrugRelation.drugResponse.oddRatio!=null){
+			userDrugRelation?.drugResponse.oddRatio.split(";").each {
+				int index1=it.indexOf("(")
+				String geneName=it.substring(0, index1)
+				Gene gene=Gene.findByNameLike(geneName+"(%")
+				String types=it.substring(index1+1, it.indexOf(")"))
+				String type=""
+				types.split(",").each {typeCon->
+					if(typeCon.split(":")[0]==gene.getType(gene.name).replace(";", "")){
+						type=typeCon.split(":")[1]
+					}
 				}
+				String spn=geneName+","+gene.getType(gene.name)+","+type
+				lis.add(spn)
 			}
-			String spn=geneName+","+gene.getType(gene.name)+","+type
-			lis.add(spn)
 		}
 		
 		[lis:lis,map1:map1,map2:map2,map3:map3,userDrugRelationInstance: userDrugRelation,status:status,total:total,username:user.username]
@@ -240,19 +242,21 @@ class UserDrugRelationController {
 		
 		//技术报告
 		List lis=new ArrayList<String>()
-		userDrugRelationInstance?.drugResponse.oddRatio.split(";").each {
-			int index1=it.indexOf("(")
-			String geneName=it.substring(0, index1)
-			Gene gene=Gene.findByNameLike(geneName+"(%")
-			String types=it.substring(index1+1, it.indexOf(")"))
-			String type=""
-			types.split(",").each {typeCon->
-				if(typeCon.split(":")[0]==gene.getType(gene.name).replace(";", "")){
-					type=typeCon.split(":")[1]
+		if(userDrugRelationInstance?.drugResponse.oddRatio!=''&&userDrugRelationInstance.drugResponse.oddRatio!=null){
+			userDrugRelationInstance?.drugResponse.oddRatio.split(";").each {
+				int index1=it.indexOf("(")
+				String geneName=it.substring(0, index1)
+				Gene gene=Gene.findByNameLike(geneName+"(%")
+				String types=it.substring(index1+1, it.indexOf(")"))
+				String type=""
+				types.split(",").each {typeCon->
+					if(typeCon.split(":")[0]==gene.getType(gene.name).replace(";", "")){
+						type=typeCon.split(":")[1]
+					}
 				}
+				String spn=geneName+","+gene.getType(gene.name)+","+type
+				lis.add(spn)
 			}
-			String spn=geneName+","+gene.getType(gene.name)+","+type
-			lis.add(spn)
 		}
 		
 		[lis:lis,map1:map1,map2:map2,map3:map3,userDrugRelationInstance: userDrugRelationInstance,status:status,total:drugResponses.size(),username:user.username]

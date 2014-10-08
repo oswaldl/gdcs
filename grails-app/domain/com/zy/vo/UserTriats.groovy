@@ -1,5 +1,7 @@
 package com.zy.vo
 
+import com.zy.auth.User;
+
 class UserTriats {
 	//用户名
 	String username
@@ -16,6 +18,11 @@ class UserTriats {
 			String resultStr=this.triats.result
 			String geneName=resultStr.substring(0,resultStr.indexOf("("))
 			Gene gene=Gene.findByNameLike(geneName+"(%")
+			SNPRelation.findAllByUser(User.findByUsername(this.username)).collect{it.gene}.each {
+				if(it.getName(it.name)==geneName){
+					gene=it
+				}
+			}
 			resultStr.substring(resultStr.indexOf("(")+1,resultStr.indexOf(")")).split(",").each {
 				if(it.split(":")[0]==gene.getType(gene.name).replace(";", "")){
 					re=it
